@@ -10,7 +10,7 @@ Install dependencies
 ```
 cd ecommerce-admin
 yarn 
-#or
+# or
 npm install
 ```
 
