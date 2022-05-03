@@ -1,9 +1,13 @@
 {
   "name": "ecommerce-admin",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
+    "serve": "HOST=$(grep HOST .env | cut -d '=' -f2) npm run start-prod",
+    "start-prod": "vite preview  --host $HOST",
+    "lint": "eslint --fix .",
+    "postinstall": "husky install",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
