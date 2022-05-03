@@ -1,11 +1,14 @@
+@import "./main";
+
+
 *, html, body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 .f-container {
     width: 100vw;
-    background-color: red;
     height: 100vh;
 }
