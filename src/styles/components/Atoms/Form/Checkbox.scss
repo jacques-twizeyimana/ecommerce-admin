@@ -8,8 +8,13 @@ input[type="checkbox"] {
 
 label {
     color: color(semi-black);
-    font-size: 14px;
-    vertical-align: text-bottom;
+    font-size: 12px;
+    // vertical-align: text-bottom;
+}
+
+.label {
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
 }
 
 .customcheck {

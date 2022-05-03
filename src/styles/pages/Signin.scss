@@ -13,13 +13,13 @@
     justify-content: center;
     align-items: center;
     .content {
-        padding: 3rem 4rem;
+        padding: 1rem 2rem;
         background: color(white);
         box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.1);
         border-radius: 20px;
 
         .form-container {
-            padding: 2rem 3rem;
+            padding: 1rem 1rem;
             
             .header {
                 .image-container {
@@ -34,22 +34,23 @@
             }
 
             .f-password {
-                font-size: 14px;
+                font-size: 12px;
                 color: color(purple);
                 text-decoration: none;
+                font-weight: 600;
                 &:hover {
                     text-decoration: underline;
                 }
             }
 
             .input-control{
-                margin-bottom: 2rem;   
+                // margin-bottom: 1rem;   
             }
 
             .footer {
                 color: color(semi-black);
                 opacity: 0.7;
-                font-size: 14px;
+                font-size: 12px;
 
                 span {
                     color: color(purple);

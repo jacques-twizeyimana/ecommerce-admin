@@ -8,7 +8,8 @@ export default function Checkbox() {
             <label className="custom-control-label"
                 for="remember-me">Remember me</label> */}
 
-            <label className="customcheck">Remember me
+            <label className="customcheck"> 
+               <span className="label">Prisiminti</span>
                 <input type="checkbox"/>
                 <span className="checkmark"></span>
             </label>
