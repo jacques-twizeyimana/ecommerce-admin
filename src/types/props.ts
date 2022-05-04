@@ -8,7 +8,7 @@ import React, {
 export interface CommonProps<T> extends AllHTMLAttributes<DOMAttributes<T>> {}
 
 import { Color, SelectData, ValueType } from '.';
-import { ISidebar, SubItem } from './services/sidebar.types';
+import { ISidebar, NestedItem, SubItem } from './services/sidebar.types';
 
 /**
  * input props that will be shared to all input components
@@ -80,4 +80,8 @@ export interface ListItemProps {
 
 export interface ListSubItemProps {
   items: SubItem[]
+}
+
+export interface ListSubNestedItemProps {
+  item: NestedItem
 }

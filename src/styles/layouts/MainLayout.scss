@@ -14,4 +14,13 @@
     .main-content {
         padding: 0.8rem 1.3rem; 
     }
+
+    @media (min-width: 992px) {
+        .col-side {
+            flex: 0 0 auto;
+            width: 18.66666667%;
+        }
+    }
+
 }
+

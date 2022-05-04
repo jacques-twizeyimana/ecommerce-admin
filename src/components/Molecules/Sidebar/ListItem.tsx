@@ -6,7 +6,9 @@ import ListSubItem from '../../Atoms/Sidebar/ListSubItem';
 export default function ListItem(props: ListItemProps) {
     return (
         <div className="list-items">
-            <p className="mb-0 mt-0">{props.item.name} <img src='/icons/arrow-down.svg' alt='arrow-down' /></p>
+            <p className="mb-0 mt-0">{props.item.name} 
+                {(props.item.subItems) ? <img src='/icons/arrow-down.svg' alt='arrow-down' />: null}
+            </p>
             <div className="subitem-area">
                 {props.item.subItems?.map((item) => (
                     <ListSubItem items={item} />

@@ -1,13 +1,13 @@
 import React from 'react';
 import '../../../styles/components/Organisms/Sidebar.scss';
+import { ListSubNestedItemProps } from '../../../types/props';
 
-export default function ListSubNestedItem() {
+export default function ListSubNestedItem(props: ListSubNestedItemProps) {
+    console.log('nested', props);
     return (
         <React.Fragment>
             <div className="list-nested-items">
-                {[0, 1, 2, 4].map((e) => (
-                    <p className="mb-0 mt-0"> Item 1  </p>
-                ))}
+                <p className="mb-0 mt-0"> {props.item.name} </p>
             </div>
         </React.Fragment>
     )

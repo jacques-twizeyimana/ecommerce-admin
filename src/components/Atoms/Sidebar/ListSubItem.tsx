@@ -12,7 +12,9 @@ export default function ListSubItem(props: ListSubItemProps) {
                     <React.Fragment>
                         <p className="mb-0 mt-0"><img src='/icons/dashboard.svg' className="label-icon" alt='Icon' /> {item.name} <img src='/icons/arrow-down-black.svg' alt='arrow-down' /> </p>
                         <div className="nested-items">
-                            {/* <ListSubNestedItem /> */}
+                            {item.nestedItems?.map((it) => (
+                                <ListSubNestedItem item={it}/>
+                            ))}
                         </div>
                     </React.Fragment>
                 ))}

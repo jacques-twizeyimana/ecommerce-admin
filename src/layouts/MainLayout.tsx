@@ -13,7 +13,7 @@ export default function MainLayout({children}) {
                         )
                     }
                 </div>
-                <div className={("col-0 d-none") +" d-md-block col-md-3 col-lg-2 p-0 "}>
+                <div className={("col-0 d-none") +" d-md-block col-side p-0 "}>
                     <div className="sidebar-content">
                         <Sidebar />
                     </div>
