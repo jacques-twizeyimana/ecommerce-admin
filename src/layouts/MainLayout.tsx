@@ -20,7 +20,7 @@ export default function MainLayout({children}) {
                 </div>
                 <div
                     className={"col-side-content col-12 p-0"}>
-                    <Nav/>
+                    <Nav />
                     <div className={" main-content "} >{children}</div>
                 </div>
             </div>
