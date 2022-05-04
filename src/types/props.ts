@@ -1,4 +1,9 @@
-import React, { AllHTMLAttributes, ButtonHTMLAttributes, DOMAttributes, ReactNode } from 'react';
+import React, {
+  AllHTMLAttributes,
+  ButtonHTMLAttributes,
+  DOMAttributes,
+  ReactNode,
+} from 'react';
 
 export interface CommonProps<T> extends AllHTMLAttributes<DOMAttributes<T>> {}
 
@@ -19,14 +24,13 @@ export interface HeadingProps {
   color?: string;
   className?: string;
   weight?: string;
-};
-
+}
 
 export interface InputProps<T> extends CommonInputProps<T> {
   defaultValue?: string;
   type?: string;
   readonly?: boolean;
-  handleChange?: (_e: ValueType) => void;
+  // handleChange?: (_e: ValueType) => void;
   value: string | number | undefined;
   name: string;
   full?: boolean;
@@ -42,9 +46,6 @@ export interface InputProps<T> extends CommonInputProps<T> {
   reference?: React.LegacyRef<HTMLInputElement>;
 }
 
-
-
-
 export interface ButtonProps<T> extends ButtonHTMLAttributes<DOMAttributes<T>> {
   children: ReactNode;
   disabled?: boolean;
@@ -56,5 +57,17 @@ export interface ButtonProps<T> extends ButtonHTMLAttributes<DOMAttributes<T>> {
   onClick?: () => void;
 }
 
+export interface TableActionsType<T> {
+  name: string;
+  icon: IconNames;
+  handleAction: (_data: T) => void;
+}
 
-
+export type IconNames =
+  | 'print'
+  | 'add'
+  | 'home'
+  | 'arrow-right'
+  | 'arrow-right2'
+  | 'arrow-left'
+  | 'more';
