@@ -16,7 +16,7 @@ export default function ListSubItem(props: ListSubItemProps) {
                 {props.items.map((item) => (
                     <React.Fragment>
                         <p className="mb-0 mt-0">
-                            <img src='/icons/dashboard.svg' className="label-icon" alt='Icon' /> 
+                            <img src={`/icons/${item.icon}`} className="label-icon" alt='Icon' /> 
                             {item.name}
                             {(item.nestedItems) ?
                                 open ? 

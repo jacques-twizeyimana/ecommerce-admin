@@ -7,35 +7,35 @@ export const sideBarItems: ISidebar[] = [
             [
                 { 
                     name: 'Darbuotojai',
-                    icon: 'Icon'
+                    icon: 'dashboard-icon.svg'
                 }
             ],
             [
                 {
                     name: 'Bendras tabelis',
-                    icon: 'Icon'
+                    icon: 'menu-icon.svg'
                 },
                 {
                     name: 'Suvestinė',
-                    icon: 'Icon'
+                    icon: 'file-icon.svg'
                 },
             ],
             [
                 {
                     name: 'Apgyvendinimas',
-                    icon: 'Icon'
+                    icon: 'bed-icon.svg'
                 },
                 {
                     name: 'Darbo priemonės',
-                    icon: 'Icon'
+                    icon: 'tools-icon.svg'
                 },
                 {
                     name: 'Automobiliai',
-                    icon: 'Icon'
+                    icon: 'car-icon.svg'
                 },
                 {
                     name: 'Nustatymai',
-                    icon: 'Icon',
+                    icon: 'toogle-icon.svg',
                     nestedItems: [
                         { name: 'Vartotojai' },
                         { name: 'Pareigos' },
