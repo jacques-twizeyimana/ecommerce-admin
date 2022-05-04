@@ -33,8 +33,7 @@ export default function SignInForm() {
     if (res.response?.data.status == 401) {
       setError('Invalid credentials');
     } else {
-      // navigate("/employees");
-      window.location.href = '/employees';
+      navigate('/employees');
     }
   };
 
@@ -63,13 +62,13 @@ export default function SignInForm() {
           <Checkbox />
         </div>
         <div className="meta-area col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-          <a href="#" className="f-password">
+          <a href="/" className="f-password">
             Pamiršote slaptažodį?
           </a>
         </div>
       </div>
       <div className="mb-4">
-        <Button children={'Prisijungti'} type={'submit'} />
+        <Button type={'submit'}>Prisijungti</Button>
       </div>
     </form>
   );
