@@ -8,6 +8,7 @@ import React, {
 export interface CommonProps<T> extends AllHTMLAttributes<DOMAttributes<T>> {}
 
 import { Color, SelectData, ValueType } from '.';
+import { ISidebar, SubItem } from './services/sidebar.types';
 
 /**
  * input props that will be shared to all input components
@@ -71,3 +72,12 @@ export type IconNames =
   | 'arrow-right2'
   | 'arrow-left'
   | 'more';
+
+
+export interface ListItemProps {
+  item: ISidebar
+}
+
+export interface ListSubItemProps {
+  items: SubItem[]
+}

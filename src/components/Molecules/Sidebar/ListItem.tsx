@@ -1,13 +1,16 @@
 import React from 'react';
 import '../../../styles/components/Organisms/Sidebar.scss';
+import { ListItemProps } from '../../../types/props';
 import ListSubItem from '../../Atoms/Sidebar/ListSubItem';
 
-export default function ListItem() {
+export default function ListItem(props: ListItemProps) {
     return (
         <div className="list-items">
-            <p className="mb-0 mt-0">Item 1 <img src='/icons/arrow-down.svg' alt='arrow-down' /></p>
+            <p className="mb-0 mt-0">{props.item.name} <img src='/icons/arrow-down.svg' alt='arrow-down' /></p>
             <div className="subitem-area">
-                <ListSubItem />
+                {props.item.subItems?.map((item) => (
+                    <ListSubItem items={item} />
+                ))}
             </div>
         </div>
     )

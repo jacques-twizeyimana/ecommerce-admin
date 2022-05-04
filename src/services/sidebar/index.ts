@@ -1,6 +1,6 @@
 import {ISidebar} from '../../types/services/sidebar.types';
 
-export const SidebarItems: ISidebar[] = [
+export const sideBarItems: ISidebar[] = [
     {
         name: 'Žmonių valdymas',
         subItems: [
