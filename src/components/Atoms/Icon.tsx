@@ -1,5 +1,6 @@
 import React from 'react';
-type IconNames = 'print' | 'add' | 'home' | 'arrow-right' | 'arrow-right2' | 'arrow-left';
+
+import { IconNames } from '../../types/props';
 
 interface IconProps {
   name: IconNames;

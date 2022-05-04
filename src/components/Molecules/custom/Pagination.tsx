@@ -17,47 +17,40 @@ const Pagination = ({ totalPages = 1, paginate, currentPage = 0 }: PaginationPro
     pageNumbers.push(i + 1);
   }
 
-  const onNext = () => {
-    paginate(currentPage + 1);
-  };
-
-  const onPrev = () => {
-    paginate(currentPage - 1);
-  };
-
   return totalPages > 1 ? (
     <div className="py-2">
-      <nav className="my-2 flex justify-end">
-        <ul className="flex pl-0 rounded list-none flex-wrap justify-center">
+      <div className="px-0 d-flex justify-content-end align-items-center shadow-sm bg-white rounded py-1">
+        <div className="mr-2">
           <button
-            aria-label="left-arrow"
-            className="mr-3"
-            onClick={onPrev}
-            disabled={currentPage === 0}>
-            <Icon name="arrow-left" size={12} />
+            className="btn btn-sm"
+            disabled={currentPage === 0}
+            onClick={() => {
+              paginate(currentPage - 1);
+            }}>
+            <Icon name="arrow-left" size={16} />
           </button>
-          <li className="space-x-2">
-            {pageNumbers.map((number) => (
-              <Indicator
-                key={number}
-                isCircular={false}
-                isActive={currentPage + 1 === number}
-                hasError={false}
-                isComplete={false}
-                clicked={() => paginate(number - 1)}>
-                {number}
-              </Indicator>
-            ))}
-          </li>
+        </div>
+        {pageNumbers.map((number) => (
+          <div className="pr-1" key={number}>
+            <Indicator
+              isCircular={false}
+              isActive={currentPage + 1 === number}
+              handleClick={() => paginate(number - 1)}>
+              {number}
+            </Indicator>
+          </div>
+        ))}
+        <div className="mr-2">
           <button
-            aria-label="right-arrow"
-            className="ml-3"
-            onClick={onNext}
-            disabled={currentPage === totalPages - 1}>
-            <Icon name="arrow-right2" size={12} />
+            disabled={currentPage === totalPages - 1}
+            className="btn btn-sm"
+            onClick={() => {
+              paginate(currentPage + 1);
+            }}>
+            <Icon name="arrow-right2" size={16} />
           </button>
-        </ul>
-      </nav>
+        </div>
+      </div>
     </div>
   ) : (
     <></>

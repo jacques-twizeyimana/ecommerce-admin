@@ -1,18 +1,24 @@
 import React from 'react';
+import Select from 'react-select';
 
+import { ValueType } from '../../types';
+import { TableActionsType } from '../../types/props';
+import Icon from '../Atoms/Icon';
 import Pagination from '../Molecules/custom/Pagination';
 
-export interface ActionsType<T> {
-  name: string;
-  handleAction: (_data: T) => void;
-}
+const showEntriesOptions = [
+  { value: '10', label: '10' },
+  { value: '25', label: '25' },
+  { value: '50', label: '50' },
+  { value: '100', label: '100' },
+];
 
 interface TableProps<T> {
   data: T[];
   uniqueCol: keyof T;
   hide?: (keyof T)[];
   showNumbering?: boolean;
-  actions?: ActionsType<T>[];
+  actions?: TableActionsType<T>[];
   handleClickRow?: () => void;
   statusColumn?: string;
 
@@ -31,15 +37,19 @@ export default function Table<T>({
   showNumbering = true,
   actions,
   handleClickRow,
-  //   statusColumn,
 
-  //   //pagination
-  //   rowsPerPage = 10,
+  //pagination
+  rowsPerPage = 10,
   totalPages = 1,
   currentPage = 0,
   onChangePage,
-}: //   onChangePageSize,
+  onChangePageSize,
+}: //   ,
 TableProps<T>) {
+  function handleCountSelect(e: ValueType) {
+    if (onChangePageSize) onChangePageSize(parseInt(e.value + ''));
+  }
+
   return (
     <div className="border rounded">
       <table className="table table-responsive my-0">
@@ -68,8 +78,14 @@ TableProps<T>) {
                   </td>
                 ))}
               {actions && (
-                <td>
-                  {actions.map((action) => (
+                <td className="px-2">
+                  <div className="dropdown">
+                    <button className="btn w-auto px-1 outline-none">
+                      <Icon name={'more'} size={24} />
+                    </button>
+                  </div>
+
+                  {/* {actions.map((action) => (
                     <div key={action.name}>
                       <button
                         className="btn btn-sm btn-primary"
@@ -77,26 +93,23 @@ TableProps<T>) {
                         {action.name}
                       </button>
                     </div>
-                  ))}
+                  ))} */}
                 </td>
               )}
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="flex justify-between mt-4 mb-5">
-        <div className="flex items-center py-2">
-          <span>Show</span>
-
-          {/* <Select
-            className="px-3"
-            width="32"
-            // height={30}
-            value={rowsPerPage.toString()}
-            handleChange={handleCountSelect}
+      <div className="d-flex justify-content-between my-2">
+        <div className="d-flex align-items-center py-2">
+          <span className="px-3">Rodyti</span>
+          <Select
             name="rowstoDisplay"
-            options={countsToDisplay}></Select>
-          <span>Entries</span> */}
+            value={showEntriesOptions.find((option) => option.value === rowsPerPage + '')}
+            // @ts-ignore
+            onChange={handleCountSelect}
+            options={showEntriesOptions}
+          />
         </div>
         <Pagination
           totalElements={data.length}
