@@ -1,5 +1,5 @@
 import React from 'react';
-type IconNames = 'print' | 'add' | 'apple';
+type IconNames = 'print' | 'add' | 'home' | 'arrow-right';
 
 interface IconProps {
   name: IconNames;
