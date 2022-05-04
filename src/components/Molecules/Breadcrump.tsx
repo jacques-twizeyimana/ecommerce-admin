@@ -21,7 +21,7 @@ export default function Breadcrump({ title, navigation }: Iprops) {
           </button>
         </div>
       </div>
-      <div>
+      <div className="d-flex align-items-center">
         <Icon name="home" />
         {navigation.map((item, index) => (
           <React.Fragment key={index}>
