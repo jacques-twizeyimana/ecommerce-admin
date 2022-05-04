@@ -3,8 +3,13 @@
 .bg {
     background-color: #F8FAFB;
     height: 100vh;
+    padding: 0;
     width: 100vw;
     overflow: hidden;
+
+    .sidebar-content {
+        margin-top: -5.68px;
+    }
 
     .main-content {
         padding: 0.8rem 1.3rem; 
