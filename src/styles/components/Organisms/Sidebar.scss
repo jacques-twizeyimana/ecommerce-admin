@@ -11,17 +11,56 @@
             // margin-top: 0.8rem;
         }
     }
+
+    .sidebar-list-items {
+        @include scrollbar();
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 100%;
+    }
 }
 
 .list-items {
-    background-color: #2D5474;
-    padding: 1rem 2.4rem;
+    // padding: 1rem 2.4rem;
     margin-bottom: 0.08rem;
     p {
         color: white !important;
+    background-color: #2D5474;
+    padding: 1rem 2.4rem;
+
+    width: 100%;
         font-size: 14px;
         img {
             width: 16px;
+            cursor: pointer;
         }
+    }
+}
+
+.list-sub-items {
+    background-color: white;
+    border-bottom: 1px solid rgb(0 0 0 / 10%);
+    p {
+        color: #2D5474 !important;
+        background-color: white;
+        font-size: 13px;
+        padding: 0.6rem 2.4rem;
+        font-weight: 400;
+        .label-icon {
+            margin-right: 0.3rem;
+        }
+    }
+
+    .nested-items {
+        background-color: #EEF1F4 !important;
+    }
+    
+}
+
+.list-nested-items {
+    background-color: #EEF1F4;
+    p {
+        padding: 0.6rem 3.9rem;
+    background-color: #EEF1F4;
     }
 }
