@@ -17,7 +17,7 @@ export default function Breadcrump({ title, navigation }: Iprops) {
         </Heading>
         <div className="text-right">
           <button className="rounded-circle btn py-2 btn-print bg-light-gray">
-            <Icon name="print" />
+            <Icon name="print" size={20} />
           </button>
         </div>
       </div>
