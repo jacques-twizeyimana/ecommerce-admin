@@ -1,4 +1,5 @@
 import './styles/index.scss';
+import './styles/fonts.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
