@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../../../styles/components/Organisms/Sidebar.scss';
 import { ListSubItemProps } from '../../../types/props';
 import ListSubNestedItem from '../../Atoms/Sidebar/ListSubNestedItem';
 
 export default function ListSubItem(props: ListSubItemProps) {
-    console.log('items', props);
+
+    const [open, setOpen] = useState(false);
+    const toogleDropper = () => {
+        setOpen(!open);
+    };
+
     return (
         <React.Fragment>
             <div className="list-sub-items">
@@ -13,12 +18,18 @@ export default function ListSubItem(props: ListSubItemProps) {
                         <p className="mb-0 mt-0">
                             <img src='/icons/dashboard.svg' className="label-icon" alt='Icon' /> 
                             {item.name}
-                            {(item.nestedItems) ? <img src='/icons/arrow-down-black.svg' alt='arrow-down' />: null} </p>
-                        <div className="nested-items">
-                            {item.nestedItems?.map((it) => (
-                                <ListSubNestedItem item={it}/>
-                            ))}
-                        </div>
+                            {(item.nestedItems) ?
+                                open ? 
+                                <img src='/icons/arrow-up-black.svg' alt='arrow-down' onClick={toogleDropper} /> :
+                                <img src='/icons/arrow-down-dark.svg' alt='arrow-down' onClick={toogleDropper} />: 
+                                 null} </p>
+                        {open ?
+                            <div className="nested-items">
+                                {item.nestedItems?.map((it) => (
+                                    <ListSubNestedItem item={it}/>
+                                ))}
+                            </div>: null }         
+                        
                     </React.Fragment>
                 ))}
             </div>
