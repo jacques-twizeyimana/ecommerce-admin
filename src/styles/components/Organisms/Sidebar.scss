@@ -3,4 +3,25 @@
 .bg-sidebar {
     background: white;
     height: 100vh;
+    .sidebar-header {
+        display: flex;
+        padding: 0.8rem 0rem;
+        img {
+            margin-left: 2.5rem;
+            // margin-top: 0.8rem;
+        }
+    }
+}
+
+.list-items {
+    background-color: #2D5474;
+    padding: 1rem 2.4rem;
+    margin-bottom: 0.08rem;
+    p {
+        color: white !important;
+        font-size: 14px;
+        img {
+            width: 16px;
+        }
+    }
 }

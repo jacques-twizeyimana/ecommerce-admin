@@ -7,7 +7,7 @@ export default function Avatar() {
     return (
         <div className="avatar d-flex">
             <span className="circle"></span>
-            <p className="mb-0">Jabes</p>
+            <p className="mb-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jabes</p>
         </div>
     )
 }
