@@ -4,7 +4,7 @@ import {InputProps} from '../../../types/props';
 
 export default function Input<T>(
   { placeholder = '', padding = 'px-4', type, readonly = false, required = true, value = '', name, min = 0, max,
-   full, fcolor = 'primary', bcolor = 'tertiary', pcolor = 'txt-secondary', width, handleChange = () => {},
+   full, fcolor = 'primary', bcolor = 'tertiary', inputColor= '#212529', bgStyles = true, pcolor = 'txt-secondary', width, handleChange = () => {},
     className = '', ...attrs}: InputProps<T>) {
 
       const [_value, setValue] = useState<string>('');
@@ -29,8 +29,9 @@ export default function Input<T>(
           required={required}
           min={min}
           max={max}
+          style={{color: inputColor}}
           autoComplete="off"
-          className={``}
+          className={(bgStyles) ? ` bg-styles ` : ``}
           /* @ts-ignore */
           onChange={handleOnChange}
         />

@@ -36,6 +36,8 @@ export interface InputProps<T> extends CommonInputProps<T> {
   pcolor?: Color;
   width?: string | number;
   className?: string;
+  bgStyles?: boolean;
+  inputColor?: string;
   required?: boolean;
   reference?: React.LegacyRef<HTMLInputElement>;
 }
