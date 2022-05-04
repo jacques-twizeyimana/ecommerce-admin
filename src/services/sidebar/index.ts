@@ -45,5 +45,17 @@ export const sideBarItems: ISidebar[] = [
                 },
             ],
         ]
-    }
+    },
+    {
+        name: 'Ištekliai'
+    },
+    {
+        name: 'Resursai'
+    },
+    {
+        name: 'Pardavimai'
+    },
+    {
+        name: 'Admino Nustatymai'
+    },
 ]
