@@ -3,6 +3,7 @@ import Select from 'react-select';
 
 import { ValueType } from '../../types';
 import { TableActionsType } from '../../types/props';
+import Dropdown from '../Atoms/custom/Dropdown';
 import Icon from '../Atoms/Icon';
 import Pagination from '../Molecules/custom/Pagination';
 
@@ -63,7 +64,7 @@ TableProps<T>) {
                   {key}
                 </td>
               ))}
-            {actions && <th>Actions</th>}
+            {actions && <th className="text-center">Actions</th>}
           </tr>
           {/* Table body */}
           {data.map((row, index) => (
@@ -79,21 +80,25 @@ TableProps<T>) {
                 ))}
               {actions && (
                 <td className="px-2">
-                  <div className="dropdown">
-                    <button className="btn w-auto px-1 outline-none">
-                      <Icon name={'more'} size={24} />
-                    </button>
-                  </div>
-
-                  {/* {actions.map((action) => (
-                    <div key={action.name}>
-                      <button
-                        className="btn btn-sm btn-primary"
-                        onClick={() => action.handleAction(row)}>
-                        {action.name}
+                  <Dropdown
+                    header={
+                      <button className="btn w-auto px-1 outline-none text-left">
+                        <Icon name={'more'} size={24} />
                       </button>
-                    </div>
-                  ))} */}
+                    }>
+                    {actions.map((action) => (
+                      <div key={action.name} className="w-100 bg-white shadow rounded">
+                        <button
+                          className="btn w-100 border-bottom rounded-0 text-capitalize"
+                          onClick={() => action.handleAction(row)}>
+                          <Icon name={action.icon} size={16} />
+                          <span className="px-2 text-sm">
+                            {action.name.toLowerCase()}
+                          </span>
+                        </button>
+                      </div>
+                    ))}
+                  </Dropdown>
                 </td>
               )}
             </tr>

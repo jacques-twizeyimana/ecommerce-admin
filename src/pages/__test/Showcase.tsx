@@ -98,7 +98,7 @@ const actions: TableActionsType<IPerson>[] = [
     name: 'delete',
     icon: 'add',
     handleAction: (item: IPerson) => {
-      console.log(item);
+      alert('deleted ' + item.name);
     },
   },
 ];
