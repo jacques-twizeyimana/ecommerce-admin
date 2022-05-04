@@ -8,6 +8,7 @@ import React, {
 export interface CommonProps<T> extends AllHTMLAttributes<DOMAttributes<T>> {}
 
 import { Color, SelectData, ValueType } from '.';
+import { ISidebar, NestedItem, SubItem } from './services/sidebar.types';
 
 /**
  * input props that will be shared to all input components
@@ -40,6 +41,8 @@ export interface InputProps<T> extends CommonInputProps<T> {
   pcolor?: Color;
   width?: string | number;
   className?: string;
+  bgStyles?: boolean;
+  inputColor?: string;
   required?: boolean;
   reference?: React.LegacyRef<HTMLInputElement>;
 }
@@ -69,3 +72,16 @@ export type IconNames =
   | 'arrow-right2'
   | 'arrow-left'
   | 'more';
+
+
+export interface ListItemProps {
+  item: ISidebar
+}
+
+export interface ListSubItemProps {
+  items: SubItem[]
+}
+
+export interface ListSubNestedItemProps {
+  item: NestedItem
+}
