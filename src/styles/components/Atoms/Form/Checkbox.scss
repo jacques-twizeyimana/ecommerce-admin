@@ -20,7 +20,7 @@ label {
 .customcheck {
     display: block;
     position: relative;
-    padding-left: 27px;
+    padding-left: 20px;
     margin-bottom: 12px;
     cursor: pointer;
 
@@ -40,19 +40,19 @@ label {
 /* Create a custom checkbox */
 .checkmark {
     position: absolute;
-    top: 2px;
+    top: 4px;
     left: 0;
-    height: 18px;
-    width: 18px;
+    height: 15px;
     background-color: color(light-gray);
-    border-radius: 5px;
+    border-radius: 3px;
+    width: 15px;
 }
 
 
 /* When the checkbox is checked, add a blue background */
 .customcheck input:checked ~ .checkmark {
     background-color: color(purple);
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -69,10 +69,10 @@ label {
 
 /* Style the checkmark/indicator */
 .customcheck .checkmark:after {
-    left: 7px;
-    top: 4px;
-    width: 5px;
-    height: 9px;
+    left: 6px;
+    top: 3px;
+    width: 4px;
+    height: 8px;
     border: solid white;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
