@@ -13,13 +13,13 @@ export default function MainLayout({children}) {
                         )
                     }
                 </div>
-                <div className={("col-0 d-none") +" d-md-block col-side p-0 "}>
+                <div className={("col-0 d-none") +" d-md-block col-md-3 col-side p-0 "}>
                     <div className="sidebar-content">
                         <Sidebar />
                     </div>
                 </div>
                 <div
-                    className={"col-lg-10 col-12 p-0"}>
+                    className={"col-side-content col-12 p-0"}>
                     <Nav/>
                     <div className={" main-content "} >{children}</div>
                 </div>

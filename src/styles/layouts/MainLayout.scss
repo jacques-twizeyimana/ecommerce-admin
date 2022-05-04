@@ -18,7 +18,13 @@
     @media (min-width: 992px) {
         .col-side {
             flex: 0 0 auto;
-            width: 18.66666667%;
+            width: 19%;
+        }
+    }
+    @media (min-width: 992px) {
+        .col-side-content {
+            flex: 0 0 auto;
+            width: 81%;
         }
     }
 
