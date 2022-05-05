@@ -1,6 +1,8 @@
 import React from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Sidebar from '../../components/Organisms/sidebar/Sidebar';
+import PopupModal from '../../components/Organisms/Modals/Modal';
+import {Button} from 'react-bootstrap';
 
 export default function Employees() {
     return (
@@ -12,33 +14,18 @@ export default function Employees() {
 
 
 const Modal = () => {
+    const [modalShow, setModalShow] = React.useState(false);
+  
     return (
-        <React.Fragment>
-            {/* <!-- Button trigger modal --> */}
-<button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-{/* <!-- Modal --> */}
-<div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog" role="document">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div className="modal-body">
-        ...
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" className="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-        </React.Fragment>
-    )
+      <>
+        <Button variant="primary" onClick={() => setModalShow(true)}>
+          Launch vertically centered modal
+        </Button>
+  
+        <PopupModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      </>
+    );
 }
