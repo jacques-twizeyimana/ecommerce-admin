@@ -10,7 +10,8 @@ export default function ListItem(props: ListItemProps) {
     }
     return (
         <div className="list-items">
-            <p className="mb-0 mt-0">{props.item.name} 
+            <p className="mb-0 mt-0">
+                {props.item.name} 
                 {(props.item.subItems) ? 
                 open ? 
                 <img src='/icons/arrow-up.svg' alt='arrow-down' onClick={toogleDropper} />:
@@ -18,8 +19,8 @@ export default function ListItem(props: ListItemProps) {
             </p>
             {open ? 
                 <div className="subitem-area">
-                    {props.item.subItems?.map((item) => (
-                        <ListSubItem items={item} />
+                    {props.item.subItems?.map((item, i) => (
+                        <ListSubItem items={item} key={i} />
                     ))}
                 </div>
                 : null

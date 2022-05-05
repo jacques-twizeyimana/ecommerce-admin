@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/layouts/MainLayout.scss';
 import Nav from '../components/Organisms/navbar/Nav';
 import Sidebar from '../components/Organisms/sidebar/Sidebar';
 
 export default function MainLayout({children}) {
+
+    const [collapse, setCollapse] = useState(false);
+
+
+
     return (
          <div className={"container-fluid bg"}>
             <div className="row">
@@ -13,14 +18,15 @@ export default function MainLayout({children}) {
                         )
                     }
                 </div>
-                <div className={("col-0 d-none") +" d-md-block col-md-3 col-side p-0 "}>
+                
+                <div className={!collapse ? "col-0 d-none d-md-block col-md-3 col-side p-0 ": "col-0 d-none col-md-3 col-side p-0 "}>
                     <div className="sidebar-content">
                         <Sidebar />
                     </div>
                 </div>
                 <div
-                    className={"col-side-content col-12 p-0"}>
-                    <Nav />
+                    className={!collapse ? "col-side-content col-12 p-0": "col-side-content-full col-12 p-0"}>
+                    <Nav collapse={collapse} setCollapse={setCollapse}/>
                     <div className={" main-content "} >{children}</div>
                 </div>
             </div>
