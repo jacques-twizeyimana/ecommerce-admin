@@ -71,7 +71,7 @@ export type IconNames =
   | 'home'
   | 'arrow-right'
   | 'arrow-right2'
-  | 'arrow-left'
+  | 'arrow-left' | 'filter'
   | 'more';
 
 

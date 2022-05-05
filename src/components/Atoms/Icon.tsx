@@ -17,9 +17,10 @@ export default function Icon({
   name,
   size = 24,
   height = size,
+  className="",
   styles = {},
   width = size,
   alt = name + ' icon',
 }: IconProps) {
-  return <img style={styles} src={`/icons/${name}.svg`} alt={alt} width={width} height={height} />;
+  return <img style={styles} className={className} src={`/icons/${name}.svg`} alt={alt} width={width} height={height} />;
 }

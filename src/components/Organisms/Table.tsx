@@ -7,6 +7,9 @@ import Dropdown from '../Atoms/custom/Dropdown';
 import Icon from '../Atoms/Icon';
 import Button from '../Molecules/Button/Button';
 import Pagination from '../Molecules/custom/Pagination';
+import Filter from '../Molecules/custom/Filter';
+import Heading from '../Atoms/Heading';
+import {useNavigate} from 'react-router-dom';
 
 const showEntriesOptions = [
   { value: '10', label: '10' },
@@ -48,12 +51,21 @@ export default function Table<T>({
   onChangePageSize,
 }: //   ,
 TableProps<T>) {
+  const navigate = useNavigate();
+  
   function handleCountSelect(e: ValueType) {
     if (onChangePageSize) onChangePageSize(parseInt(e.value + ''));
   }
 
   return (
     <div>
+      <div className="page-head">
+        <Heading fontSize="md" fontWeight="bold">
+          Registruoti naują 
+          <Icon name={'add'} styles={{marginLeft: '10px'}} size={35}/>
+        </Heading>
+      </div>
+      <Filter />
       <div className="border rounded">
       <table className="table table-responsive my-0">
         <tbody>

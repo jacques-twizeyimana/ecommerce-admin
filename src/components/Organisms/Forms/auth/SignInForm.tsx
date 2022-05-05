@@ -33,7 +33,7 @@ export default function SignInForm() {
     if (res.response?.data.status == 401) {
       setError('Invalid credentials');
     } else {
-      navigate('/employees');
+      navigate('/dashboard');
     }
   };
 

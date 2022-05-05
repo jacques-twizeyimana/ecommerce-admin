@@ -111,6 +111,13 @@ const data: IEmployee[] = [
 
 const actions: TableActionsType<IEmployee>[] = [
   {
+    name: 'View',
+    icon: 'add',
+    handleAction: (item: IEmployee) => {
+      console.log(item);
+    },
+  },
+  {
     name: 'Edit',
     icon: 'add',
     handleAction: (item: IEmployee) => {
@@ -132,7 +139,7 @@ const EmployeeTable = () => {
       <div className="">
         <Breadcrump title="Darbuotojai" navigation={['Žmonių valdymas', 'Darbuotojai']} />
       </div>
-      <div className="mt-5">
+      <div className="mt-4">
         <Table
           data={data}
           uniqueCol="Sutarties Nr."
