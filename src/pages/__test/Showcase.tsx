@@ -2,6 +2,7 @@ import React from 'react';
 
 import Heading from '../../components/Atoms/Heading';
 import Breadcrump from '../../components/Molecules/Breadcrump';
+import { Tab, Tabs } from '../../components/Molecules/custom/Tabs';
 import Table from '../../components/Organisms/Table';
 import { TableActionsType } from '../../types/props';
 
@@ -121,6 +122,18 @@ export default function ShowCase() {
         actions={actions}
         onChangePage={(_page: number) => {}}
       />
+
+      <Tabs className="my-4" activeIndex={1}>
+        <Tab label="Students">
+          <h1 className="text-3xl text-primary-500">Students</h1>
+        </Tab>
+        <Tab label="Instructors">
+          <h2 className="text-3xl text-green-400">{'Instructor'}</h2>
+        </Tab>
+        <Tab label="Admins" disabled={false}>
+          <h2 className="text-3xl text-yellow-300 font-bold">Admins here</h2>
+        </Tab>
+      </Tabs>
     </div>
   );
 }
