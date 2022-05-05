@@ -6,12 +6,12 @@ import EmployeeInfo from '../../components/Organisms/employees/EmployeeInfo';
 
 export default function EmployeeDetails() {
   return (
-    <div>
+    <div className="px-3">
       <Breadcrump
         title="Jonas Jonaitis"
         navigation={['Žmonių valdymas', 'Darbuotojai', 'Jonas Jonaitis']}
       />
-      <Tabs className="my-4">
+      <Tabs className="mt-5">
         <Tab label="DARBUOTOJO DUOMENYS">
           <EmployeeInfo />
         </Tab>

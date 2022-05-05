@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../../../styles/components/Molecules/custom/Pagination.scss';
 import Indicator from '../../Atoms/custom/Indicator';
 import Icon from '../../Atoms/Icon';
 
@@ -18,8 +18,8 @@ const Pagination = ({ totalPages = 1, paginate, currentPage = 0 }: PaginationPro
   }
 
   return totalPages > 1 ? (
-    <div className="py-2">
-      <div className="px-0 d-flex justify-content-end align-items-center shadow-sm bg-white rounded py-1">
+    <div className="py-2 d-flex justify-content-between ">
+      <div className="px-0 d-flex justify-content-start align-items-center rounded py-1">
         <div className="mr-2">
           <button
             className="btn btn-sm"
@@ -50,6 +50,9 @@ const Pagination = ({ totalPages = 1, paginate, currentPage = 0 }: PaginationPro
             <Icon name="arrow-right2" size={16} />
           </button>
         </div>
+      </div>
+      <div className="">
+        <p className="pagination-txt mb-0">Puslapis 1 iš 10 /  Viso 50 rezultatų</p>
       </div>
     </div>
   ) : (

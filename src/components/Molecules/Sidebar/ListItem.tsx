@@ -1,16 +1,19 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../../styles/components/Organisms/Sidebar.scss';
 import { ListItemProps } from '../../../types/props';
 import ListSubItem from '../../Atoms/Sidebar/ListSubItem';
 
 export default function ListItem(props: ListItemProps) {
+    const navigate= useNavigate();
     const [open, setOpen] = useState(false);
     const toogleDropper = () => {
         setOpen(!open);
     }
+
     return (
         <div className="list-items">
-            <p className="mb-0 mt-0">
+            <p className="mb-0 mt-0" onClick={() => navigate(props.item.link)}>
                 {props.item.name} 
                 {(props.item.subItems) ? 
                 open ? 

@@ -32,5 +32,21 @@ button {
     &.curved-border-right {
         border-bottom-right-radius: 20px;
     }
-    
+    &.no-styles {
+        background-color: transparent !important;
+        padding: 0 !important;
+    }
+
+    &.b-radius {
+        border-radius: 6px !important;
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        letter-spacing:0px !important;
+        // padding: 0.6rem 1rem;
+    }
+    &.light {
+        color: #9E41D6 !important;
+        
+        background-color: #9d41d622 !important;
+    }
 }

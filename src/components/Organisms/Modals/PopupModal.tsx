@@ -1,9 +1,11 @@
+
 import React, {useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import '../../../styles/components/Organisms/Modal.scss';
 import Button from '../../Molecules/Button/Button'
+import { ModalProps } from '../../../types/props';
 
-export default function PopupModal(props: any) {
+export default function PopupModal(props: ModalProps) {
     return (
       <Modal
         {...props}

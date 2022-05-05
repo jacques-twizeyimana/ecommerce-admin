@@ -68,7 +68,7 @@ export function Tabs({
                     activeTabIndex === i
                       ? 'border-white text-dark-blue bg-white'
                       : 'border-black text-white bg-dark-blue'
-                  } m-0 rounded-none text-sm font-bold `}
+                  } m-0 rounded-none text-xs font-bold `}
                   onClick={() => slideTo(i)}>
                   {tProps.label}
                 </button>

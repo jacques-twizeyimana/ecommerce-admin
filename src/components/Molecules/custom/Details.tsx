@@ -14,7 +14,7 @@ interface IDetailsProps {
 export default function Details({ title, data }: IDetailsProps) {
   return (
     <div className="py-3">
-      <Heading fontSize="lg" fontWeight="bold">
+      <Heading fontSize="md" fontWeight="bold">
         {title}
       </Heading>
       <div className="my-3 bg-light-gray">
@@ -22,7 +22,7 @@ export default function Details({ title, data }: IDetailsProps) {
           return (
             <div
               key={index}
-              className="d-flex  align-items-center border-bottom py-2 px-3 text-sm">
+              className="d-flex  align-items-center border-bottom py-2 px-3 text-xs">
               <span className="text-capitalize font-bold">
                 {key.replaceAll('_', ' ').toLocaleLowerCase()}:
               </span>

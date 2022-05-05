@@ -3,17 +3,16 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { signin } from '../../../../services/auth/auth.service';
 import { ValueType } from '../../../../types';
-import { LoginInfo } from '../../../../types/services/auth.types';
+import { ForgotPasswordInfo } from '../../../../types/services/auth.types';
 import Checkbox from '../../../Atoms/Form/Checkbox';
 import Input from '../../../Atoms/Form/Input';
 import Button from '../../../Molecules/Button/Button';
 
-export default function SignInForm() {
+export default function ForgotPasswordForm() {
   const navigate = useNavigate();
 
-  const [details, setDetails] = useState<LoginInfo>({
-    username: '',
-    password: '',
+  const [details, setDetails] = useState<ForgotPasswordInfo>({
+    email: ''
   });
 
   const [error, setError] = useState<string>('');
@@ -29,12 +28,12 @@ export default function SignInForm() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const res = await signin(details);
-    if (res.response?.data.status == 401) {
-      setError('Invalid credentials');
-    } else {
-      navigate('/dashboard');
-    }
+    // const res = await signin(details);
+    // if (res.response?.data.status == 401) {
+    //   setError('Invalid credentials');
+    // } else {
+    //   navigate('/dashboard');
+    // }
   };
 
   return (
@@ -42,35 +41,23 @@ export default function SignInForm() {
       <p className="text-danger text-center"> {error ? error : null}</p>
       <div className="input-control mb-3">
         <Input
-          placeholder={'Username'}
-          name={'username'}
+          placeholder={'Email'}
+          name={'email'}
           handleChange={handleChange}
-          value={details.username}
+          value={details.email}
         />
       </div>
-      <div className="input-control mb-3">
-        <Input
-          placeholder={'Password'}
-          name={'password'}
-          type={'password'}
-          handleChange={handleChange}
-          value={details.password}
-        />
-      </div>
-      <div className="d-flex justify-content-between mb-3">
-        <div className="input-control col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-          <Checkbox />
-        </div>
-        <div className="meta-area col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-          <Link to={'/forgot-password'}>
+      <div className="mb-3">
+        <div className="ml-auto col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <Link to={'/login'}>
             <a className="f-password">
-              Pamiršote slaptažodį?
+              Remembered Now?
             </a>
           </Link>
         </div>
       </div>
       <div className="mb-4">
-        <Button type={'submit'}>Prisijungti</Button>
+        <Button type={'submit'}>Send Email</Button>
       </div>
     </form>
   );
