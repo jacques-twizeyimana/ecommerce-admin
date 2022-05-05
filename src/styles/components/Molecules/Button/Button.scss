@@ -36,5 +36,17 @@ button {
         background-color: transparent !important;
         padding: 0 !important;
     }
-    
+
+    &.b-radius {
+        border-radius: 8px !important;
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        letter-spacing:0px !important;
+        // padding: 0.6rem 1rem;
+    }
+    &.light {
+        color: #9E41D6 !important;
+        
+        background-color: #9d41d622 !important;
+    }
 }

@@ -12,7 +12,7 @@ import Breadcrump from '../../components/Molecules/Breadcrump';
 export default function Employees() {
     return (
         <div>
-            <MainLayout  children={<EmployeeTable/>}/>
+            <EmployeeTable/>
         </div>
     )
 }
@@ -63,7 +63,44 @@ const data: IEmployee[] = [
     'Vardas Pavardė': 'john@email.com',
     'Pareigos': '+1 (123) 456-7890',
     'Statusas': '123 Main St, Anytown, CA 12345'
+  },
+    {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  }
+  ,
+  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  }
+  ,
+  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
   },  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  }
+  ,  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  }
+  ,  {
     'Sutarties Nr.': 1,
     'Grafiko Nr.': 'John Doe',
     'Vardas Pavardė': 'john@email.com',

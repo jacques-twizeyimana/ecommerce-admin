@@ -12,7 +12,10 @@
     }
 
     .main-content {
-        padding: 0.8rem 1.3rem; 
+        padding: 0.8rem 1.3rem;
+        overflow-y: scroll;
+        height: 100vh;
+        @include scrollbar();
     }
 
     @media (min-width: 992px) {
