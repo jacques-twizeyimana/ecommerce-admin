@@ -10,8 +10,8 @@ export default function Sidebar() {
                 <img src={'/assets/images/sass-logo-black.png'} width={185} alt="Logo" />
             </div>
             <div className="sidebar-list-items border">
-                {sideBarItems.map((item, i) => (
-                    <ListItem key={i} item={item} />
+                {sideBarItems.map((item) => (
+                    <ListItem key={item.id} item={item} />
                 ))}
             </div>
         </div>

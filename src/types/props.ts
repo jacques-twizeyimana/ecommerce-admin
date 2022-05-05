@@ -85,3 +85,8 @@ export interface ListSubItemProps {
 export interface ListSubNestedItemProps {
   item: NestedItem
 }
+
+export interface NavProps {
+  collapse: boolean;
+  setCollapse: (_x: boolean) => void;
+}

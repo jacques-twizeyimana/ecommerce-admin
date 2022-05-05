@@ -14,7 +14,7 @@ export default function ListSubItem(props: ListSubItemProps) {
         <React.Fragment>
             <div className="list-sub-items">
                 {props.items.map((item) => (
-                    <React.Fragment>
+                    <React.Fragment key={item.id}>
                         <p className="mb-0 mt-0">
                             <img src={`/icons/${item.icon}`} className="label-icon" alt='Icon' /> 
                             {item.name}
@@ -26,7 +26,7 @@ export default function ListSubItem(props: ListSubItemProps) {
                         {open ?
                             <div className="nested-items">
                                 {item.nestedItems?.map((it) => (
-                                    <ListSubNestedItem item={it}/>
+                                    <ListSubNestedItem item={it} key={it.id}/>
                                 ))}
                             </div>: null }         
                         

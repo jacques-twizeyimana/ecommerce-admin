@@ -18,8 +18,8 @@ export default function ListItem(props: ListItemProps) {
             </p>
             {open ? 
                 <div className="subitem-area">
-                    {props.item.subItems?.map((item) => (
-                        <ListSubItem items={item} />
+                    {props.item.subItems?.map((item, i) => (
+                        <ListSubItem items={item} key={i} />
                     ))}
                 </div>
                 : null
