@@ -2,6 +2,7 @@ import React from 'react';
 
 import Heading from '../../components/Atoms/Heading';
 import Breadcrump from '../../components/Molecules/Breadcrump';
+import Details from '../../components/Molecules/custom/Details';
 import { Tab, Tabs } from '../../components/Molecules/custom/Tabs';
 import Table from '../../components/Organisms/Table';
 import { TableActionsType } from '../../types/props';
@@ -134,6 +135,14 @@ export default function ShowCase() {
           <h2 className="text-3xl text-yellow-300 font-bold">Admins here</h2>
         </Tab>
       </Tabs>
+
+      <Details
+        title="Duomenys"
+        data={{
+          name: 'John Doe',
+          id: 4,
+        }}
+      />
     </div>
   );
 }
