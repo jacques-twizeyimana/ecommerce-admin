@@ -12,7 +12,7 @@ export default function Dropdown({ children, header, className }: IDropdownProps
     <div className="position-relative">
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <button
-        className="dropdown-h btn d-block w-100"
+        className="dropdown-h btn d-block w-100 p-0"
         onBlur={() => setisOpen(false)}
         onClick={() => setisOpen(!isOpen)}>
         {header}

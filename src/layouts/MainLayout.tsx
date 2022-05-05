@@ -8,7 +8,6 @@ export default function MainLayout({children}) {
     const [collapse, setCollapse] = useState(false);
 
 
-
     return (
          <div className={"container-fluid bg"}>
             <div className="row">

@@ -1,10 +1,11 @@
 import React from 'react';
 import Select from 'react-select';
-
+import '../../styles/components/Organisms/Table.scss';
 import { ValueType } from '../../types';
 import { TableActionsType } from '../../types/props';
 import Dropdown from '../Atoms/custom/Dropdown';
 import Icon from '../Atoms/Icon';
+import Button from '../Molecules/Button/Button';
 import Pagination from '../Molecules/custom/Pagination';
 
 const showEntriesOptions = [
@@ -52,7 +53,8 @@ TableProps<T>) {
   }
 
   return (
-    <div className="border rounded">
+    <div>
+      <div className="border rounded">
       <table className="table table-responsive my-0">
         <tbody>
           <tr className="rounded bg-light">
@@ -60,39 +62,37 @@ TableProps<T>) {
             {Object.keys(data[0])
               .filter((key) => !hide.includes(key as keyof T))
               .map((key) => (
-                <td key={key} className="text-capitalize font-bold px-2">
+                <td key={key} className="text-capitalize font-bold px-2 text-sm">
                   {key}
                 </td>
               ))}
-            {actions && <th className="text-center">Actions</th>}
+            {actions && <th className="text-center text-xs">Red.</th>}
           </tr>
           {/* Table body */}
           {data.map((row, index) => (
             <tr key={index} onClick={() => handleClickRow && handleClickRow()}>
-              {showNumbering && <td>{index + 1}</td>}
+              {showNumbering && <td className="text-xs">{index + 1}</td>}
               {Object.keys(row)
                 .filter((key) => !hide.includes(key as keyof T))
                 .map((key) => (
-                  <td key={key} className="text-sm px-2">
+                  <td key={key} className="text-xs px-2">
                     {/* @ts-ignore */}
                     {row[key]}
                   </td>
                 ))}
               {actions && (
-                <td className="px-2">
+                <td className="" >
                   <Dropdown
                     header={
-                      <button className="btn w-auto px-1 outline-none text-left">
-                        <Icon name={'more'} size={24} />
-                      </button>
+                      <Button className="no-styles" children={<Icon name={'more'} size={24} styles={{marginTop: '-9px'}} /> }></Button>
                     }>
                     {actions.map((action) => (
-                      <div key={action.name} className="w-100 bg-white shadow rounded">
+                      <div key={action.name} className="w-100 bg-white shadow p-0">
                         <button
-                          className="btn w-100 border-bottom rounded-0 text-capitalize"
+                          className="btn col-3 w-100 border-bottom drop-content-btn text-capitalize p-0"
                           onClick={() => action.handleAction(row)}>
-                          <Icon name={action.icon} size={16} />
-                          <span className="px-2 text-sm">
+                          {/* <Icon name={action.icon} size={13} /> */}
+                          <span className="px-2 text-xs">
                             {action.name.toLowerCase()}
                           </span>
                         </button>
@@ -105,10 +105,12 @@ TableProps<T>) {
           ))}
         </tbody>
       </table>
-      <div className="d-flex justify-content-between my-2">
+      </div>
+      <div className=" my-2">
         <div className="d-flex align-items-center py-2">
-          <span className="px-3">Rodyti</span>
+          <span className="px-3 text-xs">Rodyti</span>
           <Select
+          className='text-xs'
             name="rowstoDisplay"
             value={showEntriesOptions.find((option) => option.value === rowsPerPage + '')}
             // @ts-ignore
@@ -124,5 +126,6 @@ TableProps<T>) {
         />
       </div>
     </div>
+    
   );
 }

@@ -32,5 +32,9 @@ button {
     &.curved-border-right {
         border-bottom-right-radius: 20px;
     }
+    &.no-styles {
+        background-color: transparent !important;
+        padding: 0 !important;
+    }
     
 }
