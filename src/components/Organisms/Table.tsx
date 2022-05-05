@@ -51,8 +51,7 @@ export default function Table<T>({
   onChangePageSize,
 }: //   ,
 TableProps<T>) {
-  const navigate = useNavigate();
-  
+
   function handleCountSelect(e: ValueType) {
     if (onChangePageSize) onChangePageSize(parseInt(e.value + ''));
   }
@@ -82,7 +81,7 @@ TableProps<T>) {
           </tr>
           {/* Table body */}
           {data.map((row, index) => (
-            <tr key={index} onClick={() => handleClickRow && handleClickRow()}>
+            <tr key={index}  className="contentrows" onClick={() => handleClickRow && handleClickRow()}>
               {showNumbering && <td className="text-xs">{index + 1}</td>}
               {Object.keys(row)
                 .filter((key) => !hide.includes(key as keyof T))
@@ -99,10 +98,10 @@ TableProps<T>) {
                       <Button className="no-styles" children={<Icon name={'more'} size={24} styles={{marginTop: '-9px'}} /> }></Button>
                     }>
                     {actions.map((action) => (
-                      <div key={action.name} className="w-100 bg-white shadow p-0">
+                      <div key={action.name} className="w-100 bg-white shadow p-0"  onClick={() => action.handleAction(row)}>
                         <button
                           className="btn col-3 w-100 border-bottom drop-content-btn text-capitalize p-0"
-                          onClick={() => action.handleAction(row)}>
+                         >
                           {/* <Icon name={action.icon} size={13} /> */}
                           <span className="px-2 text-xs">
                             {action.name.toLowerCase()}

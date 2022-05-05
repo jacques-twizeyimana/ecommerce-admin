@@ -8,11 +8,17 @@ import Table from '../../components/Organisms/Table';
 import { TableActionsType } from '../../types/props';
 import Heading from '../../components/Atoms/Heading';
 import Breadcrump from '../../components/Molecules/Breadcrump';
+import { useNavigate } from 'react-router-dom';
 
 export default function Employees() {
+  const navigate = useNavigate();
+  const handleClickRow = () => {
+    console.log();
+    navigate('/dashboard/employees/1');
+  }
     return (
         <div>
-            <EmployeeTable/>
+            <EmployeeTable handleClickRow={handleClickRow}/>
         </div>
     )
 }
@@ -114,7 +120,7 @@ const actions: TableActionsType<IEmployee>[] = [
     name: 'View',
     icon: 'add',
     handleAction: (item: IEmployee) => {
-      console.log(item);
+      console.log('dsfadsfa', item);
     },
   },
   {
@@ -131,9 +137,14 @@ const actions: TableActionsType<IEmployee>[] = [
       alert('deleted ' + item['Grafiko Nr.']);
     },
   },
+  
 ];
 
-const EmployeeTable = () => {
+
+
+
+
+const EmployeeTable = (props: {handleClickRow: () => void}) => {
   return (
     <div className="px-3">
       <div className="">
@@ -147,6 +158,7 @@ const EmployeeTable = () => {
           rowsPerPage={10}
           totalPages={10}
           actions={actions}
+          handleClickRow={props.handleClickRow}
           onChangePage={(_page: number) => {}}
         />
       </div>
@@ -154,32 +166,3 @@ const EmployeeTable = () => {
   );
 }
 
-// const Modal = () => {
-//     const [popupModalShow, setPopupModalShow] = React.useState(false);
-//     const [rightModalShow, setRightModalShow] = React.useState(false);
-  
-//     return (
-//       <>
-//         <Button variant="primary" onClick={() => setPopupModalShow(true)}>
-//           Launch vertically centered modal
-//         </Button>
-
-//         <Button variant="primary" onClick={() => setRightModalShow(true)}>
-//           Launch full left modal
-//         </Button>
-  
-//         <PopupModal
-//           show={popupModalShow}
-//           onHide={() => {setPopupModalShow(false)}}
-//           setShow={setPopupModalShow}
-//         />
-
-//         <SideModal
-//           show={rightModalShow}
-//           className={'side-modal'}
-//           setShow={setRightModalShow}
-//           onHide={() => setRightModalShow(false)}
-//         />
-//       </>
-//     );
-// }

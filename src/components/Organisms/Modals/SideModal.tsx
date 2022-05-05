@@ -32,6 +32,14 @@ export default function SideModal(props: ModalProps) {
                     <ContentItem item={item} key={item.id} />
                   ))}
                </div>
+               <div className="body-modal-footer row px-4">
+                    <div className="col-3 mr-2">
+                      <Button className="text-capitalize b-radius" children={'Išsaugoti'}/>
+                    </div>
+                    <div className="col-3">
+                      <Button className="text-capitalize b-radius light"  children={'Atšaukti'}/>
+                    </div>
+                </div>
             </Modal.Body>
             {/* <Modal.Footer>
                 <div className="d-flex w-100 m-0">

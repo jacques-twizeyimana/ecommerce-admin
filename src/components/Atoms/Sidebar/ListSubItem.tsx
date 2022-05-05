@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../../styles/components/Organisms/Sidebar.scss';
 import { ListSubItemProps } from '../../../types/props';
 import ListSubNestedItem from '../../Atoms/Sidebar/ListSubNestedItem';
 
 export default function ListSubItem(props: ListSubItemProps) {
 
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const toogleDropper = () => {
         setOpen(!open);
@@ -15,7 +17,7 @@ export default function ListSubItem(props: ListSubItemProps) {
             <div className="list-sub-items">
                 {props.items.map((item, i) => (
                     <React.Fragment key={item.id}>
-                        <p className="mb-0 mt-0" onClick={toogleDropper}>
+                        <p className="mb-0 mt-0" onClick={() => navigate(item.link)}>
                             <span className={`col-12 d-block  ${(item.id == 11) ? 'active-show' : ''}`}>
                                 <img src={`/icons/${item.icon}`} className="label-icon" alt='Icon' /> 
                                 {item.name}

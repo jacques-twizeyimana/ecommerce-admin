@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
   basicInfo,
@@ -11,8 +11,42 @@ import {
 } from '../../../utils/static/employee';
 import Button from '../../Molecules/Button/Button';
 import Details from '../../Molecules/custom/Details';
+import PopupModal from '../Modals/PopupModal';
+import SideModal from '../Modals/SideModal';
 
 export default function EmployeeInfo() {
+    const [popupModalShow, setPopupModalShow] = React.useState(false);
+    const [rightModalShow, setRightModalShow] = React.useState(false);
+
+  // const Modal = () => {
+//     const [popupModalShow, setPopupModalShow] = React.useState(false);
+//     const [rightModalShow, setRightModalShow] = React.useState(false);
+  
+//     return (
+//       <>
+//         <Button variant="primary" onClick={() => setPopupModalShow(true)}>
+//           Launch vertically centered modal
+//         </Button>
+
+//         <Button variant="primary" onClick={() => setRightModalShow(true)}>
+//           Launch full left modal
+//         </Button>
+  
+//         <PopupModal
+//           show={popupModalShow}
+//           onHide={() => {setPopupModalShow(false)}}
+//           setShow={setPopupModalShow}
+//         />
+
+//         <SideModal
+//           show={rightModalShow}
+//           className={'side-modal'}
+//           setShow={setRightModalShow}
+//           onHide={() => setRightModalShow(false)}
+//         />
+//       </>
+//     );
+// }
   return (
     <div className="py-4 px-5 bg-white">
       <div className="p-2 border d-inline-block">
@@ -25,10 +59,10 @@ export default function EmployeeInfo() {
           Atnaujinti duomenis
         </button> */}
         <div className="col-3 mr-3">
-          <Button className="text-capitalize b-radius"  children={'Atnaujinti duomenis'}/>
+          <Button className="text-capitalize b-radius"  onClick={() => setPopupModalShow(true)} children={'Atnaujinti duomenis'}/>
         </div>
         <div className="col-3 ml-3">
-          <Button className="text-capitalize b-radius light" children={'Archyvuoti darbuotoją'}/>
+          <Button className="text-capitalize b-radius light" onClick={() => setRightModalShow(true)} children={'Archyvuoti darbuotoją'}/>
         </div>
         {/* <button className="mx-2 d-inline-block w-auto py-3 text-sm text-lowercase rounded">
           Archyvuoti darbuotoją
@@ -61,6 +95,18 @@ export default function EmployeeInfo() {
           <Details title="Kita info" data={otherInfo} />
         </div>
       </div>
+         <PopupModal
+            show={popupModalShow}
+            onHide={() => {setPopupModalShow(false)}}
+            setShow={setPopupModalShow}
+        />
+
+         <SideModal
+            show={rightModalShow}
+            className={'side-modal'}
+            setShow={setRightModalShow}
+            onHide={() => setRightModalShow(false)} 
+         />
     </div>
   );
 }
