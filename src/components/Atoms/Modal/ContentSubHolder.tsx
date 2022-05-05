@@ -8,7 +8,7 @@ export default function ContentSubHolder(props: ContentSubHolderProps) {
         <div className="content-sub-holder border row m-0 p-3">
             {props.items.map((item: ModalSubItem) => (
                 <div className=" col-xs-12 col-sm-12 col-md-3 col-lg-3 holder">
-                    <ContentSubItem item={item}/>
+                    <ContentSubItem item={item} key={item.id}/>
                 </div>
             ))}
             

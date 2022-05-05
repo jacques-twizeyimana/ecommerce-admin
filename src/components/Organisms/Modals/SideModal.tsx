@@ -29,7 +29,7 @@ export default function SideModal(props: ModalProps) {
                </div>
                <div className="body-content px-4">
                   {modalItems.map((item: IModal) => (
-                    <ContentItem item={item} />
+                    <ContentItem item={item} key={item.id} />
                   ))}
                </div>
             </Modal.Body>

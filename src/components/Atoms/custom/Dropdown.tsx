@@ -11,12 +11,12 @@ export default function Dropdown({ children, header, className }: IDropdownProps
   return (
     <div className="position-relative">
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-      <button
+      <div
         className="dropdown-h btn d-block w-100 p-0"
         onBlur={() => setisOpen(false)}
         onClick={() => setisOpen(!isOpen)}>
         {header}
-      </button>
+      </div>
       <div className={`w-100 z-10 ${isOpen ? 'position-relative' : 'd-none'}`}>
         <div className={`position-absolute top-0 ${className}`}>{children}</div>
       </div>

@@ -33,69 +33,43 @@ const data: IEmployee[] = [
     'Pareigos': '+1 (123) 456-7890',
     'Statusas': '123 Main St, Anytown, CA 12345'
   },
-  // {
-  //   id: 2,
-  //   name: 'Jane Doe',
-  //   email: 'jane@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
-  // {
-  //   id: 3,
-  //   name: 'John Doe',
-  //   email: 'john1@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
-  // {
-  //   id: 4,
-  //   name: 'John Doe',
-  //   email: 'john4@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
-  // {
-  //   id: 2,
-  //   name: 'Jane Doe',
-  //   email: 'jane@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
-  // {
-  //   id: 3,
-  //   name: 'John Doe',
-  //   email: 'john1@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
-  // {
-  //   id: 4,
-  //   name: 'John Doe',
-  //   email: 'john4@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
-  // {
-  //   id: 2,
-  //   name: 'Jane Doe',
-  //   email: 'jane@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
-  // {
-  //   id: 3,
-  //   name: 'John Doe',
-  //   email: 'john1@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
-  // {
-  //   id: 4,
-  //   name: 'John Doe',
-  //   email: 'john4@gmail.com',
-  //   phone: '+1 (123) 456-7890',
-  //   address: '123 Main St, Anytown, CA 12345',
-  // },
+  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  },  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  },  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  },  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  },  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  },  {
+    'Sutarties Nr.': 1,
+    'Grafiko Nr.': 'John Doe',
+    'Vardas Pavardė': 'john@email.com',
+    'Pareigos': '+1 (123) 456-7890',
+    'Statusas': '123 Main St, Anytown, CA 12345'
+  }
 ];
 
 const actions: TableActionsType<IEmployee>[] = [
