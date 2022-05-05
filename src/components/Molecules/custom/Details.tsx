@@ -22,7 +22,7 @@ export default function Details({ title, data }: IDetailsProps) {
           return (
             <div
               key={index}
-              className="d-flex  align-items-center border-bottom py-2 px-3">
+              className="d-flex  align-items-center border-bottom py-2 px-3 text-sm">
               <span className="text-capitalize font-bold">
                 {key.replaceAll('_', ' ').toLocaleLowerCase()}:
               </span>
