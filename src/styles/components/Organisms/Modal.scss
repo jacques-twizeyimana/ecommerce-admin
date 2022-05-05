@@ -32,12 +32,17 @@
     .modal-dialog {
         margin: 0 !important;
         margin-left: auto !important;
-        max-width: 50% !important;
+        max-width: 60% !important;
 
         .modal-content {
             border-radius: 0px !important;
-            height: 100%;
+            height: 100vh;
+            overflow-y: scroll;
+            @include scrollbar();
 
+            .close-icon {
+                cursor: pointer;
+            }
             .close-txt {
                 font-size: 12px;
                 margin-right: 8px;
@@ -54,7 +59,15 @@
                     }
                 }   
                 .holder {
-                    margin-right: 1rem;
+                    margin-right: 0.3rem;
+                    .content-sub-item {
+                        background-color: #E7E7E7;
+                        p {
+                            color: #212529;
+                            font-weight: 600;
+                            font-size: 12px;
+                        }
+                    }
                     .subitem-icon {
                         img {
                             margin-top: -7px;

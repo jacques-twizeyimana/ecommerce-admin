@@ -8,6 +8,7 @@ import React, {
 export interface CommonProps<T> extends AllHTMLAttributes<DOMAttributes<T>> {}
 
 import { Color, SelectData, ValueType } from '.';
+import { IModal, ModalSubItem } from './services/modal.types';
 import { ISidebar, NestedItem, SubItem } from './services/sidebar.types';
 
 /**
@@ -89,4 +90,19 @@ export interface ListSubNestedItemProps {
 export interface NavProps {
   collapse: boolean;
   setCollapse: (_x: boolean) => void;
+}
+
+export interface ContentItemProps {
+  item: IModal;
+}
+
+export interface ContentSubHolderProps {
+  items: ModalSubItem[]
+}
+
+export interface ModalProps {
+  show: boolean;
+  className?: string;
+  setShow: (val: boolean) => void;
+  onHide: () => void;
 }
