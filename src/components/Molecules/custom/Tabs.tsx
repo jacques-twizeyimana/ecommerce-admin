@@ -61,7 +61,7 @@ export function Tabs({
           {children.map((tab, i) => {
             const tProps: any = tab.props;
             return tProps.label && tProps.label.length > 0 ? (
-              <div className="flex-none mx-2">
+              <div className="flex-none mx-2" key={i}>
                 <button
                   key={i}
                   className={`pr-5 pl-3 py-2 ${
