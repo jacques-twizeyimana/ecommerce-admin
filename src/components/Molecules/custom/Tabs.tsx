@@ -61,10 +61,10 @@ export function Tabs({
           {children.map((tab, i) => {
             const tProps: any = tab.props;
             return tProps.label && tProps.label.length > 0 ? (
-              <div className="flex-none">
+              <div className="flex-none mx-2">
                 <button
                   key={i}
-                  className={`pr-5 pl-3 py-3 ${
+                  className={`pr-5 pl-3 py-2 ${
                     activeTabIndex === i
                       ? 'border-white text-dark-blue bg-white'
                       : 'border-black text-white bg-dark-blue'
@@ -83,7 +83,7 @@ export function Tabs({
   return (
     <div className={`tabs ${className}`}>
       <div className="d-flex flex-wrap align-items-center justify-content-between">
-        <div className="px-5 bg-dark-blue ">
+        <div className="px-3 bg-dark-blue ">
           <TabHeadings />
         </div>
         {headerComponent && headerComponent}
