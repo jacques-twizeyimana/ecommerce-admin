@@ -15,7 +15,7 @@ export default function ListSubItem(props: ListSubItemProps) {
             <div className="list-sub-items">
                 {props.items.map((item, i) => (
                     <React.Fragment key={item.id}>
-                        <p className="mb-0 mt-0">
+                        <p className="mb-0 mt-0" onClick={toogleDropper}>
                             <span className={`col-12 d-block  ${(item.id == 11) ? 'active-show' : ''}`}>
                                 <img src={`/icons/${item.icon}`} className="label-icon" alt='Icon' /> 
                                 {item.name}

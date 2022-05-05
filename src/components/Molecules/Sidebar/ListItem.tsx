@@ -10,7 +10,7 @@ export default function ListItem(props: ListItemProps) {
     }
     return (
         <div className="list-items">
-            <p className="mb-0 mt-0">
+            <p className="mb-0 mt-0" onClick={toogleDropper}>
                 {props.item.name} 
                 {(props.item.subItems) ? 
                 open ? 
