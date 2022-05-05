@@ -10,7 +10,8 @@ export default function ListItem(props: ListItemProps) {
     }
     return (
         <div className="list-items">
-            <p className="mb-0 mt-0">{props.item.name} 
+            <p className="mb-0 mt-0">
+                {props.item.name} 
                 {(props.item.subItems) ? 
                 open ? 
                 <img src='/icons/arrow-up.svg' alt='arrow-down' onClick={toogleDropper} />:

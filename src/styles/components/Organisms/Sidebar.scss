@@ -20,6 +20,8 @@
     }
 }
 
+
+
 .list-items {
     // padding: 1rem 2.4rem;
     margin-bottom: 0.08rem;
@@ -42,6 +44,15 @@
 .list-sub-items {
     background-color: white;
     border-bottom: 1px solid rgb(0 0 0 / 10%);
+    p.active {
+        background-color: #EEF1F4;
+        color: #212529 !important;
+        font-weight: 600;
+    }
+    span.active-show {
+        background-color: #EEF1F4;
+        padding: 6px 5px;
+    }
     p {
         color: #2D5474 !important;
         background-color: white;
