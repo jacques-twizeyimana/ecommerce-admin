@@ -19,7 +19,7 @@ export default function SideModal(props: ModalProps) {
         <Modal.Body>
           <div className="body-header p-4 mb-2 d-flex justify-content-between">
             <Heading text={'Atnaujinti duomenis'} />
-            <div className="close-icon" onClick={closeModal}>
+            <button className="btn w-auto close-icon" onClick={closeModal}>
               <span className="close-txt">Uždaryti</span>
               <img
                 src={'/icons/close-icon.svg'}
@@ -27,7 +27,7 @@ export default function SideModal(props: ModalProps) {
                 width={30}
                 alt="close-icon"
               />
-            </div>
+            </button>
           </div>
           <div className="body-content px-4">
             {modalItems.map((item: IModal) => (

@@ -8,9 +8,9 @@ import React, {
 export interface CommonProps<T> extends AllHTMLAttributes<DOMAttributes<T>> {}
 
 import { Color, SelectData, ValueType } from '.';
+import { EmployeeTableDto } from './services/employees.types';
 import { IModal, ModalSubItem } from './services/modal.types';
 import { ISidebar, NestedItem, SubItem } from './services/sidebar.types';
-import { EmployeeDto, EmployeeTableDto, IEmployee } from './services/employees.types';
 
 /**
  * input props that will be shared to all input components
@@ -34,7 +34,7 @@ export interface InputProps<T> extends CommonInputProps<T> {
   type?: string;
   readonly?: boolean;
   // handleChange?: (_e: ValueType) => void;
-  value: string | number | undefined;
+  value?: string | number;
   name: string;
   full?: boolean;
   padding?: string;
@@ -72,20 +72,22 @@ export type IconNames =
   | 'home'
   | 'arrow-right'
   | 'arrow-right2'
-  | 'arrow-left' | 'filter'
-  | 'more';
-
+  | 'arrow-left'
+  | 'filter'
+  | 'more'
+  | 'arrow-up-black'
+  | 'arrow-down-dark';
 
 export interface ListItemProps {
-  item: ISidebar
+  item: ISidebar;
 }
 
 export interface ListSubItemProps {
-  items: SubItem[]
+  items: SubItem[];
 }
 
 export interface ListSubNestedItemProps {
-  item: NestedItem
+  item: NestedItem;
 }
 
 export interface NavProps {
@@ -95,28 +97,62 @@ export interface NavProps {
 
 export interface ContentItemProps {
   item: IModal;
+  handChange: (_e: ValueType) => void;
 }
 
 export interface ContentSubHolderProps {
-  items: ModalSubItem[]
+  items: ModalSubItem[];
+  handleChange: (_e: ValueType) => void;
 }
 
 export interface ModalProps {
   show: boolean;
   className?: string;
-  setShow: (val: boolean) => void;
+  setShow: (_val: boolean) => void;
   onHide: () => void;
 }
 
+export interface ICreateEmployee {
+  profileUrl: string;
+  firstName: string;
+  lastName: string;
+  seqNumber: string;
+  contractNumber: string;
+  socialSecurityNumber: string;
+  nationalityId: string;
+  personalIdentificationNumber: string;
+  employeeRoleId: string;
+  employmentTypeId: string;
+  employmentTermId: string;
+  workingWeekId: string;
+  salary: number;
+  startDate: string;
+  endDate: string;
+  regDate: string;
+  phone: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  country: string;
+  bankCode: string;
+  bankAccountNumber: string;
+  drivingLicenseId: string;
+  otherInfo: string;
+  clothingIds: [string];
+}
+
+export interface IUpdateEmployee extends ICreateEmployee {
+  id: string;
+}
 
 export interface EmployeeTableProps {
-  handleClickRow: (row: EmployeeTableDto) => void;
+  handleClickRow: (_row: EmployeeTableDto) => void;
   data: EmployeeTableDto[];
   uniqueCol: keyof EmployeeTableDto;
   hide: (keyof EmployeeTableDto)[];
   rowsPerPage?: number;
   totalPages?: number;
   actions: TableActionsType<EmployeeTableDto>[];
-  onChangePage: (_page: number) => {}
-
+  onChangePage: (_page: number) => {};
 }

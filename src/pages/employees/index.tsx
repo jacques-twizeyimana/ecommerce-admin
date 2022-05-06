@@ -1,35 +1,35 @@
 import React from 'react';
-import Table from '../../components/Organisms/Table';
-import { EmployeeTableProps, TableActionsType } from '../../types/props';
-import Breadcrump from '../../components/Molecules/Breadcrump';
 import { useNavigate } from 'react-router-dom';
-import {nationalityStore} from '../../store/nationality.store';
-import {employeeStore} from '../../store/employees.store';
-import { EmployeeDto, EmployeeTableDto, IEmployee } from '../../types/services/employees.types';
+
+import Breadcrump from '../../components/Molecules/Breadcrump';
+import Table from '../../components/Organisms/Table';
 import useAuthenticator from '../../hooks/useAuthenticator';
+import { employeeStore } from '../../store/employees.store';
+import { nationalityStore } from '../../store/nationality.store';
+import { EmployeeTableProps, TableActionsType } from '../../types/props';
+import { EmployeeTableDto } from '../../types/services/employees.types';
 
 export default function Employees() {
   const navigate = useNavigate();
-  
-  const { user } = useAuthenticator();
-console.log('User', user);
 
-  const { data: nationalities} = nationalityStore.getAll();
+  const { user } = useAuthenticator();
+  console.log('User', user);
+
+  const { data: nationalities } = nationalityStore.getAll();
   const { data: employeesData } = employeeStore.getAll();
 
   const employees: EmployeeTableDto[] = [];
   if (employeesData) {
     for (const employeeData of employeesData.data) {
-      employees.push(
-        { 
-          id: employeeData.id,
-          seqNumber: employeeData.seqNumber,
-          name: `${employeeData.firstName} ${employeeData.lastName}`,
-          address: employeeData.address,
-          email: employeeData.email,
-          phone: employeeData.phone,
-          isActive: employeeData.isActive
-        } );
+      employees.push({
+        id: employeeData.id,
+        seqNumber: employeeData.seqNumber,
+        name: `${employeeData.firstName} ${employeeData.lastName}`,
+        address: employeeData.address,
+        email: employeeData.email,
+        phone: employeeData.phone,
+        isActive: employeeData.isActive,
+      });
     }
   }
 
@@ -57,38 +57,29 @@ console.log('User', user);
         alert('deleted ' + item['id']);
       },
     },
-    
   ];
-  
 
   const handleClickRow = (row: EmployeeTableDto) => {
     console.log(row);
     navigate(`/dashboard/employees/${row.id}`);
-  }
+  };
   const onChangePage = (_page: number) => {
     return {};
-  }
+  };
   console.log(employees);
-    return (
-        <div className='mb-5'>
-            <EmployeeTable 
-                data={employees || []}
-                uniqueCol="id"
-                hide={['id']}
-                actions={actions}
-                handleClickRow={handleClickRow}
-                onChangePage={onChangePage}
-                />
-        </div>
-    )
+  return (
+    <div className="mb-5">
+      <EmployeeTable
+        data={employees || []}
+        uniqueCol="id"
+        hide={['id']}
+        actions={actions}
+        handleClickRow={handleClickRow}
+        onChangePage={onChangePage}
+      />
+    </div>
+  );
 }
-
-
-
-
-
-
-
 
 const EmployeeTable = (props: EmployeeTableProps) => {
   console.log(props);
@@ -111,5 +102,4 @@ const EmployeeTable = (props: EmployeeTableProps) => {
       </div>
     </div>
   );
-}
-
+};
