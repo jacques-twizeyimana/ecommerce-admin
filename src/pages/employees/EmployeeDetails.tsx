@@ -1,10 +1,15 @@
 import React from 'react';
-
+import {useParams} from 'react-router-dom';
 import Breadcrump from '../../components/Molecules/Breadcrump';
 import { Tab, Tabs } from '../../components/Molecules/custom/Tabs';
 import EmployeeInfo from '../../components/Organisms/employees/EmployeeInfo';
+import { employeeStore } from '../../store/employees.store';
 
 export default function EmployeeDetails() {
+  const {id} = useParams();
+  console.log(id);
+  const {data: employee} = employeeStore.getById(id as string);
+  console.log(employee?.data);
   return (
     <div className="px-3">
       <Breadcrump
@@ -13,7 +18,7 @@ export default function EmployeeDetails() {
       />
       <Tabs className="mt-5">
         <Tab label="DARBUOTOJO DUOMENYS">
-          <EmployeeInfo />
+          <EmployeeInfo  employee={employee?.data!}/>
         </Tab>
         <Tab label="DARBO PRIEMONĖS">
           <h2 className="text-3xl text-green-400">DARBO PRIEMONĖS</h2>

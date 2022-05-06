@@ -15,7 +15,8 @@ class EmployeeService {
     return await customAxios.get('/employees');
   }
 
-  public async fetchById(id: string): Promise<AxiosResponse<any>> {
+  public async fetchById(id: string): Promise<AxiosResponse<EmployeeDto>> {
+    console.log('fethcig');
       return await customAxios.get(`/employees/${id}`);
   }
 }

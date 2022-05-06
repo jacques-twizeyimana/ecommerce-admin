@@ -11,7 +11,7 @@ class EmployeeStore {
   }
   getById(id: string) {
     return useQuery(['employeeById'], () => 
-    employeeService.fetchById(id)
+      employeeService.fetchById(id)
     );
   }
 }

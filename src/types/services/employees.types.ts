@@ -6,12 +6,12 @@ export interface EmployeeDto {
     bankAccountNumber: string;
     bankCode: string;
     city: string;
-    clothings: any[];
+    clothings: {id: string, size: string, type: {id: number, name: string}}[];
     contractNumber: string;
     country: string;
-    drivingLicense: any;
+    drivingLicense: {id: string, name: string};
     email: string;
-    employeeRole: any[];
+    employeeRole: {id: string, name: string};
     employmentTerm: any;
     employmentType: any;
     endDate: string;
@@ -28,7 +28,7 @@ export interface EmployeeDto {
     regDate: string;
     salary: number;
     socialSecurityNumber: string;
-    startDate: string;
+    startDate: Date;
     timesheets: any[];
     workActions: any[];
     workingWeek: any;
