@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 
 import { customAxios } from '../../plugins/axios';
-
 import { IUser } from '../../types/services/user.types';
 
 class UserService {
