@@ -18,7 +18,7 @@ const interceptRequest = (config: AxiosRequestConfig) => {
   if (token) {
     const jwtInfo: LoginRes = JSON.parse(token);
     // @ts-ignore
-    config.headers['Authorization'] = `Bearer ${jwtInfo.token}`;
+    config.headers['Authorization'] = `Bearer ${jwtInfo.data?.token}`;
   }
   return config;
 };

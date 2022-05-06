@@ -19,7 +19,7 @@ export default function Input<T>(
 
     return (
         <input
-          {...attrs}
+          // {...attrs}
           placeholder={placeholder}
           name={name}
           type={type}
