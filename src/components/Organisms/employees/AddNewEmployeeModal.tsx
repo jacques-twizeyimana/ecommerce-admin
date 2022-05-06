@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
+import { employeeStore } from '../../../store/employees.store';
+import { nationalityStore } from '../../../store/nationality.store';
 import { ValueType } from '../../../types';
 import { ICreateEmployee, ModalProps } from '../../../types/props';
 import Input from '../../Atoms/Form/Input';
@@ -57,6 +59,49 @@ export default function AddNewEmployeeModal({
   const handleChange = (e: ValueType) => {
     setvalues({ ...values, [e.name]: e.value });
   };
+
+  const { data: employee } = employeeStore.getById(employeeId);
+  const { data: nationalities } = nationalityStore.getAll();
+  // const { data: employeeRoles } = empl.getAll();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('values', values);
+  };
+
+  useEffect(() => {
+    if (employee?.data) {
+      setvalues((prev) => ({
+        ...prev,
+        profileUrl: employee.data.profileUrl || '',
+        firstName: employee.data.firstName,
+        lastName: employee.data.lastName,
+        seqNumber: employee.data.seqNumber,
+        contractNumber: employee.data.contractNumber,
+        socialSecurityNumber: employee.data.socialSecurityNumber,
+        nationalityId: employee.data.nationality.id,
+        personalIdentificationNumber: employee.data.personalIdentificationNumber,
+        employeeRoleId: employee.data.employeeRole.id,
+        employmentTypeId: employee.data.employmentType.id,
+        employmentTermId: employee.data.employmentTerm.id,
+        workingWeekId: employee.data.workingWeek.id,
+        salary: employee.data.salary,
+        startDate: employee.data.startDate.toString(),
+        endDate: employee.data.endDate,
+        regDate: employee.data.regDate,
+        phone: employee.data.phone,
+        email: employee.data.email,
+        address: employee.data.address,
+        postalCode: employee.data.postalCode,
+        city: employee.data.city,
+        country: employee.data.country,
+        bankCode: employee.data.bankCode,
+        bankAccountNumber: employee.data.bankAccountNumber,
+        drivingLicenseId: employee.data.drivingLicense.id,
+        otherInfo: employee.data.otherInfo,
+      }));
+    }
+  }, [employee?.data]);
 
   return (
     <div className="side-modal">
@@ -279,75 +324,41 @@ export default function AddNewEmployeeModal({
               <div className="p-3 row">
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
-                    name="firstName"
+                    name="bankCode"
                     handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
+                    placeholder="Banko rekvizitai"
+                    value={values.bankCode}
                   />
                 </div>
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
                     className="mr-3"
-                    name="firstName"
+                    name="bankAccountNumber"
                     handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
-                  />
-                </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="firstName"
-                    handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
-                  />
-                </div>
-
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="firstName"
-                    handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
-                  />
-                </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="firstName"
-                    handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
-                  />
-                </div>
-
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="firstName"
-                    handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
+                    placeholder="Sąskaitos numeris"
+                    value={values.bankAccountNumber}
                   />
                 </div>
               </div>
             </Collapsible>
 
-            <Collapsible isOpen={true} title="Darbo laikas">
+            <Collapsible isOpen={true} title="Vairuotojo pazymejimas">
               <div className="p-3 row">
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
                     className="mr-3"
-                    name="firstName"
+                    name="drivingLicenseId"
                     handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
+                    placeholder="Kategorija"
+                    value={values.drivingLicenseId}
                   />
                 </div>
                 <div className="col-12 col-sm-12 col-md-6 col-lg-8 p-2">
                   <Input
-                    name="firstName"
+                    name="otherInfo"
                     handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
+                    placeholder="Kita info"
+                    value={values.otherInfo}
                   />
                 </div>
               </div>

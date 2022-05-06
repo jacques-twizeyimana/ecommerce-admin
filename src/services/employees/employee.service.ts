@@ -1,14 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { customAxios } from '../../plugins/axios';
-import {
-  ForgotPasswordInfo,
-  IChangePassword,
-  IResetPassword,
-  LoginDto,
-  LoginRes,
-} from '../../types/services/auth.types';
-import { EmployeeDto, IEmployee } from '../../types/services/employees.types';
+import { EmployeeDto } from '../../types/services/employees.types';
 
 class EmployeeService {
   public async fetchAll(): Promise<AxiosResponse<EmployeeDto[]>> {
@@ -17,10 +10,8 @@ class EmployeeService {
 
   public async fetchById(id: string): Promise<AxiosResponse<EmployeeDto>> {
     console.log('fethcig');
-      return await customAxios.get(`/employees/${id}`);
+    return await customAxios.get(`/employees/${id}`);
   }
 }
 
 export const employeeService = new EmployeeService();
-
-

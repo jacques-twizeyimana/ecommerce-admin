@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Breadcrump from '../../components/Molecules/Breadcrump';
+import AddNewEmployeeModal from '../../components/Organisms/employees/AddNewEmployeeModal';
 import Table from '../../components/Organisms/Table';
 import useAuthenticator from '../../hooks/useAuthenticator';
 import { employeeStore } from '../../store/employees.store';
-import { nationalityStore } from '../../store/nationality.store';
 import { EmployeeTableProps, TableActionsType } from '../../types/props';
 import { EmployeeTableDto } from '../../types/services/employees.types';
 
@@ -15,7 +15,6 @@ export default function Employees() {
   const { user } = useAuthenticator();
   console.log('User', user);
 
-  const { data: nationalities } = nationalityStore.getAll();
   const { data: employeesData } = employeeStore.getAll();
 
   const employees: EmployeeTableDto[] = [];
@@ -82,11 +81,16 @@ export default function Employees() {
 }
 
 const EmployeeTable = (props: EmployeeTableProps) => {
+  const [isAddNewModalOpen, setisAddNewModalOpen] = useState(false);
   console.log(props);
   return (
     <div className="px-3">
       <div className="">
-        <Breadcrump title="Darbuotojai" navigation={['Žmonių valdymas', 'Darbuotojai']} />
+        <Breadcrump
+          title="Darbuotojai"
+          onClickAddNewButton={() => setisAddNewModalOpen(true)}
+          navigation={['Žmonių valdymas', 'Darbuotojai']}
+        />
       </div>
       <div className="mt-4">
         <Table
@@ -100,6 +104,12 @@ const EmployeeTable = (props: EmployeeTableProps) => {
           onChangePage={props.onChangePage}
         />
       </div>
+      <AddNewEmployeeModal
+        show={isAddNewModalOpen}
+        setShow={setisAddNewModalOpen}
+        onHide={() => setisAddNewModalOpen(false)}
+        className={'side-modal'}
+      />
     </div>
   );
 };
