@@ -1,6 +1,6 @@
 export interface ISidebar {
     id: number;
-    link: string;
+    link?: string;
     name: string;
     subItems?: SubItem[][];
 }

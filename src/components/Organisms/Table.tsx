@@ -10,6 +10,7 @@ import Pagination from '../Molecules/custom/Pagination';
 import Filter from '../Molecules/custom/Filter';
 import Heading from '../Atoms/Heading';
 import {useNavigate} from 'react-router-dom';
+import { EmployeeTableDto } from '../../types/services/employees.types';
 
 const showEntriesOptions = [
   { value: '10', label: '10' },
@@ -24,7 +25,7 @@ interface TableProps<T> {
   hide?: (keyof T)[];
   showNumbering?: boolean;
   actions?: TableActionsType<T>[];
-  handleClickRow?: () => void;
+  handleClickRow?: (row: any) => void;
   statusColumn?: string;
 
   //pagination
@@ -52,6 +53,8 @@ export default function Table<T>({
 }: //   ,
 TableProps<T>) {
 
+  console.log(data);
+
   function handleCountSelect(e: ValueType) {
     if (onChangePageSize) onChangePageSize(parseInt(e.value + ''));
   }
@@ -70,7 +73,7 @@ TableProps<T>) {
         <tbody>
           <tr className="rounded bg-light">
             {showNumbering && <th>#</th>}
-            {Object.keys(data[0])
+            {data[0] && Object.keys(data[0])
               .filter((key) => !hide.includes(key as keyof T))
               .map((key) => (
                 <td key={key} className="text-capitalize font-bold px-2 text-sm">
@@ -81,7 +84,7 @@ TableProps<T>) {
           </tr>
           {/* Table body */}
           {data.map((row, index) => (
-            <tr key={index}  className="contentrows" onClick={() => handleClickRow && handleClickRow()}>
+            <tr key={index}  className="contentrows" onClick={() => handleClickRow && handleClickRow(row)}>
               {showNumbering && <td className="text-xs">{index + 1}</td>}
               {Object.keys(row)
                 .filter((key) => !hide.includes(key as keyof T))

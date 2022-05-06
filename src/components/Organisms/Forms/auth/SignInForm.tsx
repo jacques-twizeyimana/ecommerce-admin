@@ -17,7 +17,6 @@ export default function SignInForm() {
     password: '',
   });
 
-  const [error, setError] = useState<string>('');
 
   const handleChange = (e: ValueType) => {
     console.log(e.name);
@@ -36,18 +35,16 @@ export default function SignInForm() {
       async onSuccess(data) {
         localStorage.setItem('jwt_info', JSON.stringify(data));
         toast.success('Login successful', { duration: 1200 });
-        navigate('/dashboard');
+        navigate('/dashboard/employees');
       },
       onError(__error) {
         toast.error('Authentication failed', { duration: 3000 });
-        setError('Invalid credentials');
       },
     });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <p className="text-danger text-center"> {error ? error : null}</p>
       <div className="input-control mb-3">
         <Input
           placeholder={'Username'}
@@ -71,7 +68,7 @@ export default function SignInForm() {
         </div>
         <div className="meta-area col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
           <Link to={'/forgot-password'}>
-            <a className="f-password">Pamiršote slaptažodį?</a>
+            <span className="f-password">Pamiršote slaptažodį?</span>
           </Link>
         </div>
       </div>

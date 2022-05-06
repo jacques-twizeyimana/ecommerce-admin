@@ -15,7 +15,7 @@ export default function Button<T>({
   ...attrs
 }: ButtonProps<T>) {
   return (
-    <button {...attrs} disabled={disabled} className={className} onClick={onClick}>
+    <button  disabled={disabled} className={className} onClick={onClick}>
       {children}
     </button>
   );
