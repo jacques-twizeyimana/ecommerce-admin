@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
+import useAuthenticator from '../../../hooks/useAuthenticator';
 import '../../../styles/components/Organisms/Nav.scss'
 import { ValueType } from '../../../types';
 import { NavProps } from '../../../types/props';
 import Input from '../../Atoms/Form/Input';
-import Avatar from '../../Molecules/Avatar/Avatar';
+import UserAvatar from '../../Molecules/Avatar/Avatar';
 
 export default function Nav(props: NavProps) {
     const [collapse, setCollapse] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+
+    const { user } = useAuthenticator();
+    console.log('User', user);
 
     const collapseSidebar = () => {
         props.setCollapse(!props.collapse);
@@ -26,11 +30,11 @@ export default function Nav(props: NavProps) {
                 <img src={'/icons/search.svg'} width={13}  alt={'Search Iccon'} />
                 <Input placeholder={'Greita paieška'} bgStyles={false} inputColor={'#2D5474'} value={searchQuery} name='searchQuery' handleChange={handleSearchChange}/>
             </div>
-            {/* <div className="scol-xs-1 col-sm-1 col-md-1 col-lg-2 col-xl-6 d-flex"/> */}
-            <div className="user-panel  col-xs-1 col-sm-1 col-md-4 col-lg-2 col-xl-2 ml-auto d-flex">
+            {/* <div className="scol-xs-1 col-sm-1 col-md-1 col-lg-2 col-xl"/> */}
+            <div className="user-panel  col-xs-1 col-sm-1 col-md-4 col-lg-2 col-xl-3 ml-auto d-flex">
                 <img src={'/icons/message.svg'}  alt={'Message Iccon'} />
                 <img src={'/icons/notification.svg'} alt={'Notification Iccon'} />
-                <Avatar />
+                <UserAvatar profile={user?.profileUrl!} name={`${user?.firstName!} ${user?.lastName!}`}/>
             </div>
         </div>
     )

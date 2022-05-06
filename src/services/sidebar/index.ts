@@ -51,6 +51,7 @@ export const sideBarItems: ISidebar[] = [
                     id: 17,
                     link: '/dashboard/employees',
                     name: 'Nustatymai',
+                    allowedRoles: ['SuperUser'],
                     icon: 'toogle-icon.svg',
                     nestedItems: [
                         { id: 171, link: '/dashboard/employees', name: 'Vartotojai' },
@@ -80,6 +81,7 @@ export const sideBarItems: ISidebar[] = [
     {
         id: 5,
         link: '/dashboard/employees',
-        name: 'Admino Nustatymai'
+        name: 'Admino Nustatymai',
+        allowedRoles: ['SuperUser']
     },
 ]
