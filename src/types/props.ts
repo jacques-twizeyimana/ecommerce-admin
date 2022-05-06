@@ -8,6 +8,7 @@ import React, {
 export interface CommonProps<T> extends AllHTMLAttributes<DOMAttributes<T>> {}
 
 import { Color, SelectData, ValueType } from '.';
+import { EmployeeTableDto } from './services/employees.types';
 import { IModal, ModalSubItem } from './services/modal.types';
 import { ISidebar, NestedItem, SubItem } from './services/sidebar.types';
 
@@ -143,4 +144,15 @@ export interface ICreateEmployee {
 
 export interface IUpdateEmployee extends ICreateEmployee {
   id: string;
+}
+
+export interface EmployeeTableProps {
+  handleClickRow: (_row: EmployeeTableDto) => void;
+  data: EmployeeTableDto[];
+  uniqueCol: keyof EmployeeTableDto;
+  hide: (keyof EmployeeTableDto)[];
+  rowsPerPage?: number;
+  totalPages?: number;
+  actions: TableActionsType<EmployeeTableDto>[];
+  onChangePage: (_page: number) => {};
 }

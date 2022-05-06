@@ -25,13 +25,8 @@ interface TableProps<T> {
   hide?: (keyof T)[];
   showNumbering?: boolean;
   actions?: TableActionsType<T>[];
-  handleClickRow?: () => void;
+  handleClickRow?: (_row: any) => void;
   statusColumn?: string;
-
-  // add new button
-  addButton?: boolean;
-  addButtonText?: string;
-  onAddButtonClick?: () => void;
 
   //pagination
   rowsPerPage?: number;
@@ -49,11 +44,6 @@ export default function Table<T>({
   actions,
   handleClickRow,
 
-  // add new button
-  addButton = true,
-  addButtonText = 'Add new',
-  onAddButtonClick,
-
   //pagination
   rowsPerPage = 10,
   totalPages = 1,
@@ -62,6 +52,8 @@ export default function Table<T>({
   onChangePageSize,
 }: //   ,
 TableProps<T>) {
+  console.log(data);
+
   function handleCountSelect(e: ValueType) {
     if (onChangePageSize) onChangePageSize(parseInt(e.value + ''));
   }
@@ -69,17 +61,10 @@ TableProps<T>) {
   return (
     <div>
       <div className="page-head">
-        {addButton && (
-          <Heading fontSize="md" fontWeight="bold">
-            {addButtonText}
-            <button
-              className="btn w-auto"
-              onClick={() => onAddButtonClick && onAddButtonClick()}
-              style={{ marginLeft: '10px' }}>
-              <Icon name={'add'} size={35} />
-            </button>
-          </Heading>
-        )}
+        <Heading fontSize="md" fontWeight="bold">
+          Registruoti naują
+          <Icon name={'add'} styles={{ marginLeft: '10px' }} size={35} />
+        </Heading>
       </div>
       <Filter />
       <div className="border rounded">
@@ -87,13 +72,14 @@ TableProps<T>) {
           <tbody>
             <tr className="rounded bg-light">
               {showNumbering && <th>#</th>}
-              {Object.keys(data[0])
-                .filter((key) => !hide.includes(key as keyof T))
-                .map((key) => (
-                  <td key={key} className="text-capitalize font-bold px-2 text-sm">
-                    {key}
-                  </td>
-                ))}
+              {data[0] &&
+                Object.keys(data[0])
+                  .filter((key) => !hide.includes(key as keyof T))
+                  .map((key) => (
+                    <td key={key} className="text-capitalize font-bold px-2 text-sm">
+                      {key}
+                    </td>
+                  ))}
               {actions && <th className="text-center text-xs">Red.</th>}
             </tr>
             {/* Table body */}
@@ -101,7 +87,7 @@ TableProps<T>) {
               <tr
                 key={index}
                 className="contentrows"
-                onClick={() => handleClickRow && handleClickRow()}>
+                onClick={() => handleClickRow && handleClickRow(row)}>
                 {showNumbering && <td className="text-xs">{index + 1}</td>}
                 {Object.keys(row)
                   .filter((key) => !hide.includes(key as keyof T))
@@ -115,9 +101,15 @@ TableProps<T>) {
                   <td className="">
                     <Dropdown
                       header={
-                        <Button className="no-styles">
-                          <Icon name={'more'} size={24} styles={{ marginTop: '-9px' }} />
-                        </Button>
+                        <Button
+                          className="no-styles"
+                          children={
+                            <Icon
+                              name={'more'}
+                              size={24}
+                              styles={{ marginTop: '-9px' }}
+                            />
+                          }></Button>
                       }>
                       {actions.map((action) => (
                         <div

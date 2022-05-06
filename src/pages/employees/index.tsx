@@ -1,145 +1,88 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Breadcrump from '../../components/Molecules/Breadcrump';
-import AddNewEmployeeModal from '../../components/Organisms/employees/AddNewEmployeeModal';
 import Table from '../../components/Organisms/Table';
-import { TableActionsType } from '../../types/props';
+import useAuthenticator from '../../hooks/useAuthenticator';
+import { employeeStore } from '../../store/employees.store';
+import { nationalityStore } from '../../store/nationality.store';
+import { EmployeeTableProps, TableActionsType } from '../../types/props';
+import { EmployeeTableDto } from '../../types/services/employees.types';
 
 export default function Employees() {
   const navigate = useNavigate();
-  const handleClickRow = () => {
-    console.log();
-    navigate('/dashboard/employees/1');
+
+  const { user } = useAuthenticator();
+  console.log('User', user);
+
+  const { data: nationalities } = nationalityStore.getAll();
+  const { data: employeesData } = employeeStore.getAll();
+
+  const employees: EmployeeTableDto[] = [];
+  if (employeesData) {
+    for (const employeeData of employeesData.data) {
+      employees.push({
+        id: employeeData.id,
+        seqNumber: employeeData.seqNumber,
+        name: `${employeeData.firstName} ${employeeData.lastName}`,
+        address: employeeData.address,
+        email: employeeData.email,
+        phone: employeeData.phone,
+        isActive: employeeData.isActive,
+      });
+    }
+  }
+
+  console.log('Emplooyees', employees);
+
+  const actions: TableActionsType<EmployeeTableDto>[] = [
+    {
+      name: 'View',
+      icon: 'add',
+      handleAction: (item: EmployeeTableDto) => {
+        console.log('dsfadsfa', item);
+      },
+    },
+    {
+      name: 'Edit',
+      icon: 'add',
+      handleAction: (item: EmployeeTableDto) => {
+        console.log(item);
+      },
+    },
+    {
+      name: 'delete',
+      icon: 'add',
+      handleAction: (item: EmployeeTableDto) => {
+        alert('deleted ' + item['id']);
+      },
+    },
+  ];
+
+  const handleClickRow = (row: EmployeeTableDto) => {
+    console.log(row);
+    navigate(`/dashboard/employees/${row.id}`);
   };
+  const onChangePage = (_page: number) => {
+    return {};
+  };
+  console.log(employees);
   return (
-    <div>
-      <EmployeeTable handleClickRow={handleClickRow} />
+    <div className="mb-5">
+      <EmployeeTable
+        data={employees || []}
+        uniqueCol="id"
+        hide={['id']}
+        actions={actions}
+        handleClickRow={handleClickRow}
+        onChangePage={onChangePage}
+      />
     </div>
   );
 }
 
-interface IEmployee {
-  'Sutarties Nr.': number;
-  'Grafiko Nr.': string;
-  'Vardas Pavardė': string;
-  Pareigos: string;
-  Statusas: string;
-}
-
-const data: IEmployee[] = [
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-  {
-    'Sutarties Nr.': 1,
-    'Grafiko Nr.': 'John Doe',
-    'Vardas Pavardė': 'john@email.com',
-    Pareigos: '+1 (123) 456-7890',
-    Statusas: '123 Main St, Anytown, CA 12345',
-  },
-];
-
-const actions: TableActionsType<IEmployee>[] = [
-  {
-    name: 'View',
-    icon: 'add',
-    handleAction: (item: IEmployee) => {
-      console.log('dsfadsfa', item);
-    },
-  },
-  {
-    name: 'Edit',
-    icon: 'add',
-    handleAction: (item: IEmployee) => {
-      console.log(item);
-    },
-  },
-  {
-    name: 'delete',
-    icon: 'add',
-    handleAction: (item: IEmployee) => {
-      alert('deleted ' + item['Grafiko Nr.']);
-    },
-  },
-];
-
-const EmployeeTable = (props: { handleClickRow: () => void }) => {
-  const [showAddNewModal, setshowAddNewModal] = useState(true);
+const EmployeeTable = (props: EmployeeTableProps) => {
+  console.log(props);
   return (
     <div className="px-3">
       <div className="">
@@ -147,25 +90,16 @@ const EmployeeTable = (props: { handleClickRow: () => void }) => {
       </div>
       <div className="mt-4">
         <Table
-          data={data}
-          uniqueCol="Sutarties Nr."
-          hide={['Sutarties Nr.']}
+          data={props.data}
+          uniqueCol={props.uniqueCol}
+          hide={props.hide}
           rowsPerPage={10}
           totalPages={10}
-          actions={actions}
+          actions={props.actions}
           handleClickRow={props.handleClickRow}
-          onChangePage={(_page: number) => {}}
-          addButtonText="Registruoti naują"
-          onAddButtonClick={() => setshowAddNewModal(true)}
+          onChangePage={props.onChangePage}
         />
       </div>
-
-      <AddNewEmployeeModal
-        show={showAddNewModal}
-        className={'side-modal'}
-        setShow={setshowAddNewModal}
-        onHide={() => setshowAddNewModal(false)}
-      />
     </div>
   );
 };
