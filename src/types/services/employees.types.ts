@@ -34,8 +34,21 @@ export interface EmployeeDto {
     workingWeek: any;
     firstName: string;
     lastName: string;
-    seqNumber: string;
-    
+    seqNumber: string; 
+  }
+  
+
+
+  export interface EmployeeTableDto {
+    address: string;
+    email: string;
+    id: string;
+    isActive?: boolean;
+    phone: string;
+    // firstName: string;
+    // lastName: string;
+    name: string;
+    seqNumber: string; 
   }
   
   export interface LoginRes {

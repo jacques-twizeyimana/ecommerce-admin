@@ -10,7 +10,7 @@ export interface CommonProps<T> extends AllHTMLAttributes<DOMAttributes<T>> {}
 import { Color, SelectData, ValueType } from '.';
 import { IModal, ModalSubItem } from './services/modal.types';
 import { ISidebar, NestedItem, SubItem } from './services/sidebar.types';
-import { EmployeeDto, IEmployee } from './services/employees.types';
+import { EmployeeDto, EmployeeTableDto, IEmployee } from './services/employees.types';
 
 /**
  * input props that will be shared to all input components
@@ -110,13 +110,13 @@ export interface ModalProps {
 
 
 export interface EmployeeTableProps {
-  handleClickRow: () => void;
-  data: EmployeeDto[]
-  uniqueCol: keyof IEmployee;
-  hide: (keyof IEmployee)[];
+  handleClickRow: (row: EmployeeTableDto) => void;
+  data: EmployeeTableDto[];
+  uniqueCol: keyof EmployeeTableDto;
+  hide: (keyof EmployeeTableDto)[];
   rowsPerPage?: number;
   totalPages?: number;
-  actions: TableActionsType<IEmployee>[];
+  actions: TableActionsType<EmployeeTableDto>[];
   onChangePage: (_page: number) => {}
 
 }

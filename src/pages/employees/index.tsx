@@ -5,56 +5,71 @@ import Breadcrump from '../../components/Molecules/Breadcrump';
 import { useNavigate } from 'react-router-dom';
 import {nationalityStore} from '../../store/nationality.store';
 import {employeeStore} from '../../store/employees.store';
-import { IEmployee } from '../../types/services/employees.types';
-
+import { EmployeeDto, EmployeeTableDto, IEmployee } from '../../types/services/employees.types';
 
 
 export default function Employees() {
   const navigate = useNavigate();
   
-  const { data: nationalities } = nationalityStore.getAll();
-  const { data: employees } = employeeStore.getAll();
+  const { data: nationalities} = nationalityStore.getAll();
+  const { data: employeesData } = employeeStore.getAll();
 
-  console.log(employees);
-  const actions: TableActionsType<IEmployee>[] = [
+  const employees: EmployeeTableDto[] = [];
+  for (const employeeData of employeesData?.data!) {
+    employees.push(
+      { 
+        id: employeeData.id,
+        seqNumber: employeeData.seqNumber,
+        name: `${employeeData.firstName} ${employeeData.lastName}`,
+        address: employeeData.address,
+        email: employeeData.email,
+        phone: employeeData.phone,
+        isActive: employeeData.isActive
+      } );
+  }
+
+  console.log('Emplooyees', employees);
+
+  const actions: TableActionsType<EmployeeTableDto>[] = [
     {
       name: 'View',
       icon: 'add',
-      handleAction: (item: IEmployee) => {
+      handleAction: (item: EmployeeTableDto) => {
         console.log('dsfadsfa', item);
       },
     },
     {
       name: 'Edit',
       icon: 'add',
-      handleAction: (item: IEmployee) => {
+      handleAction: (item: EmployeeTableDto) => {
         console.log(item);
       },
     },
     {
       name: 'delete',
       icon: 'add',
-      handleAction: (item: IEmployee) => {
-        alert('deleted ' + item['Grafiko Nr.']);
+      handleAction: (item: EmployeeTableDto) => {
+        alert('deleted ' + item['id']);
       },
     },
     
   ];
   
 
-  const handleClickRow = () => {
-    navigate('/dashboard/employees/1');
+  const handleClickRow = (row: EmployeeTableDto) => {
+    console.log(row);
+    navigate(`/dashboard/employees/${row.id}`);
   }
   const onChangePage = (_page: number) => {
-    console.log('change');
-    return {}
+    return {};
   }
+  console.log(employees);
     return (
         <div className='mb-5'>
             <EmployeeTable 
-                data={employees}
-                uniqueCol="Sutarties Nr."
-                hide={['Sutarties Nr.']}
+                data={employees || []}
+                uniqueCol="id"
+                hide={['id']}
                 actions={actions}
                 handleClickRow={handleClickRow}
                 onChangePage={onChangePage}
@@ -71,6 +86,7 @@ export default function Employees() {
 
 
 const EmployeeTable = (props: EmployeeTableProps) => {
+  console.log(props);
   return (
     <div className="px-3">
       <div className="">
