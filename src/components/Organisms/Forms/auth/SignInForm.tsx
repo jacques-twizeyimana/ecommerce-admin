@@ -1,9 +1,10 @@
 import React, { FormEvent, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { signin } from '../../../../services/auth/auth.service';
+import { authStore } from '../../../../store/auth.store';
 import { ValueType } from '../../../../types';
-import { LoginInfo } from '../../../../types/services/auth.types';
+import { LoginDto } from '../../../../types/services/auth.types';
 import Checkbox from '../../../Atoms/Form/Checkbox';
 import Input from '../../../Atoms/Form/Input';
 import Button from '../../../Molecules/Button/Button';
@@ -11,7 +12,7 @@ import Button from '../../../Molecules/Button/Button';
 export default function SignInForm() {
   const navigate = useNavigate();
 
-  const [details, setDetails] = useState<LoginInfo>({
+  const [details, setDetails] = useState<LoginDto>({
     username: '',
     password: '',
   });
@@ -26,15 +27,22 @@ export default function SignInForm() {
     }));
   };
 
+  const { mutateAsync, isLoading } = authStore.login();
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const res = await signin(details);
-    if (res.response?.data.status == 401) {
-      setError('Invalid credentials');
-    } else {
-      navigate('/dashboard');
-    }
+    await mutateAsync(details, {
+      async onSuccess(data) {
+        localStorage.setItem('jwt_info', JSON.stringify(data));
+        toast.success('Login successful', { duration: 1200 });
+        navigate('/dashboard');
+      },
+      onError(__error) {
+        toast.error('Authentication failed', { duration: 3000 });
+        setError('Invalid credentials');
+      },
+    });
   };
 
   return (
@@ -63,14 +71,14 @@ export default function SignInForm() {
         </div>
         <div className="meta-area col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
           <Link to={'/forgot-password'}>
-            <a className="f-password">
-              Pamiršote slaptažodį?
-            </a>
+            <a className="f-password">Pamiršote slaptažodį?</a>
           </Link>
         </div>
       </div>
       <div className="mb-4">
-        <Button type={'submit'}>Prisijungti</Button>
+        <Button type={'submit'} disabled={isLoading}>
+          Prisijungti
+        </Button>
       </div>
     </form>
   );

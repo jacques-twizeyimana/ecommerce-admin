@@ -1,10 +1,8 @@
 import React, { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { signin } from '../../../../services/auth/auth.service';
 import { ValueType } from '../../../../types';
 import { ForgotPasswordInfo } from '../../../../types/services/auth.types';
-import Checkbox from '../../../Atoms/Form/Checkbox';
 import Input from '../../../Atoms/Form/Input';
 import Button from '../../../Molecules/Button/Button';
 
@@ -12,10 +10,10 @@ export default function ForgotPasswordForm() {
   const navigate = useNavigate();
 
   const [details, setDetails] = useState<ForgotPasswordInfo>({
-    email: ''
+    username: '',
   });
 
-  const [error, setError] = useState<string>('');
+  const [error] = useState<string>('');
 
   const handleChange = (e: ValueType) => {
     console.log(e.name);
@@ -44,15 +42,13 @@ export default function ForgotPasswordForm() {
           placeholder={'Email'}
           name={'email'}
           handleChange={handleChange}
-          value={details.email}
+          value={details.username}
         />
       </div>
       <div className="mb-3">
         <div className="ml-auto col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
           <Link to={'/login'}>
-            <a className="f-password">
-              Remembered Now?
-            </a>
+            <a className="f-password">Remembered Now?</a>
           </Link>
         </div>
       </div>
