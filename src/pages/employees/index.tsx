@@ -6,26 +6,31 @@ import { useNavigate } from 'react-router-dom';
 import {nationalityStore} from '../../store/nationality.store';
 import {employeeStore} from '../../store/employees.store';
 import { EmployeeDto, EmployeeTableDto, IEmployee } from '../../types/services/employees.types';
-
+import useAuthenticator from '../../hooks/useAuthenticator';
 
 export default function Employees() {
   const navigate = useNavigate();
   
+  const { user } = useAuthenticator();
+console.log('User', user);
+
   const { data: nationalities} = nationalityStore.getAll();
   const { data: employeesData } = employeeStore.getAll();
 
   const employees: EmployeeTableDto[] = [];
-  for (const employeeData of employeesData?.data!) {
-    employees.push(
-      { 
-        id: employeeData.id,
-        seqNumber: employeeData.seqNumber,
-        name: `${employeeData.firstName} ${employeeData.lastName}`,
-        address: employeeData.address,
-        email: employeeData.email,
-        phone: employeeData.phone,
-        isActive: employeeData.isActive
-      } );
+  if (employeesData) {
+    for (const employeeData of employeesData.data) {
+      employees.push(
+        { 
+          id: employeeData.id,
+          seqNumber: employeeData.seqNumber,
+          name: `${employeeData.firstName} ${employeeData.lastName}`,
+          address: employeeData.address,
+          email: employeeData.email,
+          phone: employeeData.phone,
+          isActive: employeeData.isActive
+        } );
+    }
   }
 
   console.log('Emplooyees', employees);

@@ -18,12 +18,6 @@ export default function Filter() {
          <div className="col-5">
             <Select name="filter" className="text-xs" options={[]} />
          </div>
-         <div className="col-5">
-            <Select name="filter" className="text-xs" options={[]} />
-         </div>
-         <div className="col-5">
-            <Select name="filter" className="text-xs" options={[]} />
-         </div>
         </div>
       </div>
     </div>
