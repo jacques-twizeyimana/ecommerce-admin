@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 
+import { SelectData } from '../../../types';
 import { SelectProps } from '../../../types/props';
 
 export default function CustomSelect(props: SelectProps) {
+  const [internalValue, setinternalValue] = useState<SelectData | undefined>(undefined);
+
   const handleChangeLocally = (e: any) => {
     if (props.isMulti) {
       let options: string[] = [];
@@ -16,15 +19,16 @@ export default function CustomSelect(props: SelectProps) {
   };
 
   useEffect(() => {
-    if (props.defaultValue)
-      handleChangeLocally({ name: props.name, value: props.defaultValue.value });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (props.value) {
+      setinternalValue(props.options.find((option) => option.value === props.value));
+    }
+  }, [props.options, props.value]);
 
   return (
     <>
       {/*@tsc-ignore*/}
       <Select
+        value={internalValue}
         isDisabled={props.disabled || false}
         name={props.name}
         options={props.options}
