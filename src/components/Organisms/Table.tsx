@@ -1,6 +1,6 @@
 import '../../styles/components/Organisms/Table.scss';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 
 import { ValueType } from '../../types';
@@ -13,6 +13,7 @@ import Filter from '../Molecules/custom/Filter';
 import Pagination from '../Molecules/custom/Pagination';
 
 const showEntriesOptions = [
+  { value: '5', label: '5' },
   { value: '10', label: '10' },
   { value: '25', label: '25' },
   { value: '50', label: '50' },
@@ -50,7 +51,7 @@ export default function Table<T>({
   handleClickRow,
 
   //pagination
-  rowsPerPage = 10,
+  rowsPerPage = 5,
   totalPages = 1,
   currentPage = 0,
   onChangePage,
@@ -62,11 +63,25 @@ export default function Table<T>({
   showAddNewButton = true,
 }: //   ,
 TableProps<T>) {
-  console.log(data);
+  const [_currentPage, setcurrentPage] = useState(currentPage);
+  const [_rowsPerPage, setrowsPerPage] = useState(rowsPerPage);
+  const [rows, setrows] = useState<T[]>([]);
 
-  function handleCountSelect(e: ValueType) {
+  function handleChangeRowsPerPage(e: ValueType) {
+    setcurrentPage(0);
+    setrowsPerPage(Number(e.value));
     if (onChangePageSize) onChangePageSize(parseInt(e.value + ''));
   }
+
+  function handlePageChange(e: number) {
+    setcurrentPage(e);
+    if (onChangePage) onChangePage(e);
+  }
+
+  useEffect(() => {
+    const startingPoint = _currentPage * _rowsPerPage;
+    setrows(data.slice(startingPoint, startingPoint + _rowsPerPage));
+  }, [_currentPage, _rowsPerPage, data]);
 
   return (
     <div>
@@ -97,7 +112,7 @@ TableProps<T>) {
               {actions && <th className="text-center text-xs">Red.</th>}
             </tr>
             {/* Table body */}
-            {data.map((row, index) => (
+            {rows.map((row, index) => (
               <tr
                 key={index}
                 className="contentrows"
@@ -146,17 +161,19 @@ TableProps<T>) {
           <Select
             className="text-xs"
             name="rowstoDisplay"
-            value={showEntriesOptions.find((option) => option.value === rowsPerPage + '')}
+            value={showEntriesOptions.find(
+              (option) => option.value === _rowsPerPage + '',
+            )}
             // @ts-ignore
-            onChange={handleCountSelect}
+            onChange={handleChangeRowsPerPage}
             options={showEntriesOptions}
           />
         </div>
         <Pagination
           totalElements={data.length}
-          paginate={onChangePage}
-          currentPage={currentPage}
-          totalPages={totalPages}
+          paginate={handlePageChange}
+          currentPage={_currentPage}
+          totalPages={Math.ceil(data.length / _rowsPerPage)}
         />
       </div>
     </div>
