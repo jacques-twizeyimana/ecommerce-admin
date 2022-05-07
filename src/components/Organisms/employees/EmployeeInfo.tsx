@@ -59,9 +59,9 @@ export default function EmployeeInfo(props: { employee: EmployeeDto }) {
     };
 
     clothingSize = {
-      Batai: props.employee.clothings[1].type.name,
-      Kelnės: props.employee.clothings[0].type.name,
-      Švarkas: props.employee.clothings[0].type.name,
+      Batai: props.employee.clothings[1]?.type.name,
+      Kelnės: props.employee.clothings[0]?.type.name,
+      Švarkas: props.employee.clothings[0]?.type.name,
     };
 
     otherInfo = {

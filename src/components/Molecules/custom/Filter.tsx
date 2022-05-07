@@ -38,7 +38,8 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
   //automaticall call handleFilter when filter is changed
   useEffect(() => {
     handleFilter(filter.column, filter.filterType, filter.filter);
-  }, [filter, handleFilter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter.filter]);
 
   const colOptions = React.useMemo(() => {
     if (data) {

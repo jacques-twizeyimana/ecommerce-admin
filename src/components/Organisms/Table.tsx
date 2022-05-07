@@ -65,7 +65,9 @@ export default function Table<T>({
 TableProps<T>) {
   const [_currentPage, setcurrentPage] = useState(currentPage);
   const [_rowsPerPage, setrowsPerPage] = useState(rowsPerPage);
-  const [rows, setrows] = useState<T[]>([]);
+
+  const [rowsToDisplay, setrowsToDisplay] = useState<T[]>([]);
+  const [rowsAvailable, setrowsAvailable] = useState(data);
 
   //filter data using column, filter and filterType
   const filterData = (column: keyof T, filterType: filterType, searchValue: string) => {
@@ -87,8 +89,12 @@ TableProps<T>) {
           return true;
         }
       });
-      setrows(filteredData);
-    } else setrows(data);
+      setrowsAvailable(filteredData);
+    } else {
+      if (rowsAvailable.length !== data.length) {
+        setrowsAvailable(data);
+      }
+    }
   };
 
   function handleChangeRowsPerPage(e: ValueType) {
@@ -103,9 +109,13 @@ TableProps<T>) {
   }
 
   useEffect(() => {
+    setrowsAvailable(data);
+  }, [data]);
+
+  useEffect(() => {
     const startingPoint = _currentPage * _rowsPerPage;
-    setrows(data.slice(startingPoint, startingPoint + _rowsPerPage));
-  }, [_currentPage, _rowsPerPage, data]);
+    setrowsToDisplay(rowsAvailable.slice(startingPoint, startingPoint + _rowsPerPage));
+  }, [_currentPage, _rowsPerPage, rowsAvailable]);
 
   return (
     <div>
@@ -136,7 +146,7 @@ TableProps<T>) {
               {actions && <th className="text-center text-xs">Red.</th>}
             </tr>
             {/* Table body */}
-            {rows.map((row, index) => (
+            {rowsToDisplay.map((row, index) => (
               <tr
                 key={index}
                 className="contentrows"
