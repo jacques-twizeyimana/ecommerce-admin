@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Breadcrump from '../../components/Molecules/Breadcrump';
 import AddNewEmployeeModal from '../../components/Organisms/employees/AddNewEmployeeModal';
+import PopupModal from '../../components/Organisms/Modals/PopupModal';
 import Table from '../../components/Organisms/Table';
 import useAuthenticator from '../../hooks/useAuthenticator';
 import { employeeStore } from '../../store/employees.store';
@@ -82,7 +83,8 @@ export default function Employees() {
 
 const EmployeeTable = (props: EmployeeTableProps) => {
   const [isAddNewModalOpen, setisAddNewModalOpen] = useState(false);
-  console.log(props);
+  const [isSuccessModalOpen, setisSuccessModalOpen] = useState(false);
+
   return (
     <div className="px-3">
       <div className="">
@@ -105,10 +107,17 @@ const EmployeeTable = (props: EmployeeTableProps) => {
         />
       </div>
       <AddNewEmployeeModal
+        handleSuccess={() => setisSuccessModalOpen(true)}
         show={isAddNewModalOpen}
         setShow={setisAddNewModalOpen}
         onHide={() => setisAddNewModalOpen(false)}
         className={'side-modal'}
+      />
+      <PopupModal
+        isUpdate={false}
+        show={isSuccessModalOpen}
+        onHide={() => setisSuccessModalOpen(false)}
+        setShow={setisSuccessModalOpen}
       />
     </div>
   );
