@@ -2,16 +2,14 @@ import '../../../styles/components/Organisms/Nav.scss';
 
 import React, { useState } from 'react';
 
-import useAuthenticator from '../../../hooks/useAuthenticator';
 import { ValueType } from '../../../types';
 import { NavProps } from '../../../types/props';
 import Input from '../../Atoms/Form/Input';
+import Icon from '../../Atoms/Icon';
 import Avatar from '../../Molecules/Avatar/Avatar';
 
 export default function Nav(props: NavProps) {
-  const [collapse, setCollapse] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { user } = useAuthenticator();
 
   const collapseSidebar = () => {
     props.setCollapse(!props.collapse);
@@ -22,14 +20,11 @@ export default function Nav(props: NavProps) {
   };
 
   return (
-    <div className="bg-navbar d-flex">
+    <div className="bg-navbar d-flex align-items-center">
       <div className="menu-area mr-2 col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
-        <img
-          src={'/icons/menu.svg'}
-          style={{ verticalAlign: 'text-bottom', cursor: 'pointer' }}
-          alt={'Menu Iccon'}
-          onClick={collapseSidebar}
-        />
+        <button onClick={collapseSidebar} className="btn w-auto">
+          <Icon name="menu" size={30} />
+        </button>
       </div>
       <div className="search-area col-xs-1 col-sm-1 col-md-1 col-lg-2 col-xl-2 d-flex">
         <img src={'/icons/search.svg'} width={13} alt={'Search Iccon'} />

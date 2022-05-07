@@ -85,12 +85,13 @@ export default function EmployeeInfo(props: { employee: EmployeeDto }) {
       {props.employee ? (
         <div className="py-4 px-5 bg-white">
           <div className="p-2 border d-inline-block">
-            <div className=" w-20 h-20 border rounded-circle text-center text-sm">
+            <div className="w-20 h-20 border rounded-circle text-center text-sm">
               {/* Photo placeholder */}
               <img
                 src={props.employee?.profileUrl!}
-                width={85}
-                style={{ borderRadius: '50%', marginLeft: '-3px', marginTop: '1px' }}
+                className="d-block w-20 h-20 rounded-circle"
+                // width={85}
+                // style={{ borderRadius: '50%', marginLeft: '-3px', marginTop: '1px' }}
                 alt="Profile url"
               />
             </div>
