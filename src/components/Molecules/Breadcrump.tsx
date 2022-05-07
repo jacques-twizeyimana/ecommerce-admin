@@ -6,10 +6,9 @@ import Icon from '../Atoms/Icon';
 interface Iprops {
   title: string;
   navigation: string[];
-  onClickAddNewButton?: () => void;
 }
 
-export default function Breadcrump({ title, navigation, onClickAddNewButton }: Iprops) {
+export default function Breadcrump({ title, navigation }: Iprops) {
   return (
     <div className="">
       <div className="d-flex justify-content-between align-items-center mb-2">
@@ -17,9 +16,7 @@ export default function Breadcrump({ title, navigation, onClickAddNewButton }: I
           {title}
         </Heading>
         <div className="text-right">
-          <button
-            className="rounded-circle btn py-2 btn-print bg-light-gray"
-            onClick={() => onClickAddNewButton && onClickAddNewButton()}>
+          <button className="rounded-circle btn py-2 btn-print bg-light-gray">
             <Icon name="print" size={19} />
           </button>
         </div>
