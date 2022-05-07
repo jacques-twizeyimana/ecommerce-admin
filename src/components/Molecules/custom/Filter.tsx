@@ -39,7 +39,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
   useEffect(() => {
     handleFilter(filter.column, filter.filterType, filter.filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter.filter]);
+  }, [filter.filter, filter.filterType, filter.column]);
 
   const colOptions = React.useMemo(() => {
     if (data) {
