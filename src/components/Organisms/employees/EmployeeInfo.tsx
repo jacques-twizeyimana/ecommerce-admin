@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { EmployeeDto } from '../../../types/services/employees.types';
 import Button from '../../Molecules/Button/Button';
 import Details from '../../Molecules/custom/Details';
 import PopupModal from '../Modals/PopupModal';
-import SideModal from '../Modals/SideModal';
 import AddNewEmployeeModal from './AddNewEmployeeModal';
 
 export default function EmployeeInfo(props: { employee: EmployeeDto }) {
-  const [popupModalShow, setPopupModalShow] = React.useState(false);
-  const [rightModalShow, setRightModalShow] = React.useState(false);
+  const [rightModalShow, setRightModalShow] = useState(false);
+  const [isSuccessModalOpen, setisSuccessModalOpen] = useState(false);
 
   let basicInfo = {},
     workingCondition = {},
@@ -110,7 +109,8 @@ export default function EmployeeInfo(props: { employee: EmployeeDto }) {
             <div className="col-3 ml-3">
               <Button
                 className="text-capitalize b-radius light"
-                onClick={() => setPopupModalShow(true)}>
+                // onClick={() => setPopupModalShow(true)}
+              >
                 Archyvuoti darbuotoją
               </Button>
             </div>
@@ -145,21 +145,22 @@ export default function EmployeeInfo(props: { employee: EmployeeDto }) {
               <Details title="Kita info" data={otherInfo} />
             </div>
           </div>
-          <PopupModal
-            show={popupModalShow}
-            onHide={() => {
-              setPopupModalShow(false);
-            }}
-            setShow={setPopupModalShow}
-          />
 
           <AddNewEmployeeModal
+            handleSuccess={() => setisSuccessModalOpen(true)}
             show={rightModalShow}
             className={'side-modal'}
             setShow={setRightModalShow}
             onHide={() => setRightModalShow(false)}
             employeeId={props.employee.id}
             isUpdating={true}
+          />
+
+          <PopupModal
+            isUpdate={true}
+            show={isSuccessModalOpen}
+            onHide={() => setisSuccessModalOpen(false)}
+            setShow={setisSuccessModalOpen}
           />
         </div>
       ) : null}
