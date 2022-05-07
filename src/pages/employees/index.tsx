@@ -95,8 +95,6 @@ const EmployeeTable = (props: EmployeeTableProps) => {
           data={props.data}
           uniqueCol={props.uniqueCol}
           hide={props.hide}
-          rowsPerPage={10}
-          totalPages={10}
           actions={props.actions}
           handleClickRow={props.handleClickRow}
           onChangePage={props.onChangePage}

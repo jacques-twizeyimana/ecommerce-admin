@@ -17,9 +17,7 @@ export default function SignInForm() {
     password: '',
   });
 
-
   const handleChange = (e: ValueType) => {
-    console.log(e.name);
     setDetails((details) => ({
       ...details,
       [e.name]: e.value,
