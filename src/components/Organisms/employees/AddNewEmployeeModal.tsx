@@ -39,7 +39,7 @@ export default function AddNewEmployeeModal({
 
   const [values, setvalues] = useState<ICreateEmployee>({
     profileUrl:
-      'https://i.pinimg.com/originals/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
+      'https://i.picsum.photos/id/1005/5760/3840.jpg?hmac=2acSJCOwz9q_dKtDZdSB-OIK1HUcwBeXco_RMMTUgfY',
     firstName: '',
     lastName: '',
     seqNumber: '',
@@ -99,9 +99,9 @@ export default function AddNewEmployeeModal({
         employeeRoleId: employee.data.employeeRole.id,
         employmentTypeId: employee.data.employmentType.id,
         employmentTermId: employee.data.employmentTerm.id,
-        workingWeekId: employee.data.workingWeek.id,
+        workingWeekId: employee.data.workingWeek?.id,
         salary: employee.data.salary,
-        startDate: employee.data.startDate.toString(),
+        startDate: employee.data.startDate,
         endDate: employee.data.endDate,
         regDate: employee.data.regDate,
         phone: employee.data.phone,
@@ -119,7 +119,6 @@ export default function AddNewEmployeeModal({
   }, [employee?.data]);
 
   const handleSubmit = async () => {
-    console.log(values);
     const toastId = toast.loading('Saving ....');
     if (employeeId && isUpdating) {
       updateMutation(
@@ -271,7 +270,7 @@ export default function AddNewEmployeeModal({
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
                     className="mr-3"
-                    type="date"
+                    type="datetime-local"
                     name="regDate"
                     handleChange={handleChange}
                     placeholder="Idarbinimo data Nr."
@@ -281,7 +280,7 @@ export default function AddNewEmployeeModal({
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
                     name="startDate"
-                    type="date"
+                    type="datetime-local"
                     handleChange={handleChange}
                     placeholder="Pirmoji darbo diena"
                     value={values.startDate}
@@ -291,7 +290,7 @@ export default function AddNewEmployeeModal({
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
                     name="endDate"
-                    type="date"
+                    type="datetime-local"
                     handleChange={handleChange}
                     placeholder="Paskutine darbo diena"
                     value={values.endDate}
