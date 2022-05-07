@@ -6,7 +6,11 @@ import Modal from 'react-bootstrap/Modal';
 import { ModalProps } from '../../../types/props';
 import Button from '../../Molecules/Button/Button';
 
-export default function PopupModal(props: ModalProps) {
+interface IProps extends ModalProps {
+  isUpdate?: boolean;
+}
+
+export default function PopupModal(props: IProps) {
   return (
     <Modal {...props} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Body>
@@ -14,7 +18,8 @@ export default function PopupModal(props: ModalProps) {
           <img src={'/icons/success.svg'} width={50} alt="success" />
         </div>
         <p className="text-align-center message mb-4">
-          Darbuotojas pridėtas <span className="font-weight-bold">sėkmingai </span>
+          Darbuotojas {props.isUpdate ? 'atnaujinta' : 'pridėtas'}
+          <span className="font-weight-bold">sėkmingai </span>
         </p>
       </Modal.Body>
       <Modal.Footer>
@@ -23,7 +28,9 @@ export default function PopupModal(props: ModalProps) {
             <Button className={'whitish curved-border-left'}>Kurti naują</Button>
           </div>
           <div className="col-6">
-            <Button className={'blueish curved-border-right'}>Uždaryti</Button>
+            <Button className={'blueish curved-border-right'} onClick={props.onHide}>
+              Uždaryti
+            </Button>
           </div>
         </div>
       </Modal.Footer>

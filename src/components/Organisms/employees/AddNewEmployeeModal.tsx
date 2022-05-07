@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import toast from 'react-hot-toast';
 
-import { ValueType } from '../../../types';
+import { queryClient } from '../../../plugins/react-query';
+import { clothingStore } from '../../../store/clothing.store';
+import { drivingLicenseStore } from '../../../store/driving-license.store';
+import { employeeRoleStore } from '../../../store/employee-role.store';
+import { employeeStore } from '../../../store/employees.store';
+import { employmentTermStore } from '../../../store/employment-term.store';
+import { employmentTypeStore } from '../../../store/employment-type.store';
+import { nationalityStore } from '../../../store/nationality.store';
+import { workingWeekStore } from '../../../store/working-week.store';
+import { SelectData, ValueType } from '../../../types';
 import { ICreateEmployee, ModalProps } from '../../../types/props';
 import Input from '../../Atoms/Form/Input';
+import CustomSelect from '../../Atoms/Form/Select';
 import Heading from '../../Atoms/Heading';
 import Collapsible from '../../Molecules/Modal/Collapsible';
 
 interface IModalProps extends ModalProps {
   employeeId?: string;
   isUpdating?: boolean;
+  handleSuccess: () => void;
 }
 
 export default function AddNewEmployeeModal({
   setShow,
   employeeId,
   isUpdating = false,
+  handleSuccess,
   ...props
 }: IModalProps) {
   const closeModal = () => {
@@ -25,7 +38,8 @@ export default function AddNewEmployeeModal({
   console.log('employeeId', employeeId);
 
   const [values, setvalues] = useState<ICreateEmployee>({
-    profileUrl: '',
+    profileUrl:
+      'https://i.picsum.photos/id/1005/5760/3840.jpg?hmac=2acSJCOwz9q_dKtDZdSB-OIK1HUcwBeXco_RMMTUgfY',
     firstName: '',
     lastName: '',
     seqNumber: '',
@@ -58,13 +72,96 @@ export default function AddNewEmployeeModal({
     setvalues({ ...values, [e.name]: e.value });
   };
 
+  const { data: employee } = employeeStore.getById(employeeId);
+  const { data: nationalities } = nationalityStore.getAll();
+  const { data: employeeRoles } = employeeRoleStore.getAll();
+  const { data: employmentTypes } = employmentTypeStore.getAll();
+  const { data: employmentTerms } = employmentTermStore.getAll();
+  const { data: workingWeeks } = workingWeekStore.getAll();
+  const { data: drivingLicenses } = drivingLicenseStore.getAll();
+  const { data: clothing } = clothingStore.getAll();
+
+  const { mutateAsync } = employeeStore.createEmployee();
+  const { mutateAsync: updateMutation } = employeeStore.updateEmployee();
+
+  useEffect(() => {
+    if (employee?.data) {
+      setvalues((prev) => ({
+        ...prev,
+        profileUrl: employee.data.profileUrl || '',
+        firstName: employee.data.firstName,
+        lastName: employee.data.lastName,
+        seqNumber: employee.data.seqNumber,
+        contractNumber: employee.data.contractNumber,
+        socialSecurityNumber: employee.data.socialSecurityNumber,
+        nationalityId: employee.data.nationality.id,
+        personalIdentificationNumber: employee.data.personalIdentificationNumber,
+        employeeRoleId: employee.data.employeeRole.id,
+        employmentTypeId: employee.data.employmentType.id,
+        employmentTermId: employee.data.employmentTerm.id,
+        workingWeekId: employee.data.workingWeek?.id,
+        salary: employee.data.salary,
+        startDate: employee.data.startDate,
+        endDate: employee.data.endDate,
+        regDate: employee.data.regDate,
+        phone: employee.data.phone,
+        email: employee.data.email,
+        address: employee.data.address,
+        postalCode: employee.data.postalCode,
+        city: employee.data.city,
+        country: employee.data.country,
+        bankCode: employee.data.bankCode,
+        bankAccountNumber: employee.data.bankAccountNumber,
+        drivingLicenseId: employee.data.drivingLicense.id,
+        otherInfo: employee.data.otherInfo,
+      }));
+    }
+  }, [employee?.data]);
+
+  const handleSubmit = async () => {
+    const toastId = toast.loading('Saving ....');
+    if (employeeId && isUpdating) {
+      updateMutation(
+        { ...values, id: employeeId },
+        {
+          async onSuccess(_data) {
+            toast.success('Employee was updated successfully', { id: toastId });
+            queryClient.invalidateQueries(['employeeById', employeeId]);
+            closeModal();
+            handleSuccess();
+          },
+          onError(error: any) {
+            toast.error(
+              error.response.data.message || 'error occurred please try again',
+              { id: toastId },
+            );
+          },
+        },
+      );
+    } else {
+      mutateAsync(values, {
+        async onSuccess(_data) {
+          toast.success('Employee was created successfully', { id: toastId });
+          queryClient.invalidateQueries(['employees']);
+          closeModal();
+          handleSuccess();
+        },
+        onError(error: any) {
+          toast.error(error.response.data.message || 'error occurred please try again', {
+            id: toastId,
+          });
+        },
+      });
+    }
+  };
+
   return (
     <div className="side-modal">
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Body>
           <div className="body-header p-4 mb-2 d-flex justify-content-between">
             <Heading>{isUpdating ? 'Atnaujinti duomenis' : 'Registruoti naują'}</Heading>
-            <button className="close-icon btn w-auto" onClick={closeModal}>
+            <button className="close-icon btn w-auto" type="button" onClick={closeModal}>
               <span className="close-txt">Uždaryti</span>
               <img
                 src={'/icons/close-icon.svg'}
@@ -111,11 +208,17 @@ export default function AddNewEmployeeModal({
                     </div>
 
                     <div className="col-12 col-sm-12 col-md-6 col-lg-6 p-2">
-                      <Input
-                        name="country"
+                      <CustomSelect
+                        name="nationalityId"
                         handleChange={handleChange}
                         placeholder="Salis*"
                         value={values.nationalityId}
+                        options={
+                          nationalities?.data.map((n) => ({
+                            value: n.id,
+                            label: n.name,
+                          })) as SelectData[]
+                        }
                       />
                     </div>
                   </div>
@@ -123,7 +226,7 @@ export default function AddNewEmployeeModal({
                 <div className="row">
                   <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                     <Input
-                      name="nationalityId"
+                      name="personalIdentificationNumber"
                       handleChange={handleChange}
                       placeholder="Asmes kodas"
                       value={values.personalIdentificationNumber}
@@ -151,17 +254,23 @@ export default function AddNewEmployeeModal({
             <Collapsible isOpen={true} title="Darbo salygos">
               <div className="p-3 row">
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
+                  <CustomSelect
                     name="employeeRoleId"
                     handleChange={handleChange}
                     placeholder="Pareigos"
                     value={values.employeeRoleId}
+                    options={
+                      employeeRoles?.data.map((n) => ({
+                        value: n.id,
+                        label: n.name,
+                      })) as SelectData[]
+                    }
                   />
                 </div>
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
                     className="mr-3"
-                    type="date"
+                    type="datetime-local"
                     name="regDate"
                     handleChange={handleChange}
                     placeholder="Idarbinimo data Nr."
@@ -171,7 +280,7 @@ export default function AddNewEmployeeModal({
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
                     name="startDate"
-                    type="date"
+                    type="datetime-local"
                     handleChange={handleChange}
                     placeholder="Pirmoji darbo diena"
                     value={values.startDate}
@@ -180,27 +289,55 @@ export default function AddNewEmployeeModal({
 
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
-                    name="employmentTermId"
+                    name="endDate"
+                    type="datetime-local"
                     handleChange={handleChange}
-                    placeholder="Sutarties tipas"
-                    value={values.employmentTermId}
-                  />
-                </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="employmentTypeId"
-                    handleChange={handleChange}
-                    placeholder="Etatas"
-                    value={values.employmentTypeId}
+                    placeholder="Paskutine darbo diena"
+                    value={values.endDate}
                   />
                 </div>
 
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
+                  <CustomSelect
+                    name="employmentTermId"
+                    handleChange={handleChange}
+                    placeholder="Sutarties tipas"
+                    value={values.employmentTermId}
+                    options={
+                      employmentTerms?.data.map((n) => ({
+                        value: n.id,
+                        label: n.name,
+                      })) as SelectData[]
+                    }
+                  />
+                </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
+                  <CustomSelect
+                    name="employmentTypeId"
+                    handleChange={handleChange}
+                    placeholder="Etatas"
+                    value={values.employmentTypeId}
+                    options={
+                      employmentTypes?.data.map((n) => ({
+                        value: n.id,
+                        label: n.name,
+                      })) as SelectData[]
+                    }
+                  />
+                </div>
+
+                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
+                  <CustomSelect
                     name="workingWeekId"
                     handleChange={handleChange}
                     placeholder="Darbo savaite"
                     value={values.workingWeekId}
+                    options={
+                      workingWeeks?.data.map((n) => ({
+                        value: n.id,
+                        label: n.name,
+                      })) as SelectData[]
+                    }
                   />
                 </div>
 
@@ -279,75 +416,63 @@ export default function AddNewEmployeeModal({
               <div className="p-3 row">
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
-                    name="firstName"
+                    name="bankCode"
                     handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
+                    placeholder="Banko rekvizitai"
+                    value={values.bankCode}
                   />
                 </div>
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
                   <Input
                     className="mr-3"
-                    name="firstName"
+                    name="bankAccountNumber"
                     handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
-                  />
-                </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="firstName"
-                    handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
-                  />
-                </div>
-
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="firstName"
-                    handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
-                  />
-                </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="firstName"
-                    handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
-                  />
-                </div>
-
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
-                    name="firstName"
-                    handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
+                    placeholder="Sąskaitos numeris"
+                    value={values.bankAccountNumber}
                   />
                 </div>
               </div>
             </Collapsible>
 
-            <Collapsible isOpen={true} title="Darbo laikas">
+            <Collapsible isOpen={true} title="Vairuotojo pazymejimas">
               <div className="p-3 row">
                 <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <Input
+                  <CustomSelect
                     className="mr-3"
-                    name="firstName"
+                    name="drivingLicenseId"
                     handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
+                    placeholder="Kategorija"
+                    value={values.drivingLicenseId}
+                    options={
+                      drivingLicenses?.data.map((n) => ({
+                        value: n.id,
+                        label: n.name,
+                      })) as SelectData[]
+                    }
                   />
                 </div>
+                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
+                  <CustomSelect
+                    className="mr-3"
+                    name="clothingIds"
+                    handleChange={handleChange}
+                    placeholder="Informacija apie drabužius"
+                    isMulti
+                    options={
+                      clothing?.data.map((n) => ({
+                        value: n.id,
+                        label: `${n.type.name}(${n.size})`,
+                      })) as SelectData[]
+                    }
+                  />
+                </div>
+                {/* Informacija apie drabužius */}
                 <div className="col-12 col-sm-12 col-md-6 col-lg-8 p-2">
                   <Input
-                    name="firstName"
+                    name="otherInfo"
                     handleChange={handleChange}
-                    placeholder="Graffiko Nr."
-                    value={values.firstName}
+                    placeholder="Kita info"
+                    value={values.otherInfo}
                   />
                 </div>
               </div>
@@ -355,7 +480,9 @@ export default function AddNewEmployeeModal({
           </div>
           <div className="body-modal-footer row px-4">
             <div className="col-3 mr-2">
-              <Button className="text-capitalize b-radius">Išsaugoti</Button>
+              <Button className="text-capitalize b-radius" onClick={() => handleSubmit()}>
+                Išsaugoti
+              </Button>
             </div>
             <div className="col-3">
               <Button className="text-capitalize b-radius light" onClick={closeModal}>

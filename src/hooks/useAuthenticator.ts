@@ -1,29 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
+import UserContext from '../contexts/UserContext';
 import { userService } from '../services/users/user.service';
-import { IUser } from '../types/services/user.types';
 
 export default function useAuthenticator() {
-  const [user, setUser] = useState<IUser | undefined>(undefined);
+  const { user, setUser } = useContext(UserContext);
+  console.log('usercontext', user);
+
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchUser = async () => {
-    setIsLoading(true);
-    try {
-      const user = await userService.fetchCurrentUser();
-      setUser(user.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    console.log(user);
+    const fetchUser = async () => {
+      setIsLoading(true);
+      try {
+        const user = await userService.fetchCurrentUser();
+        setUser(user.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     if (!user) {
+      console.log(true);
       fetchUser();
     }
-  }, [user]);
+  }, [setUser, user]);
 
   return { user, isLoading };
 }

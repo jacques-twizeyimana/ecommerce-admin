@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Breadcrump from '../../components/Molecules/Breadcrump';
+import AddNewEmployeeModal from '../../components/Organisms/employees/AddNewEmployeeModal';
+import PopupModal from '../../components/Organisms/Modals/PopupModal';
 import Table from '../../components/Organisms/Table';
 import useAuthenticator from '../../hooks/useAuthenticator';
 import { employeeStore } from '../../store/employees.store';
-import { nationalityStore } from '../../store/nationality.store';
 import { EmployeeTableProps, TableActionsType } from '../../types/props';
 import { EmployeeTableDto } from '../../types/services/employees.types';
 
@@ -15,7 +16,6 @@ export default function Employees() {
   const { user } = useAuthenticator();
   console.log('User', user);
 
-  const { data: nationalities } = nationalityStore.getAll();
   const { data: employeesData } = employeeStore.getAll();
 
   const employees: EmployeeTableDto[] = [];
@@ -82,7 +82,9 @@ export default function Employees() {
 }
 
 const EmployeeTable = (props: EmployeeTableProps) => {
-  console.log(props);
+  const [isAddNewModalOpen, setisAddNewModalOpen] = useState(false);
+  const [isSuccessModalOpen, setisSuccessModalOpen] = useState(false);
+
   return (
     <div className="px-3">
       <div className="">
@@ -98,8 +100,23 @@ const EmployeeTable = (props: EmployeeTableProps) => {
           actions={props.actions}
           handleClickRow={props.handleClickRow}
           onChangePage={props.onChangePage}
+          addNewButtonText="Registruoti naują"
+          onClickAddNewButton={() => setisAddNewModalOpen(true)}
         />
       </div>
+      <AddNewEmployeeModal
+        handleSuccess={() => setisSuccessModalOpen(true)}
+        show={isAddNewModalOpen}
+        setShow={setisAddNewModalOpen}
+        onHide={() => setisAddNewModalOpen(false)}
+        className={'side-modal'}
+      />
+      <PopupModal
+        isUpdate={false}
+        show={isSuccessModalOpen}
+        onHide={() => setisSuccessModalOpen(false)}
+        setShow={setisSuccessModalOpen}
+      />
     </div>
   );
 };
