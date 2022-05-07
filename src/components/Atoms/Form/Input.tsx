@@ -17,8 +17,8 @@ export default function Input<T>({
   inputColor = '#212529',
   bgStyles = true,
   handleChange = () => {},
-  ...attrs
-}: InputProps<T>) {
+}: // ...attrs
+InputProps<T>) {
   const [_value, setValue] = useState<string>('');
 
   useEffect(() => setValue(value?.toString()), [value]);
@@ -31,7 +31,7 @@ export default function Input<T>({
 
   return (
     <input
-      {...attrs}
+      // {...attrs}
       placeholder={placeholder}
       name={name}
       type={type}
