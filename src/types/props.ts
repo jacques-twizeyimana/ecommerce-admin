@@ -185,3 +185,23 @@ export interface SelectProps extends commonInputProps {
   loading?: boolean;
   value?: string | string[];
 }
+
+export interface IFilterType<T> {
+  column: keyof T;
+  filter: string;
+  filterType:
+    | 'equals'
+    | 'contains'
+    | 'startsWith'
+    | 'endsWith'
+    | 'lessThan'
+    | 'greaterThan';
+}
+
+export type filterType =
+  | 'equals'
+  | 'contains'
+  | 'startsWith'
+  | 'endsWith'
+  | 'lessThan'
+  | 'greaterThan';

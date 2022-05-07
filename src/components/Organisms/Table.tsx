@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 
 import { ValueType } from '../../types';
-import { TableActionsType } from '../../types/props';
+import { filterType, TableActionsType } from '../../types/props';
 import Dropdown from '../Atoms/custom/Dropdown';
 import Heading from '../Atoms/Heading';
 import Icon from '../Atoms/Icon';
@@ -52,7 +52,7 @@ export default function Table<T>({
 
   //pagination
   rowsPerPage = 5,
-  totalPages = 1,
+  // totalPages = 1,
   currentPage = 0,
   onChangePage,
   onChangePageSize,
@@ -66,6 +66,30 @@ TableProps<T>) {
   const [_currentPage, setcurrentPage] = useState(currentPage);
   const [_rowsPerPage, setrowsPerPage] = useState(rowsPerPage);
   const [rows, setrows] = useState<T[]>([]);
+
+  //filter data using column, filter and filterType
+  const filterData = (column: keyof T, filterType: filterType, searchValue: string) => {
+    if (column.toString().length > 0 && searchValue.length > 0) {
+      const filteredData = data.filter((item) => {
+        const currentItem = (item[column] as unknown as string).toLowerCase();
+        searchValue = searchValue.toLowerCase();
+        if (column) {
+          if (filterType === 'equals') {
+            return currentItem === searchValue;
+          } else if (filterType === 'contains') {
+            return currentItem.includes(searchValue);
+          } else if (filterType === 'startsWith') {
+            return currentItem.startsWith(searchValue);
+          } else if (filterType === 'endsWith') {
+            return currentItem.endsWith(searchValue);
+          }
+        } else {
+          return true;
+        }
+      });
+      setrows(filteredData);
+    } else setrows(data);
+  };
 
   function handleChangeRowsPerPage(e: ValueType) {
     setcurrentPage(0);
@@ -95,7 +119,7 @@ TableProps<T>) {
           </Heading>
         </div>
       )}
-      <Filter />
+      <Filter handleFilter={filterData} data={data[0]} />
       <div className="border rounded">
         <table className="table table-responsive my-0">
           <tbody>
