@@ -34,6 +34,11 @@ interface TableProps<T> {
   currentPage?: number;
   onChangePage: (_page: number) => void;
   onChangePageSize?: (_size: number) => void;
+
+  // add new item button
+  onClickAddNewButton?: () => void;
+  addNewButtonText?: string;
+  showAddNewButton?: boolean;
 }
 
 export default function Table<T>({
@@ -50,6 +55,11 @@ export default function Table<T>({
   currentPage = 0,
   onChangePage,
   onChangePageSize,
+
+  // add new button
+  onClickAddNewButton,
+  addNewButtonText = 'Pridėti naują',
+  showAddNewButton = true,
 }: //   ,
 TableProps<T>) {
   console.log(data);
@@ -60,12 +70,16 @@ TableProps<T>) {
 
   return (
     <div>
-      <div className="page-head">
-        <Heading fontSize="md" fontWeight="bold">
-          Registruoti naują
-          <Icon name={'add'} styles={{ marginLeft: '10px' }} size={35} />
-        </Heading>
-      </div>
+      {showAddNewButton && (
+        <div className="page-head">
+          <Heading fontSize="md" fontWeight="bold">
+            {addNewButtonText}
+            <button className="btn w-auto" onClick={onClickAddNewButton}>
+              <Icon name={'add'} styles={{ marginLeft: '5px' }} size={35} />
+            </button>
+          </Heading>
+        </div>
+      )}
       <Filter />
       <div className="border rounded">
         <table className="table table-responsive my-0">
@@ -101,15 +115,9 @@ TableProps<T>) {
                   <td className="">
                     <Dropdown
                       header={
-                        <Button
-                          className="no-styles"
-                          children={
-                            <Icon
-                              name={'more'}
-                              size={24}
-                              styles={{ marginTop: '-9px' }}
-                            />
-                          }></Button>
+                        <Button className="no-styles">
+                          <Icon name={'more'} size={24} styles={{ marginTop: '-9px' }} />
+                        </Button>
                       }>
                       {actions.map((action) => (
                         <div

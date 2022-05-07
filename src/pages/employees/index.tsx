@@ -88,11 +88,7 @@ const EmployeeTable = (props: EmployeeTableProps) => {
   return (
     <div className="px-3">
       <div className="">
-        <Breadcrump
-          title="Darbuotojai"
-          onClickAddNewButton={() => setisAddNewModalOpen(true)}
-          navigation={['Žmonių valdymas', 'Darbuotojai']}
-        />
+        <Breadcrump title="Darbuotojai" navigation={['Žmonių valdymas', 'Darbuotojai']} />
       </div>
       <div className="mt-4">
         <Table
@@ -104,6 +100,8 @@ const EmployeeTable = (props: EmployeeTableProps) => {
           actions={props.actions}
           handleClickRow={props.handleClickRow}
           onChangePage={props.onChangePage}
+          addNewButtonText="Registruoti naują"
+          onClickAddNewButton={() => setisAddNewModalOpen(true)}
         />
       </div>
       <AddNewEmployeeModal
