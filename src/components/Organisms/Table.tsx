@@ -69,24 +69,26 @@ TableProps<T>) {
 
   //filter data using column, filter and filterType
   const filterData = (column: keyof T, filterType: filterType, searchValue: string) => {
-    const filteredData = data.filter((item) => {
-      const currentItem = (item[column] as unknown as string).toLowerCase();
-      searchValue = searchValue.toLowerCase();
-      if (column) {
-        if (filterType === 'equals') {
-          return currentItem === searchValue;
-        } else if (filterType === 'contains') {
-          return currentItem.includes(searchValue);
-        } else if (filterType === 'startsWith') {
-          return currentItem.startsWith(searchValue);
-        } else if (filterType === 'endsWith') {
-          return currentItem.endsWith(searchValue);
+    if (column.toString().length > 0 && searchValue.length > 0) {
+      const filteredData = data.filter((item) => {
+        const currentItem = (item[column] as unknown as string).toLowerCase();
+        searchValue = searchValue.toLowerCase();
+        if (column) {
+          if (filterType === 'equals') {
+            return currentItem === searchValue;
+          } else if (filterType === 'contains') {
+            return currentItem.includes(searchValue);
+          } else if (filterType === 'startsWith') {
+            return currentItem.startsWith(searchValue);
+          } else if (filterType === 'endsWith') {
+            return currentItem.endsWith(searchValue);
+          }
+        } else {
+          return true;
         }
-      } else {
-        return true;
-      }
-    });
-    setrows(filteredData);
+      });
+      setrows(filteredData);
+    } else setrows(data);
   };
 
   function handleChangeRowsPerPage(e: ValueType) {
