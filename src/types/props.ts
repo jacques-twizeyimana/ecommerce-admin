@@ -76,7 +76,8 @@ export type IconNames =
   | 'filter'
   | 'more'
   | 'arrow-up-black'
-  | 'arrow-down-dark';
+  | 'arrow-down-dark'
+  | 'menu';
 
 export interface ListItemProps {
   item: ISidebar;
@@ -182,5 +183,5 @@ export interface SelectProps extends commonInputProps {
   padding?: number;
 
   loading?: boolean;
-  value?: string;
+  value?: string | string[];
 }

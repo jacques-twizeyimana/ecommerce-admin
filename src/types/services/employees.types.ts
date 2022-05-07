@@ -39,7 +39,7 @@ export interface EmployeeDto {
   regDate: string;
   salary: number;
   socialSecurityNumber: string;
-  startDate: Date;
+  startDate: string;
   timesheets: any[];
   workActions: any[];
   workingWeek: any;
