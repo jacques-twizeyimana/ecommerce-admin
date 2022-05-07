@@ -156,3 +156,31 @@ export interface EmployeeTableProps {
   actions: TableActionsType<EmployeeTableDto>[];
   onChangePage: (_page: number) => {};
 }
+
+//common input props that will be used on all reusable input components
+export interface commonInputProps {
+  required?: boolean;
+  handleChange: (_e: ValueType) => any;
+  name: string;
+  options: SelectData[];
+  className?: string;
+  placeholder?: string;
+  disabled?: boolean;
+}
+
+export interface SelectProps extends commonInputProps {
+  isMulti?: boolean;
+  getOptionLabel?: (_option: Object) => string;
+  getOptionValue?: (_option: Object) => string;
+  noOptionsMessage?: string;
+  width?: string;
+  searchable?: boolean;
+  defaultValue?: SelectData;
+  styles?: Object;
+  hasError?: boolean;
+  height?: number;
+  padding?: number;
+
+  loading?: boolean;
+  value?: string;
+}

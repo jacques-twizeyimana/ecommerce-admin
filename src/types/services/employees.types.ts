@@ -1,12 +1,23 @@
 import { INationality } from './nationalities.types';
 
+export interface IClothingType {
+  id: number;
+  name: string;
+}
+
+export interface IClothingInfo {
+  id: string;
+  size: string;
+  type: IClothingType;
+}
+
 export interface EmployeeDto {
   accomodations: any[];
   address: string;
   bankAccountNumber: string;
   bankCode: string;
   city: string;
-  clothings: { id: string; size: string; type: { id: number; name: string } }[];
+  clothings: IClothingInfo[];
   contractNumber: string;
   country: string;
   drivingLicense: { id: string; name: string };
@@ -86,4 +97,8 @@ export interface ICreateEmployeeRole {
 
 export interface IEmployeeRole extends ICreateEmployeeRole {
   id: string;
+}
+
+export interface IEmploymentTypeInfo extends IEmployeeRole {
+  multiplyer: number;
 }

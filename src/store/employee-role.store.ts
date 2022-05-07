@@ -2,7 +2,7 @@ import { useMutation, useQuery } from 'react-query';
 
 import { employeeRolesService } from '../services/employees/employee-roles.service';
 
-class EmployeeStore {
+class EmployeeRole {
   create() {
     return useMutation(employeeRolesService.createRole);
   }
@@ -20,4 +20,4 @@ class EmployeeStore {
   }
 }
 
-export const employeeStore = new EmployeeStore();
+export const employeeRoleStore = new EmployeeRole();
