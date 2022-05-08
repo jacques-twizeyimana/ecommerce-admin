@@ -181,7 +181,7 @@ export interface SelectProps extends commonInputProps {
   hasError?: boolean;
   height?: number;
   padding?: number;
-
+  bgColor?: string;
   loading?: boolean;
   value?: string | string[];
 }

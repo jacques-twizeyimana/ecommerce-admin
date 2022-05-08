@@ -48,7 +48,7 @@ export default function CustomSelect(props: SelectProps) {
         styles={{
           control: (base: any, _state: any) => ({
             ...base,
-            backgroundColor: '#EEF1F4',
+            backgroundColor: props.bgColor || '#EEF1F4',
             borderColor: props.hasError ? 'rgb(238,64,64)' : 'rgb(240, 241, 241)',
             borderWidth: 2,
             cursor: 'pointer',

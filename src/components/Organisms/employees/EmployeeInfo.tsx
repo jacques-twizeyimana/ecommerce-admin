@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { EmployeeDto } from '../../../types/services/employees.types';
 import Button from '../../Molecules/Button/Button';
 import Details from '../../Molecules/custom/Details';
-import PopupModal from '../Modals/PopupModal';
+import SuccessModal from '../Modals/SuccessModal';
 import AddNewEmployeeModal from './AddNewEmployeeModal';
 
 export default function EmployeeInfo(props: { employee: EmployeeDto }) {
@@ -157,7 +157,7 @@ export default function EmployeeInfo(props: { employee: EmployeeDto }) {
             isUpdating={true}
           />
 
-          <PopupModal
+          <SuccessModal
             isUpdate={true}
             show={isSuccessModalOpen}
             onHide={() => setisSuccessModalOpen(false)}

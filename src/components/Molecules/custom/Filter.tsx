@@ -72,12 +72,13 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
           </div>
         }>
         <div className="col-12 col-md-10 col-lg-8">
-          <div className="border row p-2 ">
+          <div className="border row py-2 bg-almost-white">
             <div className="col-3">
               <CustomSelect
                 name="column"
                 placeholder="Column"
                 handleChange={handleChange}
+                bgColor="white"
                 className="text-xs"
                 options={colOptions}
                 value={filter.column.toString()}
@@ -85,6 +86,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
             </div>
             <div className="col-3">
               <CustomSelect
+                bgColor="white"
                 placeholder="Filter"
                 handleChange={handleChange}
                 name="filterType"
@@ -99,6 +101,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
                 name="filter"
                 value={filter.filter}
                 placeholder="Type here"
+                className="bg-white"
               />
             </div>
             <div className="col-2">
