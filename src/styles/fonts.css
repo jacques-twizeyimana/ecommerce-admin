@@ -48,3 +48,7 @@
 .font-black {
     font-weight: 900;
 }
+
+::placeholder{
+    font-size: 12px !important;
+}

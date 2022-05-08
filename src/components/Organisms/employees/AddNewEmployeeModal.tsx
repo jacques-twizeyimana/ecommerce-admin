@@ -16,6 +16,7 @@ import { ICreateEmployee, ModalProps } from '../../../types/props';
 import Input from '../../Atoms/Form/Input';
 import CustomSelect from '../../Atoms/Form/Select';
 import Heading from '../../Atoms/Heading';
+import Icon from '../../Atoms/Icon';
 import Collapsible from '../../Molecules/Modal/Collapsible';
 
 interface IModalProps extends ModalProps {
@@ -165,7 +166,9 @@ export default function AddNewEmployeeModal({
           <div className="body-header p-4 mb-2 d-flex justify-content-between">
             <Heading>{isUpdating ? 'Atnaujinti duomenis' : 'Registruoti naują'}</Heading>
             <button className="close-icon btn w-auto" type="button" onClick={closeModal}>
-              <span className="close-txt">Uždaryti</span>
+              <span className="close-txt font-bold text-capitalize tracking-0">
+                Uždaryti
+              </span>
               <img
                 src={'/icons/close-icon.svg'}
                 className="cursor-pointer"
@@ -179,7 +182,9 @@ export default function AddNewEmployeeModal({
               <div className="p-3">
                 <div className="d-flex justify-content-between">
                   <div className="profile-pic w-20 h-20">
-                    <div className="w-20 h-20 border rounded-circle text-center text-sm">
+                    <div className="w-20 h-20 border rounded-circle text-center text-sm p-2">
+                      <Icon name="plus" size={32} />
+                      <p className="text-xs">Upload image</p>
                       {/* Photo placeholder */}
                     </div>
                   </div>

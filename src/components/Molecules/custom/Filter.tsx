@@ -24,7 +24,8 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
   const [filter, setfilter] = useState<IFilterType<T>>({
     // @ts-ignore
     column: '',
-    filterType: 'equals',
+    // @ts-ignore
+    filterType: '',
     filter: '',
   });
 
@@ -55,7 +56,8 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
     setfilter({
       // @ts-ignore
       column: '',
-      filterType: 'equals',
+      // @ts-ignore
+      filterType: '',
       filter: '',
     });
   };
@@ -105,13 +107,11 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
               />
             </div>
             <div className="col-2">
-              {filter.column && (
-                <button
-                  className="w-auto btn bg-light-gray text-xs text-capitalize"
-                  onClick={handleResetFilter}>
-                  reset
-                </button>
-              )}
+              <button
+                className="w-auto btn bg-light-gray text-xs text-capitalize"
+                onClick={handleResetFilter}>
+                reset
+              </button>
             </div>
           </div>
         </div>
