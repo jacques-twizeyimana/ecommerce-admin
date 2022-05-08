@@ -4,18 +4,30 @@ import React from 'react';
 
 import { sideBarItems } from '../../../services/sidebar';
 import ListItem from '../../Molecules/Sidebar/ListItem';
+import useAuthenticator from '../../../hooks/useAuthenticator';
+import { IRole } from '../../../types/services/user.types';
+import {containsAll} from '../../../utils/utility';
 
 export default function Sidebar() {
-  return (
-    <div className={'container bg-sidebar p-0'}>
-      <div className="sidebar-header d-flex">
-        <img src={'/assets/images/sass-logo-black.png'} width={185} alt="Logo" />
-      </div>
-      <div className="sidebar-list-items border">
-        {sideBarItems.map((item) => (
-          <ListItem key={item.id} item={item} />
-        ))}
-      </div>
-    </div>
-  );
+    const {user} = useAuthenticator();
+
+    return (
+        <React.Fragment>
+            {user ? <div className={'container bg-sidebar p-0'}>
+                <div className="sidebar-header d-flex">
+                    <img src={'/assets/images/sass-logo-black.png'} width={185} alt="Logo" />
+                </div>
+                <div className="sidebar-list-items border">
+                    {sideBarItems.map((item) => (
+                        item.allowedRoles ?
+                        containsAll(user?.currentUserRoles!, item.allowedRoles!) ? 
+                            <ListItem key={item.id} item={item} />: null  
+                        : <ListItem key={item.id} item={item} />
+                    ))}
+                </div>
+            </div>
+            : null}
+            
+        </React.Fragment>
+    )
 }

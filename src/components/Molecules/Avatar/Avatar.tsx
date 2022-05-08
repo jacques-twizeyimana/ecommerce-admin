@@ -7,6 +7,7 @@ import useAuthenticator from '../../../hooks/useAuthenticator';
 import { queryClient } from '../../../plugins/react-query';
 import Dropdown from '../../Atoms/custom/Dropdown';
 
+
 export default function Avatar() {
   const { user } = useAuthenticator();
   const navigate = useNavigate();

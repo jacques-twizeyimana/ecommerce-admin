@@ -13,8 +13,6 @@ import { EmployeeTableDto } from '../../types/services/employees.types';
 export default function Employees() {
   const navigate = useNavigate();
 
-  const { user } = useAuthenticator();
-  console.log('User', user);
 
   const { data: employeesData } = employeeStore.getAll();
 
