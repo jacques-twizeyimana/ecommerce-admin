@@ -10,4 +10,4 @@ export interface IUser {
    currentUserRoles: IRole[]
 }
 
-export type IRole = 'User' | 'SuperUser' | 'Admin' | 'Guest';
+export type IRole = 'SystemAdmin' | 'User' | 'SuperUser' | 'Admin' | 'Guest';

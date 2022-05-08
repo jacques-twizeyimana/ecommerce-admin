@@ -11,7 +11,6 @@ export default function Nav(props: NavProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
     const { user } = useAuthenticator();
-    console.log('User', user);
 
     const collapseSidebar = () => {
         props.setCollapse(!props.collapse);
