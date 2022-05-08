@@ -6,9 +6,9 @@ import { NavProps } from '../../../types/props';
 import Input from '../../Atoms/Form/Input';
 import UserAvatar from '../../Molecules/Avatar/Avatar';
 
+
 export default function Nav(props: NavProps) {
-    const [collapse, setCollapse] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
     const { user } = useAuthenticator();
     console.log('User', user);
@@ -16,10 +16,9 @@ export default function Nav(props: NavProps) {
     const collapseSidebar = () => {
         props.setCollapse(!props.collapse);
     }
-
-    const handleSearchChange = (e: ValueType) => {
-        setSearchQuery((e.value) as string);
-    }
+  const handleSearchChange = (e: ValueType) => {
+    setSearchQuery(e.value as string);
+  };
 
     return (
         <div className="bg-navbar d-flex">
@@ -34,8 +33,9 @@ export default function Nav(props: NavProps) {
             <div className="user-panel  col-xs-1 col-sm-1 col-md-4 col-lg-2 col-xl-3 ml-auto d-flex">
                 <img src={'/icons/message.svg'}  alt={'Message Iccon'} />
                 <img src={'/icons/notification.svg'} alt={'Notification Iccon'} />
-                <UserAvatar profile={user?.profileUrl!} name={`${user?.firstName!} ${user?.lastName!}`}/>
+                <UserAvatar />
             </div>
         </div>
     )
 }
+

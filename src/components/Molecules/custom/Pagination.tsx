@@ -1,5 +1,7 @@
-import React from 'react';
 import '../../../styles/components/Molecules/custom/Pagination.scss';
+
+import React from 'react';
+
 import Indicator from '../../Atoms/custom/Indicator';
 import Icon from '../../Atoms/Icon';
 
@@ -11,11 +13,15 @@ type PaginationProps = {
   totalPages?: number;
 };
 const Pagination = ({ totalPages = 1, paginate, currentPage = 0 }: PaginationProps) => {
-  const pageNumbers = [1];
+  let pageNumbers = [1];
 
   for (let i = 1; i < totalPages; i++) {
     pageNumbers.push(i + 1);
   }
+
+  console.log('====================================');
+  console.log(pageNumbers);
+  console.log('====================================');
 
   return totalPages > 1 ? (
     <div className="py-2 d-flex justify-content-between ">
@@ -52,7 +58,7 @@ const Pagination = ({ totalPages = 1, paginate, currentPage = 0 }: PaginationPro
         </div>
       </div>
       <div className="">
-        <p className="pagination-txt mb-0">Puslapis 1 iš 10 /  Viso 50 rezultatų</p>
+        <p className="pagination-txt mb-0">Puslapis 1 iš 10 / Viso 50 rezultatų</p>
       </div>
     </div>
   ) : (

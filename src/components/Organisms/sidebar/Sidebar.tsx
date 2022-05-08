@@ -1,7 +1,9 @@
-import React from 'react';
 import '../../../styles/components/Organisms/Sidebar.scss';
+
+import React from 'react';
+
+import { sideBarItems } from '../../../services/sidebar';
 import ListItem from '../../Molecules/Sidebar/ListItem';
-import {sideBarItems} from '../../../services/sidebar';
 import useAuthenticator from '../../../hooks/useAuthenticator';
 import { IRole } from '../../../types/services/user.types';
 import {containsAll} from '../../../utils/utility';

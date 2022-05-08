@@ -1,18 +1,21 @@
 import { useMutation, useQuery } from 'react-query';
 
 import { employeeService } from '../services/employees/employee.service';
-import { EmployeeDto } from '../types/services/employees.types';
 
 class EmployeeStore {
-  getAll() {
-    return useQuery(['employees'], () => 
-    employeeService.fetchAll()
-    )
+  createEmployee() {
+    return useMutation(employeeService.create);
   }
-  getById(id: string) {
-    return useQuery(['employeeById'], () => 
-      employeeService.fetchById(id)
-    );
+  updateEmployee() {
+    return useMutation(employeeService.update);
+  }
+  getAll() {
+    return useQuery(['employees'], () => employeeService.fetchAll());
+  }
+  getById(id?: string) {
+    return useQuery(['employeeById', id], () => employeeService.fetchById(id || ''), {
+      enabled: !!id,
+    });
   }
 }
 
