@@ -24,6 +24,37 @@ interface IModalProps extends ModalProps {
   handleSuccess: () => void;
 }
 
+const defaultState: ICreateEmployee = {
+  profileUrl:
+    'https://res.cloudinary.com/jsanbderg/image/upload/v1652029488/image_odfnts.png',
+  firstName: '',
+  lastName: '',
+  seqNumber: '',
+  contractNumber: '',
+  socialSecurityNumber: '',
+  nationalityId: '',
+  personalIdentificationNumber: '',
+  employeeRoleId: '',
+  employmentTypeId: '',
+  employmentTermId: '',
+  workingWeekId: '',
+  salary: 0,
+  startDate: '',
+  endDate: '',
+  regDate: '',
+  phone: '',
+  email: '',
+  address: '',
+  postalCode: '',
+  city: '',
+  country: '',
+  bankCode: '',
+  bankAccountNumber: '',
+  drivingLicenseId: '',
+  otherInfo: '',
+  clothingIds: [''],
+};
+
 export default function AddNewEmployeeModal({
   setShow,
   employeeId,
@@ -37,36 +68,7 @@ export default function AddNewEmployeeModal({
 
   console.log('employeeId', employeeId);
 
-  const [values, setvalues] = useState<ICreateEmployee>({
-    profileUrl:
-      'https://i.picsum.photos/id/1005/5760/3840.jpg?hmac=2acSJCOwz9q_dKtDZdSB-OIK1HUcwBeXco_RMMTUgfY',
-    firstName: '',
-    lastName: '',
-    seqNumber: '',
-    contractNumber: '',
-    socialSecurityNumber: '',
-    nationalityId: '',
-    personalIdentificationNumber: '',
-    employeeRoleId: '',
-    employmentTypeId: '',
-    employmentTermId: '',
-    workingWeekId: '',
-    salary: 0,
-    startDate: '',
-    endDate: '',
-    regDate: '',
-    phone: '',
-    email: '',
-    address: '',
-    postalCode: '',
-    city: '',
-    country: '',
-    bankCode: '',
-    bankAccountNumber: '',
-    drivingLicenseId: '',
-    otherInfo: '',
-    clothingIds: [''],
-  });
+  const [values, setvalues] = useState<ICreateEmployee>({ ...defaultState });
 
   const handleChange = (e: ValueType) => {
     setvalues({ ...values, [e.name]: e.value });
@@ -144,6 +146,7 @@ export default function AddNewEmployeeModal({
           toast.success('Employee was created successfully', { id: toastId });
           queryClient.invalidateQueries(['employees']);
           closeModal();
+          setvalues({ ...defaultState });
           handleSuccess();
         },
         onError(error: any) {
