@@ -108,9 +108,17 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
             </div>
             <div className="col-2">
               <button
-                className="w-auto btn bg-light-gray text-xs text-capitalize"
+                className="w-auto btn text-xs text-lowercase"
                 onClick={handleResetFilter}>
                 reset
+                <span className="ml-1 bg-light-gray rounded-circle">
+                  <img
+                    src={'/icons/close-icon.svg'}
+                    className="cursor-pointer"
+                    width={30}
+                    alt="close-icon"
+                  />
+                </span>
               </button>
             </div>
           </div>

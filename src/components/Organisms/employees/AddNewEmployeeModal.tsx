@@ -147,7 +147,7 @@ export default function AddNewEmployeeModal({
           toast.success('Employee was created successfully', { id: toastId });
           queryClient.invalidateQueries(['employees']);
           closeModal();
-          setvalues({ ...defaultState });
+          resetForm();
           handleSuccess();
         },
         onError(error: any) {
@@ -159,12 +159,18 @@ export default function AddNewEmployeeModal({
     }
   };
 
+  const resetForm = () => {
+    setvalues({ ...defaultState });
+  };
+
   return (
     <div className="side-modal">
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Body>
           <div className="body-header p-4 mb-2 d-flex justify-content-between">
-            <Heading>{isUpdating ? 'Atnaujinti duomenis' : 'Registruoti naują'}</Heading>
+            <Heading fontWeight="bold" fontSize="xl">
+              {isUpdating ? 'Atnaujinti duomenis' : 'Registruoti naują'}
+            </Heading>
             <button className="close-icon btn w-auto" type="button" onClick={closeModal}>
               <span className="close-txt font-bold text-capitalize tracking-0">
                 Uždaryti
@@ -182,12 +188,32 @@ export default function AddNewEmployeeModal({
               <div className="p-3">
                 <div className="d-flex justify-content-between">
                   <div className="profile-pic w-20 h-20">
-                    <div className="w-20 h-20 border rounded-circle text-center text-sm p-2">
-                      <Icon name="plus" size={32} />
-                      <p className="text-xs">Upload image</p>
-                      {/* Photo placeholder */}
-                    </div>
+                    <label
+                      htmlFor="profileUrl"
+                      className="w-20 h-20 border rounded-circle text-center text-sm py-3 px-2 bg-light-gray cursor-pointer">
+                      <Icon name="plus" size={28} />
+                      <p className="text-xxs">Pridėti nuotrauką</p>
+                    </label>
                   </div>
+                  {/* hidden input file */}
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    name="profileUrl"
+                    id="profileUrl"
+                    onChange={(_e) => {
+                      // const file = e.target.files[0];
+                      // if (file) {
+                      //   const reader = new FileReader();
+                      //   reader.onloadend = () => {
+                      //     setvalues((prev) => ({ ...prev, profileUrl: reader.result }));
+                      //   };
+                      //   reader.readAsDataURL(file);
+                      // }
+                    }}
+                    hidden
+                  />
+
                   <div className="profile-info w-100 row px-3">
                     <div className="col-12 col-sm-12 col-md-6 col-lg-6 p-2">
                       <Input
@@ -493,7 +519,7 @@ export default function AddNewEmployeeModal({
               </Button>
             </div>
             <div className="col-3">
-              <Button className="text-capitalize b-radius light" onClick={closeModal}>
+              <Button className="text-capitalize b-radius light" onClick={resetForm}>
                 Atšaukti
               </Button>
             </div>
