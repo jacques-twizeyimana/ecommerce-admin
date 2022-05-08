@@ -17,14 +17,19 @@ export default function ListItem(props: ListItemProps) {
         <React.Fragment>
         
             <div className="list-items">
+                <div className="d-flex">
                 <p className="mb-0 mt-0">
                     {/* {props.item.name} */}
                     <span onClick={() => navigate(props.item.link!)}>{props.item.name}</span> 
-                    {(props.item.subItems) ? 
-                    open ? 
-                    <img src='/icons/arrow-up.svg' alt='arrow-down' onClick={toogleDropper} />:
-                    <img src='/icons/arrow-down.svg' onClick={toogleDropper} alt='arrow-down' />: null}
+           
                 </p>
+                <div onClick={toogleDropper} className="icon-holder d-flex">
+                    {(props.item.subItems) ? 
+                        open ? 
+                        <img src='/icons/arrow-up.svg' alt='arrow-down' width={18} />:
+                        <img src='/icons/arrow-down.svg' alt='arrow-down' width={18} />: null}
+                </div>
+                </div>
                 {open ? 
                     <div className="subitem-area">
                         {props.item.subItems?.map((item, i) => (

@@ -1,28 +1,34 @@
 import '../../../styles/components/Organisms/Sidebar.scss';
 
-import React from 'react';
+import React, {useState} from 'react';
 
-import { sideBarItems } from '../../../services/sidebar';
 import ListItem from '../../Molecules/Sidebar/ListItem';
 import useAuthenticator from '../../../hooks/useAuthenticator';
 import { IRole } from '../../../types/services/user.types';
-import {containsAll} from '../../../utils/utility';
+import {containsAll, getPriorityRole, getRoleSidebar} from '../../../utils/utility';
+import { ISidebar } from '../../../types/services/sidebar.types';
 
 export default function Sidebar() {
     const {user} = useAuthenticator();
+    const [resolved, setResolved] = useState(false);
+    let sidebarItems: ISidebar[] = [];
+    if (user) {
+       const role: IRole = getPriorityRole(user.currentUserRoles);
+       console.log(role);
+       sidebarItems = getRoleSidebar(role);
+       console.log(sidebarItems);
+    //    setResolved(true);
+    }
 
     return (
         <React.Fragment>
-            {user ? <div className={'container bg-sidebar p-0'}>
+            {(user && sidebarItems.length > 0) ? <div className={'container bg-sidebar p-0'}>
                 <div className="sidebar-header d-flex">
                     <img src={'/assets/images/sass-logo-black.png'} width={185} alt="Logo" />
                 </div>
                 <div className="sidebar-list-items border">
-                    {sideBarItems.map((item) => (
-                        item.allowedRoles ?
-                        containsAll(user?.currentUserRoles!, item.allowedRoles!) ? 
-                            <ListItem key={item.id} item={item} />: null  
-                        : <ListItem key={item.id} item={item} />
+                    {sidebarItems.map((item) => (
+                            <ListItem key={item.id} item={item} />  
                     ))}
                 </div>
             </div>

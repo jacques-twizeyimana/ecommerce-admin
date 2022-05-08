@@ -12,16 +12,12 @@ type PaginationProps = {
   rowsPerPage?: number;
   totalPages?: number;
 };
-const Pagination = ({ totalPages = 1, paginate, currentPage = 0 }: PaginationProps) => {
+const Pagination = ({ totalPages = 1, paginate, currentPage = 0, totalElements }: PaginationProps) => {
   let pageNumbers = [1];
 
   for (let i = 1; i < totalPages; i++) {
     pageNumbers.push(i + 1);
   }
-
-  console.log('====================================');
-  console.log(pageNumbers);
-  console.log('====================================');
 
   return totalPages > 1 ? (
     <div className="py-2 d-flex justify-content-between ">
@@ -58,7 +54,7 @@ const Pagination = ({ totalPages = 1, paginate, currentPage = 0 }: PaginationPro
         </div>
       </div>
       <div className="">
-        <p className="pagination-txt mb-0">Puslapis 1 iš 10 / Viso 50 rezultatų</p>
+        <p className="pagination-txt mb-0">Puslapis {currentPage + 1} iš {totalPages} / Viso {totalElements} rezultatų</p>
       </div>
     </div>
   ) : (
