@@ -25,11 +25,14 @@
 .list-items {
     // padding: 1rem 2.4rem;
     margin-bottom: 0.08rem;
+    transition: all 0.3s ease-in;
     p {
         color: white !important;
         cursor: pointer;
         background-color: #2D5474;
         padding: 1rem 2.2rem;
+    transition: all 0.3s ease-in;
+
 
     width: 100%;
         font-size: 14px;
@@ -50,6 +53,8 @@
 
 .list-sub-items {
     background-color: white;
+    transition: all 0.3s ease-in;
+
     border-bottom: 1px solid rgb(0 0 0 / 10%);
     p.active {
         color: #212529 !important;

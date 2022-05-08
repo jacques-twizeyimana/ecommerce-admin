@@ -30,15 +30,13 @@ export default function ListSubItem(props: ListSubItemProps) {
                                :
                                   <span onClick={() => navigate(item.link!)}>{item.name}</span> 
                 }
-                              
-                          
-                                      </span>  
-                                      </p>
-                                <div className="icon-holder bg-white d-flex" onClick={toogleDropper}>
+                                </span>  
+                          </p>
+                        <div className="icon-holder bg-white d-flex" onClick={toogleDropper}>
                                 {(item.nestedItems) ?
-                                   open ? 
-                                   <img src='/icons/arrow-up-black.svg' alt='arrow-down' width={18}  /> :
-                                   <img src='/icons/arrow-down-dark.svg' alt='arrow-down' width={18} />: 
+                                open ? 
+                                <img src='/icons/arrow-up-black.svg' alt='arrow-down' width={18}  /> :
+                                <img src='/icons/arrow-down-dark.svg' alt='arrow-down' width={18} />: 
                                     null} 
                                 </div>      
                         </div>         
