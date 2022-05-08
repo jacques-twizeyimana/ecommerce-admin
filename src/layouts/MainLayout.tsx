@@ -43,6 +43,7 @@ export default function MainLayout() {
             !collapse ? 'col-side-content col-12 p-0' : 'col-side-content-full col-12 p-0'
           }>
           <Nav collapse={collapse} setCollapse={setCollapse} />
+          
           <div className={' main-content '}>
             <Outlet />
           </div>

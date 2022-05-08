@@ -18,3 +18,22 @@
         
     }
 }
+
+
+@mixin main-scrollbar {
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: rgb(209, 209, 209);
+    }
+    
+    &::-webkit-scrollbar {
+        width: 4px;
+        background-color: rgb(209, 209, 209);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #2d54748a;
+        
+    }
+}
