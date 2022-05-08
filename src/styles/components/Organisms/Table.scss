@@ -11,3 +11,17 @@ span.text-xs {
 .contentrows {
     cursor: pointer;
 }
+
+
+
+span[class^='circle'] {
+    width: 6px;
+    height: 6px;
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-right: 4px;
+    display: inline-block;
+    &.circle-blue {
+        background-color: blue;
+    }
+}

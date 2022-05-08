@@ -32,7 +32,10 @@ export default function ListSubItem(props: ListSubItemProps) {
                            <p className="mb-0 mt-0">
                                <span className={`col-12 d-block  ${(item.id == 11) ? 'active-show' : ''}`}>
                                    <img src={`/icons/${item.icon}`} className="label-icon" alt='Icon' /> 
-                                  <span onClick={() => navigate(item.link)}>{item.name}</span> 
+                               {item.link ?  <span onClick={() => navigate(item.link!)}>{item.name}</span> 
+                               :
+                                  <span onClick={() => navigate(item.link!)}>{item.name}</span> 
+                }
                               
                                {(item.nestedItems) ?
                                    open ? 

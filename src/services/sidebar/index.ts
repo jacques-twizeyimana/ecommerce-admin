@@ -51,7 +51,6 @@ export const SUPER_USER_SIDEBAR: ISidebar[] = [
                 },
                 {
                     id: 17,
-                    link: '/dashboard/employees',
                     name: 'Nustatymai',
                     
                     icon: 'toogle-icon.svg',
@@ -132,7 +131,6 @@ export const ADMIN_SIDEBAR: ISidebar[] = [
                 },
                 {
                     id: 17,
-                    link: '/dashboard/employees',
                     name: 'Nustatymai',
                     
                     icon: 'toogle-icon.svg',
@@ -219,7 +217,6 @@ export const SYSTEM_ADMIN_SIDEBAR: ISidebar[] = [
                 },
                 {
                     id: 17,
-                    link: '/dashboard/employees',
                     name: 'Nustatymai',
                     
                     icon: 'toogle-icon.svg',

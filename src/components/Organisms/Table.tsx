@@ -11,6 +11,7 @@ import Icon from '../Atoms/Icon';
 import Button from '../Molecules/Button/Button';
 import Filter from '../Molecules/custom/Filter';
 import Pagination from '../Molecules/custom/Pagination';
+import TdStatus from '../Molecules/Table/Status';
 
 const showEntriesOptions = [
   { value: '5', label: '5' },
@@ -49,14 +50,12 @@ export default function Table<T>({
   showNumbering = true,
   actions,
   handleClickRow,
-
   //pagination
   rowsPerPage = 5,
   // totalPages = 1,
   currentPage = 0,
   onChangePage,
   onChangePageSize,
-
   // add new button
   onClickAddNewButton,
   addNewButtonText = 'Pridėti naują',
@@ -157,7 +156,12 @@ TableProps<T>) {
                   .map((key) => (
                     <td key={key} className="text-xs px-2">
                       {/* @ts-ignore */}
-                      {row[key]}
+                      {typeof row[key] !== 'boolean' ? row[key]: 
+                        <span>
+                          <span className="circle-blue"></span>
+                          <span>Active</span>
+                        </span>
+                      }
                     </td>
                   ))}
                 {actions && (
