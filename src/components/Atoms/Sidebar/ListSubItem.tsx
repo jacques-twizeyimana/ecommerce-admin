@@ -10,7 +10,6 @@ export default function ListSubItem(props: ListSubItemProps) {
 
     const navigate = useNavigate();
     const {user} = useAuthenticator();
-    console.log('This is a user', user);
     const [open, setOpen] = useState(false);
     const toogleDropper = () => {
         setOpen(!open);
@@ -23,6 +22,7 @@ export default function ListSubItem(props: ListSubItemProps) {
 
                 {props.items.map((item, i) => (
                     <React.Fragment key={item.id}>
+                        <div className="d-flex">
                            <p className="mb-0 mt-0">
                                <span className={`col-12 d-block  ${(item.id == 11) ? 'active-show' : ''}`}>
                                    <img src={`/icons/${item.icon}`} className="label-icon" alt='Icon' /> 
@@ -31,13 +31,17 @@ export default function ListSubItem(props: ListSubItemProps) {
                                   <span onClick={() => navigate(item.link!)}>{item.name}</span> 
                 }
                               
-                               {(item.nestedItems) ?
-                                   open ? 
-                                   <img src='/icons/arrow-up-black.svg' alt='arrow-down' onClick={toogleDropper} /> :
-                                   <img src='/icons/arrow-down-dark.svg' alt='arrow-down' onClick={toogleDropper} />: 
-                                    null} 
+                          
                                       </span>  
                                       </p>
+                                <div className="icon-holder bg-white d-flex" onClick={toogleDropper}>
+                                {(item.nestedItems) ?
+                                   open ? 
+                                   <img src='/icons/arrow-up-black.svg' alt='arrow-down' width={18}  /> :
+                                   <img src='/icons/arrow-down-dark.svg' alt='arrow-down' width={18} />: 
+                                    null} 
+                                </div>      
+                        </div>         
                            {open ?
                                <div className="nested-items">
                                    {item.nestedItems?.map((it) => (
