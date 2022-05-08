@@ -19,10 +19,6 @@ const Pagination = ({ totalPages = 1, paginate, currentPage = 0, totalElements }
     pageNumbers.push(i + 1);
   }
 
-  console.log('====================================');
-  console.log(pageNumbers);
-  console.log('====================================');
-
   return totalPages > 1 ? (
     <div className="py-2 d-flex justify-content-between ">
       <div className="px-0 d-flex justify-content-start align-items-center rounded py-1">
