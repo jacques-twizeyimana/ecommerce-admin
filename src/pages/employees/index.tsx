@@ -12,10 +12,8 @@ import { EmployeeTableDto } from '../../types/services/employees.types';
 
 export default function Employees() {
   const navigate = useNavigate();
-
-
   const { data: employeesData } = employeeStore.getAll();
-
+  
   const employees: EmployeeTableDto[] = [];
   if (employeesData) {
     for (const employeeData of employeesData.data) {
@@ -62,9 +60,10 @@ export default function Employees() {
     navigate(`/dashboard/employees/${row.id}`);
   };
   const onChangePage = (_page: number) => {
+    console.log('jdsfjakjf')
     return {};
   };
-  console.log(employees);
+
   return (
     <div className="mb-5">
       <EmployeeTable
