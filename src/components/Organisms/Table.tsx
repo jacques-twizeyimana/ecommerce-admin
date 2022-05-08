@@ -158,7 +158,7 @@ TableProps<T>) {
                       {/* @ts-ignore */}
                       {typeof row[key] !== 'boolean' ? row[key]: 
                         <span>
-                          <span className="circle-blue"></span>
+                          <span className={row[key] ? 'circle-success': 'circle-fail'}></span>
                           <span>Active</span>
                         </span>
                       }

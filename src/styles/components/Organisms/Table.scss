@@ -14,14 +14,17 @@ span.text-xs {
 
 
 
-span[class^='circle'] {
+td span[class^='circle'] {
     width: 6px;
     height: 6px;
     vertical-align: middle;
     border-radius: 50%;
-    margin-right: 4px;
+    margin-right: 5px;
     display: inline-block;
-    &.circle-blue {
-        background-color: blue;
+    &.circle-fail {
+        background-color: #FF0000;
+    }
+    &.circle-success {
+        background-color: #26A53F;
     }
 }

@@ -20,12 +20,6 @@ export default function ListSubItem(props: ListSubItemProps) {
         <React.Fragment>
             {user ? 
             <div className="list-sub-items">
-            {/* {props.item.subItems?.map((item, i) => (
-                    item.allowedRoles ?
-                    containsAll(user?.currentUserRoles!, item.allowedRoles!) ? 
-                    <ListSubItem items={item} key={i} />: null  
-                    : <ListSubItem items={item} key={i} />
-                ))} */}
 
                 {props.items.map((item, i) => (
                     <React.Fragment key={item.id}>
