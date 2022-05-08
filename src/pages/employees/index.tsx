@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import Breadcrump from '../../components/Molecules/Breadcrump';
 import AddNewEmployeeModal from '../../components/Organisms/employees/AddNewEmployeeModal';
-import PopupModal from '../../components/Organisms/Modals/PopupModal';
+import SuccessModal from '../../components/Organisms/Modals/SuccessModal';
 import Table from '../../components/Organisms/Table';
-import useAuthenticator from '../../hooks/useAuthenticator';
 import { employeeStore } from '../../store/employees.store';
 import { EmployeeTableProps, TableActionsType } from '../../types/props';
 import { EmployeeTableDto } from '../../types/services/employees.types';
@@ -13,7 +12,6 @@ import { EmployeeTableDto } from '../../types/services/employees.types';
 export default function Employees() {
   const navigate = useNavigate();
   const { data: employeesData } = employeeStore.getAll();
-  
   const employees: EmployeeTableDto[] = [];
   if (employeesData) {
     for (const employeeData of employeesData.data) {
@@ -60,7 +58,7 @@ export default function Employees() {
     navigate(`/dashboard/employees/${row.id}`);
   };
   const onChangePage = (_page: number) => {
-    console.log('jdsfjakjf')
+    console.log('jdsfjakjf');
     return {};
   };
 
@@ -106,11 +104,12 @@ const EmployeeTable = (props: EmployeeTableProps) => {
         onHide={() => setisAddNewModalOpen(false)}
         className={'side-modal'}
       />
-      <PopupModal
+      <SuccessModal
         isUpdate={false}
         show={isSuccessModalOpen}
         onHide={() => setisSuccessModalOpen(false)}
         setShow={setisSuccessModalOpen}
+        handleClickAddAnother={() => setisAddNewModalOpen(true)}
       />
     </div>
   );

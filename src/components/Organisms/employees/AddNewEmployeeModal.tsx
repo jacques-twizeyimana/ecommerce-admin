@@ -16,6 +16,7 @@ import { ICreateEmployee, ModalProps } from '../../../types/props';
 import Input from '../../Atoms/Form/Input';
 import CustomSelect from '../../Atoms/Form/Select';
 import Heading from '../../Atoms/Heading';
+import Icon from '../../Atoms/Icon';
 import Collapsible from '../../Molecules/Modal/Collapsible';
 
 interface IModalProps extends ModalProps {
@@ -23,6 +24,37 @@ interface IModalProps extends ModalProps {
   isUpdating?: boolean;
   handleSuccess: () => void;
 }
+
+const defaultState: ICreateEmployee = {
+  profileUrl:
+    'https://res.cloudinary.com/jsanbderg/image/upload/v1652029488/image_odfnts.png',
+  firstName: '',
+  lastName: '',
+  seqNumber: '',
+  contractNumber: '',
+  socialSecurityNumber: '',
+  nationalityId: '',
+  personalIdentificationNumber: '',
+  employeeRoleId: '',
+  employmentTypeId: '',
+  employmentTermId: '',
+  workingWeekId: '',
+  salary: 0,
+  startDate: '',
+  endDate: '',
+  regDate: '',
+  phone: '',
+  email: '',
+  address: '',
+  postalCode: '',
+  city: '',
+  country: '',
+  bankCode: '',
+  bankAccountNumber: '',
+  drivingLicenseId: '',
+  otherInfo: '',
+  clothingIds: [''],
+};
 
 export default function AddNewEmployeeModal({
   setShow,
@@ -37,36 +69,7 @@ export default function AddNewEmployeeModal({
 
   console.log('employeeId', employeeId);
 
-  const [values, setvalues] = useState<ICreateEmployee>({
-    profileUrl:
-      'https://i.picsum.photos/id/1005/5760/3840.jpg?hmac=2acSJCOwz9q_dKtDZdSB-OIK1HUcwBeXco_RMMTUgfY',
-    firstName: '',
-    lastName: '',
-    seqNumber: '',
-    contractNumber: '',
-    socialSecurityNumber: '',
-    nationalityId: '',
-    personalIdentificationNumber: '',
-    employeeRoleId: '',
-    employmentTypeId: '',
-    employmentTermId: '',
-    workingWeekId: '',
-    salary: 0,
-    startDate: '',
-    endDate: '',
-    regDate: '',
-    phone: '',
-    email: '',
-    address: '',
-    postalCode: '',
-    city: '',
-    country: '',
-    bankCode: '',
-    bankAccountNumber: '',
-    drivingLicenseId: '',
-    otherInfo: '',
-    clothingIds: [''],
-  });
+  const [values, setvalues] = useState<ICreateEmployee>({ ...defaultState });
 
   const handleChange = (e: ValueType) => {
     setvalues({ ...values, [e.name]: e.value });
@@ -144,6 +147,7 @@ export default function AddNewEmployeeModal({
           toast.success('Employee was created successfully', { id: toastId });
           queryClient.invalidateQueries(['employees']);
           closeModal();
+          resetForm();
           handleSuccess();
         },
         onError(error: any) {
@@ -155,14 +159,22 @@ export default function AddNewEmployeeModal({
     }
   };
 
+  const resetForm = () => {
+    setvalues({ ...defaultState });
+  };
+
   return (
     <div className="side-modal">
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Body>
           <div className="body-header p-4 mb-2 d-flex justify-content-between">
-            <Heading>{isUpdating ? 'Atnaujinti duomenis' : 'Registruoti naują'}</Heading>
+            <Heading fontWeight="bold" fontSize="xl">
+              {isUpdating ? 'Atnaujinti duomenis' : 'Registruoti naują'}
+            </Heading>
             <button className="close-icon btn w-auto" type="button" onClick={closeModal}>
-              <span className="close-txt">Uždaryti</span>
+              <span className="close-txt font-bold text-capitalize tracking-0">
+                Uždaryti
+              </span>
               <img
                 src={'/icons/close-icon.svg'}
                 className="cursor-pointer"
@@ -176,10 +188,32 @@ export default function AddNewEmployeeModal({
               <div className="p-3">
                 <div className="d-flex justify-content-between">
                   <div className="profile-pic w-20 h-20">
-                    <div className="w-20 h-20 border rounded-circle text-center text-sm">
-                      {/* Photo placeholder */}
-                    </div>
+                    <label
+                      htmlFor="profileUrl"
+                      className="w-20 h-20 border rounded-circle text-center text-sm py-3 px-2 bg-light-gray cursor-pointer">
+                      <Icon name="plus" size={28} />
+                      <p className="text-xxs">Pridėti nuotrauką</p>
+                    </label>
                   </div>
+                  {/* hidden input file */}
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    name="profileUrl"
+                    id="profileUrl"
+                    onChange={(_e) => {
+                      // const file = e.target.files[0];
+                      // if (file) {
+                      //   const reader = new FileReader();
+                      //   reader.onloadend = () => {
+                      //     setvalues((prev) => ({ ...prev, profileUrl: reader.result }));
+                      //   };
+                      //   reader.readAsDataURL(file);
+                      // }
+                    }}
+                    hidden
+                  />
+
                   <div className="profile-info w-100 row px-3">
                     <div className="col-12 col-sm-12 col-md-6 col-lg-6 p-2">
                       <Input
@@ -485,7 +519,7 @@ export default function AddNewEmployeeModal({
               </Button>
             </div>
             <div className="col-3">
-              <Button className="text-capitalize b-radius light" onClick={closeModal}>
+              <Button className="text-capitalize b-radius light" onClick={resetForm}>
                 Atšaukti
               </Button>
             </div>

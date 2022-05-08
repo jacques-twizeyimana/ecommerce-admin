@@ -8,9 +8,10 @@ import Button from '../../Molecules/Button/Button';
 
 interface IProps extends ModalProps {
   isUpdate?: boolean;
+  handleClickAddAnother?: () => void;
 }
 
-export default function PopupModal(props: IProps) {
+export default function SuccessModal(props: IProps) {
   return (
     <Modal {...props} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Body>
@@ -25,7 +26,15 @@ export default function PopupModal(props: IProps) {
       <Modal.Footer>
         <div className="d-flex w-100 m-0">
           <div className="col-6">
-            <Button className={'whitish curved-border-left'}>Kurti naują</Button>
+            {!props.isUpdate && (
+              <Button
+                className={'whitish curved-border-left'}
+                onClick={() =>
+                  props.handleClickAddAnother && props.handleClickAddAnother()
+                }>
+                Kurti naują
+              </Button>
+            )}
           </div>
           <div className="col-6">
             <Button className={'blueish curved-border-right'} onClick={props.onHide}>

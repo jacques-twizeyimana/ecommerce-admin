@@ -24,7 +24,8 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
   const [filter, setfilter] = useState<IFilterType<T>>({
     // @ts-ignore
     column: '',
-    filterType: 'equals',
+    // @ts-ignore
+    filterType: '',
     filter: '',
   });
 
@@ -55,7 +56,8 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
     setfilter({
       // @ts-ignore
       column: '',
-      filterType: 'equals',
+      // @ts-ignore
+      filterType: '',
       filter: '',
     });
   };
@@ -72,12 +74,13 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
           </div>
         }>
         <div className="col-12 col-md-10 col-lg-8">
-          <div className="border row p-2 ">
+          <div className="border row py-2 bg-almost-white">
             <div className="col-3">
               <CustomSelect
                 name="column"
                 placeholder="Column"
                 handleChange={handleChange}
+                bgColor="white"
                 className="text-xs"
                 options={colOptions}
                 value={filter.column.toString()}
@@ -85,6 +88,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
             </div>
             <div className="col-3">
               <CustomSelect
+                bgColor="white"
                 placeholder="Filter"
                 handleChange={handleChange}
                 name="filterType"
@@ -99,16 +103,23 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
                 name="filter"
                 value={filter.filter}
                 placeholder="Type here"
+                className="bg-white"
               />
             </div>
             <div className="col-2">
-              {filter.column && (
-                <button
-                  className="w-auto btn bg-light-gray text-xs text-capitalize"
-                  onClick={handleResetFilter}>
-                  reset
-                </button>
-              )}
+              <button
+                className="w-auto btn text-xs text-lowercase"
+                onClick={handleResetFilter}>
+                reset
+                <span className="ml-1 bg-light-gray rounded-circle">
+                  <img
+                    src={'/icons/close-icon.svg'}
+                    className="cursor-pointer"
+                    width={30}
+                    alt="close-icon"
+                  />
+                </span>
+              </button>
             </div>
           </div>
         </div>
