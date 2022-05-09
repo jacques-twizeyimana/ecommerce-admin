@@ -78,7 +78,9 @@ export type IconNames =
   | 'arrow-up-black'
   | 'arrow-down-dark'
   | 'menu'
-  | 'plus';
+  | 'plus'
+  | 'message'
+  | 'notification';
 
 export interface ListItemProps {
   item: ISidebar;
