@@ -156,12 +156,17 @@ TableProps<T>) {
                   .map((key) => (
                     <td key={key} className="text-xs px-2">
                       {/* @ts-ignore */}
-                      {typeof row[key] !== 'boolean' ? row[key]: 
+                      {typeof row[key] !== 'boolean' ? (
+                        row[key]
+                      ) : (
                         <span>
-                          <span className={row[key] ? 'circle-success': 'circle-fail'}></span>
+                          <span
+                            className={
+                              row[key] ? 'circle-success' : 'circle-fail'
+                            }></span>
                           <span>Active</span>
                         </span>
-                      }
+                      )}
                     </td>
                   ))}
                 {actions && (
@@ -194,7 +199,7 @@ TableProps<T>) {
         </table>
       </div>
       <div className=" my-2">
-        <div className="d-flex align-items-center py-2">
+        <div className="d-flex align-items-center py-5">
           <span className="px-3 text-xs">Rodyti</span>
           <Select
             className="text-xs"
@@ -202,6 +207,12 @@ TableProps<T>) {
             value={showEntriesOptions.find(
               (option) => option.value === _rowsPerPage + '',
             )}
+            styles={{
+              menu: (provided) => ({
+                ...provided,
+                padding: '0px 0px 60px 0px',
+              }),
+            }}
             // @ts-ignore
             onChange={handleChangeRowsPerPage}
             options={showEntriesOptions}
