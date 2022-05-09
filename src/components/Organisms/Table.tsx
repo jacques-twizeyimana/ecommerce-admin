@@ -199,7 +199,7 @@ TableProps<T>) {
         </table>
       </div>
       <div className=" my-2">
-        <div className="d-flex align-items-center py-5">
+        <div className="d-flex align-items-center py-2">
           <span className="px-3 text-xs">Rodyti</span>
           <Select
             className="text-xs"
