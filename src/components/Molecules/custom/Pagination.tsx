@@ -12,12 +12,26 @@ type PaginationProps = {
   rowsPerPage?: number;
   totalPages?: number;
 };
-const Pagination = ({ totalPages = 1, paginate, currentPage = 0, totalElements }: PaginationProps) => {
+const Pagination = ({
+  totalPages = 1,
+  paginate,
+  currentPage = 0,
+  totalElements,
+}: PaginationProps) => {
   let pageNumbers = [1];
 
   for (let i = 1; i < totalPages; i++) {
     pageNumbers.push(i + 1);
   }
+
+  const getPageNumbers = () => {
+    if (totalPages <= 5) return pageNumbers;
+    if (currentPage <= 2) return pageNumbers.slice(0, 5);
+    if (currentPage >= totalPages - 2) return pageNumbers.slice(totalPages - 5);
+    return pageNumbers.slice(currentPage - 2, currentPage + 3);
+  };
+
+  console.log(getPageNumbers());
 
   return totalPages > 1 ? (
     <div className="py-2 d-flex justify-content-between ">
@@ -32,7 +46,7 @@ const Pagination = ({ totalPages = 1, paginate, currentPage = 0, totalElements }
             <Icon name="arrow-left" size={16} />
           </button>
         </div>
-        {pageNumbers.map((number) => (
+        {getPageNumbers().map((number) => (
           <div className="pr-1" key={number}>
             <Indicator
               isCircular={false}
@@ -54,7 +68,9 @@ const Pagination = ({ totalPages = 1, paginate, currentPage = 0, totalElements }
         </div>
       </div>
       <div className="">
-        <p className="pagination-txt mb-0">Puslapis {currentPage + 1} iš {totalPages} / Viso {totalElements} rezultatų</p>
+        <p className="pagination-txt mb-0">
+          Puslapis {currentPage + 1} iš {totalPages} / Viso {totalElements} rezultatų
+        </p>
       </div>
     </div>
   ) : (

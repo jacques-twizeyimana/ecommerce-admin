@@ -20,13 +20,16 @@ export default function SuccessModal(props: IProps) {
         </div>
         <p className="text-align-center message mb-4">
           Darbuotojas {props.isUpdate ? 'atnaujinta' : 'pridėtas'}
-          <span className="font-weight-bold">sėkmingai </span>
+          <span className="font-weight-bold px-2">sėkmingai </span>
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <div className="d-flex w-100 m-0">
-          <div className="col-6">
-            {!props.isUpdate && (
+        <div
+          className={`d-flex w-100 m-0 ${
+            props.isUpdate ? 'justify-content-center' : ''
+          }`}>
+          {!props.isUpdate && (
+            <div className="col-6">
               <Button
                 className={'whitish curved-border-left'}
                 onClick={() =>
@@ -34,10 +37,12 @@ export default function SuccessModal(props: IProps) {
                 }>
                 Kurti naują
               </Button>
-            )}
-          </div>
+            </div>
+          )}
           <div className="col-6">
-            <Button className={'blueish curved-border-right'} onClick={props.onHide}>
+            <Button
+              className={`blueish ${props.isUpdate ? '' : 'curved-border-right'}`}
+              onClick={props.onHide}>
               Uždaryti
             </Button>
           </div>
