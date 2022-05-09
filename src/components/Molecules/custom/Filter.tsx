@@ -108,9 +108,9 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
             </div>
             <div className="col-6 col-md-3">
               <button
-                className="w-auto btn text-xs text-lowercase"
+                className="w-auto btn text-xs text-capitalize reset-btn"
                 onClick={handleResetFilter}>
-                reset
+                Išvalyti &nbsp;
                 <span className="ml-1 bg-light-gray rounded-circle">
                   <img
                     src={'/icons/close-icon.svg'}
