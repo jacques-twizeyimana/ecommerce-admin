@@ -73,12 +73,12 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
             <Icon name="filter" size={20} />
           </div>
         }>
-        <div className="col-12 col-md-10 col-lg-8">
+        <div className="col-12 col-lg-8">
           <div className="border row py-2 bg-almost-white">
-            <div className="col-3">
+            <div className="col-6 col-md-3">
               <CustomSelect
                 name="column"
-                placeholder="Column"
+                placeholder="Col"
                 handleChange={handleChange}
                 bgColor="white"
                 className="text-xs"
@@ -86,7 +86,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
                 value={filter.column.toString()}
               />
             </div>
-            <div className="col-3">
+            <div className="col-6 col-md-3">
               <CustomSelect
                 bgColor="white"
                 placeholder="Filter"
@@ -97,7 +97,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
                 value={filter.filterType}
               />
             </div>
-            <div className="col-4">
+            <div className="col-6 col-md-3">
               <Input
                 handleChange={handleChange}
                 name="filter"
@@ -106,7 +106,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
                 className="bg-white"
               />
             </div>
-            <div className="col-2">
+            <div className="col-6 col-md-3">
               <button
                 className="w-auto btn text-xs text-lowercase"
                 onClick={handleResetFilter}>
