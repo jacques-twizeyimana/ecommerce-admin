@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 
 import { queryClient } from '../../../plugins/react-query';
-import { clothingStore } from '../../../store/clothing.store';
+import { clothingTypeStore } from '../../../store/clothing-types.store';
 import { drivingLicenseStore } from '../../../store/driving-license.store';
 import { employeeRoleStore } from '../../../store/employee-role.store';
 import { employeeStore } from '../../../store/employees.store';
@@ -83,7 +83,7 @@ export default function AddNewEmployeeModal({
   const { data: employmentTerms } = employmentTermStore.getAll();
   const { data: workingWeeks } = workingWeekStore.getAll();
   const { data: drivingLicenses } = drivingLicenseStore.getAll();
-  const { data: clothing } = clothingStore.getAll();
+  const { data: clothing } = clothingTypeStore.getAll();
 
   const { mutateAsync } = employeeStore.createEmployee();
   const { mutateAsync: updateMutation } = employeeStore.updateEmployee();
@@ -501,7 +501,7 @@ export default function AddNewEmployeeModal({
                     options={
                       clothing?.data.map((n) => ({
                         value: n.id,
-                        label: `${n.type.name}(${n.size})`,
+                        label: n.name, // `${n.type.name}(${n.size})`,
                       })) as SelectData[]
                     }
                   />

@@ -24,7 +24,11 @@ export default function Avatar() {
   return (
     <div className="avatar d-flex">
       {/* <span className="circle" /> */}
-      <img src={user?.profileUrl || '/assets/images/avatar.png'}  className="rounded-profile" />
+      <img
+        src={user?.profileUrl || '/assets/images/avatar.png'}
+        className="rounded-profile"
+        alt="avatar"
+      />
       <Dropdown
         header={
           <p
