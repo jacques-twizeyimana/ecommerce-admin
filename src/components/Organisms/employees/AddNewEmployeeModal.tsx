@@ -164,6 +164,11 @@ export default function AddNewEmployeeModal({
     setvalues({ ...defaultState });
   };
 
+  const handleCancel = () => {
+    resetForm();
+    closeModal();
+  };
+
   return (
     <div className="side-modal">
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
@@ -521,7 +526,7 @@ export default function AddNewEmployeeModal({
               </Button>
             </div>
             <div className="col-3">
-              <Button className="text-capitalize b-radius light" onClick={resetForm}>
+              <Button className="text-capitalize b-radius light" onClick={handleCancel}>
                 Atšaukti
               </Button>
             </div>
