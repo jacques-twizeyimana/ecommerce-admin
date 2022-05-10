@@ -11,7 +11,6 @@ import Icon from '../Atoms/Icon';
 import Button from '../Molecules/Button/Button';
 import Filter from '../Molecules/custom/Filter';
 import Pagination from '../Molecules/custom/Pagination';
-import TdStatus from '../Molecules/Table/Status';
 
 const showEntriesOptions = [
   { value: '5', label: '5' },
