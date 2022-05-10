@@ -52,6 +52,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
 
   // reset filter
   const handleResetFilter = () => {
+    console.log('resetting');
     setfilter({
       // @ts-ignore
       column: 'id',
@@ -81,7 +82,7 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
                 bgColor="white"
                 className="text-xs"
                 options={colOptions}
-                value={filter.column.toString()}
+                value={filter.column?.toString()}
               />
             </div>
             <div className="col-6 col-md-3">
