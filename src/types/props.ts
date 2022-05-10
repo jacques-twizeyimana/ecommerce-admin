@@ -144,7 +144,7 @@ export interface ICreateEmployee {
   bankAccountNumber: string;
   drivingLicenseId: string;
   otherInfo: string;
-  clothingIds: [string];
+  clothingIds: string[];
 }
 
 export interface IUpdateEmployee extends ICreateEmployee {

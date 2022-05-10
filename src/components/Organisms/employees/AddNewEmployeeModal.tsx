@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 
 import { queryClient } from '../../../plugins/react-query';
-import { clothingTypeStore } from '../../../store/clothing-types.store';
+import { clothingStore } from '../../../store/clothing.store';
 import { drivingLicenseStore } from '../../../store/driving-license.store';
 import { employeeRoleStore } from '../../../store/employee-role.store';
 import { employeeStore } from '../../../store/employees.store';
@@ -13,6 +13,7 @@ import { nationalityStore } from '../../../store/nationality.store';
 import { workingWeekStore } from '../../../store/working-week.store';
 import { SelectData, ValueType } from '../../../types';
 import { ICreateEmployee, ModalProps } from '../../../types/props';
+import { groupClothinByType } from '../../../utils/clothing';
 import Input from '../../Atoms/Form/Input';
 import CustomSelect from '../../Atoms/Form/Select';
 import Heading from '../../Atoms/Heading';
@@ -54,7 +55,7 @@ const defaultState: ICreateEmployee = {
   bankAccountNumber: '',
   drivingLicenseId: '',
   otherInfo: '',
-  clothingIds: [''],
+  clothingIds: [],
 };
 
 export default function AddNewEmployeeModal({
@@ -67,8 +68,6 @@ export default function AddNewEmployeeModal({
   const closeModal = () => {
     setShow(false);
   };
-
-  console.log('employeeId', employeeId);
 
   const [values, setvalues] = useState<ICreateEmployee>({ ...defaultState });
 
@@ -83,7 +82,8 @@ export default function AddNewEmployeeModal({
   const { data: employmentTerms } = employmentTermStore.getAll();
   const { data: workingWeeks } = workingWeekStore.getAll();
   const { data: drivingLicenses } = drivingLicenseStore.getAll();
-  const { data: clothing } = clothingTypeStore.getAll();
+  const { data: clothingData } = clothingStore.getAll();
+  const clothings = groupClothinByType(clothingData?.data || []);
 
   const { mutateAsync } = employeeStore.createEmployee();
   const { mutateAsync: updateMutation } = employeeStore.updateEmployee();
@@ -121,6 +121,12 @@ export default function AddNewEmployeeModal({
       }));
     }
   }, [employee?.data]);
+
+  const handleChangeClothing = (e: ValueType) => {
+    const { clothingIds } = values;
+    const newClothingIds = [...clothingIds, e.value.toString()];
+    setvalues({ ...values, clothingIds: newClothingIds });
+  };
 
   const handleSubmit = async () => {
     const toastId = toast.loading('Saving ....');
@@ -491,20 +497,21 @@ export default function AddNewEmployeeModal({
                     }
                   />
                 </div>
-                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2">
-                  <CustomSelect
-                    className="mr-3"
-                    name="clothingIds"
-                    handleChange={handleChange}
-                    placeholder="Informacija apie drabužius"
-                    isMulti
-                    options={
-                      clothing?.data.map((n) => ({
-                        value: n.id,
-                        label: n.name, // `${n.type.name}(${n.size})`,
-                      })) as SelectData[]
-                    }
-                  />
+                <div className="col-12 col-sm-12 col-md-6 col-lg-4 p-2 d-flex flex-wrap gap-2">
+                  {Object.keys(clothings).map((key) => (
+                    <CustomSelect
+                      key={key}
+                      name={`clothings.${key}`}
+                      handleChange={handleChangeClothing}
+                      placeholder={key}
+                      options={
+                        clothings[key]?.map((n) => ({
+                          value: n.id,
+                          label: n.size,
+                        })) as SelectData[]
+                      }
+                    />
+                  ))}
                 </div>
                 {/* Informacija apie drabužius */}
                 <div className="col-12 col-sm-12 col-md-6 col-lg-8 p-2">
