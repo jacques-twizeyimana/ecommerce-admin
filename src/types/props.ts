@@ -186,11 +186,11 @@ export interface SelectProps extends commonInputProps {
   padding?: number;
   bgColor?: string;
   loading?: boolean;
-  value?: string | string[];
+  value?: string | string[] | null;
 }
 
 export interface IFilterType<T> {
-  column: keyof T;
+  column: keyof T | null;
   filter: string;
   filterType:
     | 'equals'
@@ -198,7 +198,7 @@ export interface IFilterType<T> {
     | 'startsWith'
     | 'endsWith'
     | 'lessThan'
-    | 'greaterThan';
+    | 'greaterThan' | null;
 }
 
 export type filterType =

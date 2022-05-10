@@ -69,7 +69,7 @@ TableProps<T>) {
 
   //filter data using column, filter and filterType
   const filterData = (column: keyof T, filterType: filterType, searchValue: string) => {
-    if (column.toString().length > 0 && searchValue.length > 0) {
+    if (column?.toString().length > 0 && searchValue.length > 0) {
       const filteredData = data.filter((item) => {
         const currentItem = (item[column] as unknown as string).toLowerCase();
         searchValue = searchValue.toLowerCase();

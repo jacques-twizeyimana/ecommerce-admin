@@ -28,7 +28,7 @@ export default function ListSubItem(props: ListSubItemProps) {
                                    <img src={`/icons/${item.icon}`} className="label-icon" alt='Icon' /> 
                                {item.link ?  <span onClick={() => navigate(item.link!)}>{item.name}</span> 
                                :
-                                  <span onClick={() => navigate(item.link!)}>{item.name}</span> 
+                                  <span>{item.name}</span> 
                 }
                                 </span>  
                           </p>
