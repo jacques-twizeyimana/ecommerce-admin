@@ -109,7 +109,10 @@ const EmployeeTable = (props: EmployeeTableProps) => {
         show={isSuccessModalOpen}
         onHide={() => setisSuccessModalOpen(false)}
         setShow={setisSuccessModalOpen}
-        handleClickAddAnother={() => setisAddNewModalOpen(true)}
+        handleClickAddAnother={() => {
+          setisSuccessModalOpen(false);
+          setisAddNewModalOpen(true);
+        }}
       />
     </div>
   );
