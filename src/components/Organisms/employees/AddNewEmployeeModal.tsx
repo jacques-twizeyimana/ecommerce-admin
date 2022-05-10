@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 
 import { queryClient } from '../../../plugins/react-query';
@@ -17,6 +17,7 @@ import Input from '../../Atoms/Form/Input';
 import CustomSelect from '../../Atoms/Form/Select';
 import Heading from '../../Atoms/Heading';
 import Icon from '../../Atoms/Icon';
+import Button from '../../Molecules/Button/Button';
 import Collapsible from '../../Molecules/Modal/Collapsible';
 
 interface IModalProps extends ModalProps {
@@ -515,7 +516,8 @@ export default function AddNewEmployeeModal({
           <div className="body-modal-footer row px-4">
             <div className="col-3 mr-2">
               <Button className="text-capitalize b-radius" onClick={() => handleSubmit()}>
-                Išsaugoti
+                <Icon name="save" />
+                <span>Išsaugoti</span>
               </Button>
             </div>
             <div className="col-3">

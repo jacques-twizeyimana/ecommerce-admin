@@ -53,7 +53,7 @@ export interface ButtonProps<T> extends ButtonHTMLAttributes<DOMAttributes<T>> {
   children: ReactNode;
   disabled?: boolean;
   full?: boolean;
-  icon?: boolean;
+  icon?: IconNames;
   color?: Color;
   className?: string;
   isLoading?: boolean;
@@ -80,7 +80,8 @@ export type IconNames =
   | 'menu'
   | 'plus'
   | 'message'
-  | 'notification';
+  | 'notification'
+  | 'save';
 
 export interface ListItemProps {
   item: ISidebar;
