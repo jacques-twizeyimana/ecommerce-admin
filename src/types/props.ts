@@ -191,7 +191,7 @@ export interface SelectProps extends commonInputProps {
 }
 
 export interface IFilterType<T> {
-  column: keyof T | null;
+  column: keyof T;
   filter: string;
   filterType:
     | 'equals'
@@ -199,7 +199,7 @@ export interface IFilterType<T> {
     | 'startsWith'
     | 'endsWith'
     | 'lessThan'
-    | 'greaterThan' | null;
+    | 'greaterThan';
 }
 
 export type filterType =
