@@ -77,3 +77,12 @@ button:focus{
 .css-ab2pqw-control {
     font-size: 12px !important;
 }
+
+.select {
+    // background-color: red !important;
+    > div {
+        div {
+            font-size: 12px !important;
+        }
+    }
+}
