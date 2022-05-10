@@ -23,9 +23,8 @@ const filterOperations: SelectData[] = [
 export default function Filter<T>({ data, handleFilter }: IProps<T>) {
   const [filter, setfilter] = useState<IFilterType<T>>({
     // @ts-ignore
-    column: '',
-    // @ts-ignore
-    filterType: '',
+    column: 'id',
+    filterType: 'contains',
     filter: '',
   });
 
@@ -55,9 +54,8 @@ export default function Filter<T>({ data, handleFilter }: IProps<T>) {
   const handleResetFilter = () => {
     setfilter({
       // @ts-ignore
-      column: '',
-      // @ts-ignore
-      filterType: '',
+      column: 'id',
+      filterType: 'contains',
       filter: '',
     });
   };
