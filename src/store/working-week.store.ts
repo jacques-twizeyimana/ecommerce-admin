@@ -1,19 +1,15 @@
 import { useQuery } from 'react-query';
 
-import { employmentTypeService } from '../services/employees/employment-types.service';
+import { workingWeeksService } from '../services/working-weeks/working-weeks.service';
 
 class WorkingWeek {
   getAll() {
-    return useQuery(['working-weeks'], () => employmentTypeService.getAll());
+    return useQuery(['working-weeks'], () => workingWeeksService.getAll());
   }
   getById(id?: string) {
-    return useQuery(
-      ['working-weeks', id],
-      () => employmentTypeService.getById(id || ''),
-      {
-        enabled: !!id,
-      },
-    );
+    return useQuery(['working-weeks', id], () => workingWeeksService.getById(id || ''), {
+      enabled: !!id,
+    });
   }
 }
 
