@@ -41,7 +41,7 @@ const defaultState: ICreateEmployee = {
   employmentTypeId: '',
   employmentTermId: '',
   workingWeekId: '',
-  salary: 0,
+  salary: '',
   startDate: '',
   endDate: '',
   regDate: '',
@@ -532,11 +532,13 @@ export default function AddNewEmployeeModal({
                 <span>Išsaugoti</span>
               </Button>
             </div>
-            <div className="col-3">
-              <Button className="text-capitalize b-radius light" onClick={handleCancel}>
-                Atšaukti
-              </Button>
-            </div>
+            {!isUpdating && (
+              <div className="col-3">
+                <Button className="text-capitalize b-radius light" onClick={handleCancel}>
+                  Atšaukti
+                </Button>
+              </div>
+            )}
           </div>
         </Modal.Body>
         {/* <Modal.Footer>
